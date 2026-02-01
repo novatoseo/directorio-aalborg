@@ -1,12 +1,133 @@
-:root { --p: #2563eb; --t: #1f2937; --bg: #f3f4f6; }
-* { box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; background: var(--bg); color: var(--t); }
-.nav { background: white; padding: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center; font-weight: bold; }
-.container { max-width: 900px; margin: 0 auto; padding: 15px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-.card { background: white; padding: 1.5rem; border-radius: 12px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; display: flex; flex-direction: column; justify-content: space-between; }
-.card h3 { margin: 0 0 10px 0; color: var(--p); font-size: 1.2rem; }
-.stars { color: #f59e0b; font-weight: bold; margin-bottom: 10px; }
-.btn-call { background: #10b981; color: white; text-align: center; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 15px; display: block; }
-.map-container iframe { width: 100%; height: 350px; border-radius: 12px; margin-top: 20px; border: none; }
-@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 1.5rem; } }
+:root {
+    --bg: #F5F5F7;           /* Gris muy suave de fondo */
+    --card-bg: #FFFFFF;      /* Blanco puro para tarjetas */
+    --text-main: #111111;    /* Negro casi puro para textos */
+    --text-sec: #6E6E73;     /* Gris para secundarios */
+    --accent: #0071E3;       /* Azul eléctrico estilo tech/sport */
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: var(--font-stack);
+    margin: 0;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header estilo Hero */
+.header-hero {
+    background: var(--card-bg);
+    padding: 3rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.header-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.header-hero p {
+    color: var(--text-sec);
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* Navegación */
+.nav-bar {
+    background: var(--text-main);
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+.nav-bar a { color: white; text-decoration: none; }
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Grid y Tarjetas */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-color: var(--accent);
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+}
+
+.category-tag {
+    display: inline-block;
+    background: #E8F2FF;
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+/* Botones y Elementos */
+.btn-primary {
+    display: block;
+    background: var(--text-main);
+    color: white;
+    text-align: center;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+
+.rating { color: #F5A623; font-weight: 700; }
+.meta-info { color: var(--text-sec); font-size: 0.95rem; margin-bottom: 5px; }
+
+/* Imágenes */
+.business-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background-color: #eee;
+}
+
+iframe {
+    width: 100%;
+    height: 300px;
+    border: 0;
+    border-radius: 12px;
+    margin-top: 24px;
+}
