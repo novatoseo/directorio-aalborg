@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Centre i Aalborg | FitAalborg</title>
+  <meta name="description" id="pageDescription" content="Find de bedste centre i Aalborg. Sammenlign priser, læs anmeldelser og find det perfekte sted.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" id="pageCanonical" href="https://fitaalborg.dk/kategori.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" id="ogTitle" content="Centre i Aalborg | FitAalborg">
+  <meta property="og:description" id="ogDescription" content="Find de bedste centre i Aalborg. Sammenlign priser og læs anmeldelser.">
+  <meta property="og:url" id="ogUrl" content="https://fitaalborg.dk/kategori.html">
+  <meta property="og:site_name" content="FitAalborg">
+  <meta property="og:locale" content="da_DK">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Schema.org JSON-LD (will be populated by JS) -->
+  <script type="application/ld+json" id="schemaJsonLd">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Centre i Aalborg",
+    "description": "Find de bedste centre i Aalborg",
+    "url": "https://fitaalborg.dk/kategori.html"
+  }
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo">
+        <span class="header__logo-icon">💪</span>
+        <span>FitAalborg</span>
+      </a>
+      
+      <nav class="header__nav" aria-label="Hovednavigation">
+        <ul class="header__nav-list">
+          <li><a href="index.html" class="header__nav-link">Forside</a></li>
+          <li><a href="kategori.html?kategori=fitnesscentre" class="header__nav-link" data-kategori="fitnesscentre">Fitness</a></li>
+          <li><a href="kategori.html?kategori=fysioterapi" class="header__nav-link" data-kategori="fysioterapi">Fysioterapi</a></li>
+          <li><a href="kategori.html?kategori=yoga" class="header__nav-link" data-kategori="yoga">Yoga</a></li>
+          <li><a href="kategori.html" class="header__nav-link">Alle kategorier</a></li>
+          <li><a href="#kontakt" class="header__nav-link">Kontakt</a></li>
+        </ul>
+      </nav>
+      
+      <button class="header__mobile-toggle" aria-label="Åbn menu" aria-expanded="false" onclick="toggleMobileNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+  
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigation">
+    <ul class="mobile-nav__list">
+      <li><a href="index.html" class="mobile-nav__link">Forside</a></li>
+      <li><a href="kategori.html?kategori=fitnesscentre" class="mobile-nav__link">Fitness</a></li>
+      <li><a href="kategori.html?kategori=fysioterapi" class="mobile-nav__link">Fysioterapi</a></li>
+      <li><a href="kategori.html?kategori=yoga" class="mobile-nav__link">Yoga</a></li>
+      <li><a href="kategori.html?kategori=kampsport" class="mobile-nav__link">Kampsport</a></li>
+      <li><a href="kategori.html?kategori=danseskoler" class="mobile-nav__link">Dans</a></li>
+      <li><a href="#kontakt" class="mobile-nav__link">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="index.html" class="breadcrumbs__link">Forside</a>
+          <span class="breadcrumbs__separator">›</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current" id="breadcrumbCurrent">Alle centre</span>
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero hero--category">
+      <div class="container">
+        <h1 class="hero__title" id="heroTitle">Centre i Aalborg</h1>
+        <p class="hero__subtitle" id="heroSubtitle">
+          Find og sammenlign de bedste centre i Aalborg. Læs anmeldelser, tjek priser og book dit næste besøg.
+        </p>
+        
+        <div class="hero__stats" id="heroStats">
+          <div class="hero__stat">
+            <span class="hero__stat-icon">📍</span>
+            <span><strong id="statCount">0</strong> centre</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-icon">⭐</span>
+            <span>Gns. rating: <strong id="statAvgRating">-</strong></span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-icon">✅</span>
+            <span>Opdateret <strong>januar 2025</strong></span>
+          </div>
+        </div>
+        
+        <!-- Mini Search -->
+        <div class="search-box" style="margin-top: var(--space-6); padding: var(--space-4);">
+          <form class="search-box__form" onsubmit="handleSearch(event)">
+            <div class="search-box__input-group" style="flex: 2;">
+              <span class="search-box__icon">🔍</span>
+              <input 
+                type="text" 
+                class="search-box__input" 
+                id="searchInput"
+                placeholder="Søg efter navn eller område..."
+                aria-label="Søg"
+              >
+            </div>
+            <button type="submit" class="btn btn--primary">Søg</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters & Listing -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="filters" id="filtersPanel">
+          <div class="filters__header">
+            <span class="filters__title">
+              <span>⚙️</span> Filtre
+            </span>
+            <button class="filters__clear" onclick="clearFilters()">Ryd alle</button>
+          </div>
+          
+          <div class="filters__grid">
+            <div class="filters__group">
+              <label for="filterCategory">Kategori</label>
+              <select id="filterCategory" onchange="applyFilters()">
+                <option value="">Alle kategorier</option>
+              </select>
+            </div>
+            
+            <div class="filters__group">
+              <label for="filterArea">Område</label>
+              <select id="filterArea" onchange="applyFilters()">
+                <option value="">Alle områder</option>
+                <option value="9000">9000 Aalborg Centrum</option>
+                <option value="9200">9200 Aalborg SV</option>
+                <option value="9210">9210 Aalborg SØ</option>
+                <option value="9220">9220 Aalborg Øst</option>
+                <option value="9400">9400 Nørresundby</option>
+              </select>
+            </div>
+            
+            <div class="filters__group">
+              <label for="filterRating">Minimum rating</label>
+              <select id="filterRating" onchange="applyFilters()">
+                <option value="">Alle ratings</option>
+                <option value="4.5">⭐ 4.5+</option>
+                <option value="4">⭐ 4.0+</option>
+                <option value="3.5">⭐ 3.5+</option>
+                <option value="3">⭐ 3.0+</option>
+              </select>
+            </div>
+            
+            <div class="filters__group">
+              <label for="filterFacility">Facilitet</label>
+              <select id="filterFacility" onchange="applyFilters()">
+                <option value="">Alle faciliteter</option>
+                <option value="24/7">🕐 24/7 åbent</option>
+                <option value="Parkering">🅿️ Parkering</option>
+                <option value="Sauna">🧖 Sauna</option>
+                <option value="Svømmehal">🏊 Svømmehal</option>
+                <option value="Holdtræning">👥 Holdtræning</option>
+                <option value="Personlig">💪 Personlig træner</option>
+              </select>
+            </div>
+          </div>
+          
+          <!-- Active filters chips -->
+          <div class="filters__chips" id="activeFilters" style="display: none;"></div>
+        </div>
+        
+        <!-- Sort Bar -->
+        <div class="sort-bar">
+          <div class="sort-bar__count">
+            Viser <strong id="resultsCount">0</strong> centre
+          </div>
+          <div class="sort-bar__options">
+            <label class="sort-bar__label" for="sortSelect">Sorter:</label>
+            <select class="sort-bar__select" id="sortSelect" onchange="applyFilters()">
+              <option value="rating">Bedst bedømt</option>
+              <option value="reviews">Flest anmeldelser</option>
+              <option value="name">Navn A-Å</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Centers Grid -->
+        <div class="centers-grid" id="centersGrid">
+          <!-- Centers will be populated by JS -->
+        </div>
+        
+        <!-- No Results -->
+        <div class="no-results" id="noResults" style="display: none;">
+          <div class="no-results__icon">🔍</div>
+          <h2 class="no-results__title">Ingen resultater fundet</h2>
+          <p class="no-results__text">Prøv at ændre dine filtre eller søgeord</p>
+          <button class="btn btn--primary" onclick="clearFilters()">Ryd filtre</button>
+        </div>
+        
+        <!-- Load More -->
+        <div class="text-center" style="margin-top: var(--space-8);" id="loadMoreWrapper">
+          <button class="btn btn--secondary btn--lg" id="loadMoreBtn" onclick="loadMore()">
+            Indlæs flere centre
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="section section--white" id="comparisonSection">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title" id="comparisonTitle">Top 5 Bedst Bedømte</h2>
+          <p class="section__subtitle">Hurtig sammenligning af de mest populære centre</p>
+        </header>
+        
+        <div class="comparison-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Center</th>
+                <th>Rating</th>
+                <th>Anmeldelser</th>
+                <th>Område</th>
+                <th>Pris</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="comparisonTableBody">
+              <!-- Will be populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Categories -->
+    <section class="section section--gray">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title">Udforsk Andre Kategorier</h2>
+        </header>
+        
+        <div class="categories-grid" id="relatedCategories" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
+          <!-- Will be populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Content Section -->
+    <section class="section section--white">
+      <div class="container">
+        <div class="content-section" id="seoContent">
+          <!-- Will be populated by JS based on category -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section section--gray">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title" id="faqTitle">Ofte Stillede Spørgsmål</h2>
+        </header>
+        
+        <div class="faq__list" id="faqList" role="list">
+          <!-- Will be populated by JS based on category -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="kontakt">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <span>💪</span>
+            <span>FitAalborg</span>
+          </a>
+          <p class="footer__tagline">Din guide til fitness og sundhed i Aalborg. Find, sammenlign og vælg det rigtige træningssted for dig.</p>
+        </div>
+        
+        <div>
+          <h3 class="footer__title">Kategorier</h3>
+          <ul class="footer__list">
+            <li><a href="kategori.html?kategori=fitnesscentre" class="footer__link">Fitnesscentre</a></li>
+            <li><a href="kategori.html?kategori=fysioterapi" class="footer__link">Fysioterapi</a></li>
+            <li><a href="kategori.html?kategori=yoga" class="footer__link">Yoga</a></li>
+            <li><a href="kategori.html?kategori=kampsport" class="footer__link">Kampsport</a></li>
+            <li><a href="kategori.html?kategori=danseskoler" class="footer__link">Danseskoler</a></li>
+            <li><a href="kategori.html?kategori=pilates" class="footer__link">Pilates</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer__title">Områder</h3>
+          <ul class="footer__list">
+            <li><a href="kategori.html?omraade=9000" class="footer__link">Aalborg Centrum</a></li>
+            <li><a href="kategori.html?omraade=9220" class="footer__link">Aalborg Øst</a></li>
+            <li><a href="kategori.html?omraade=9200" class="footer__link">Aalborg SV</a></li>
+            <li><a href="kategori.html?omraade=9400" class="footer__link">Nørresundby</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer__title">Information</h3>
+          <ul class="footer__list">
+            <li><a href="index.html" class="footer__link">Om FitAalborg</a></li>
+            <li><a href="#tilføj" class="footer__link">Tilføj dit center</a></li>
+            <li><a href="#kontakt" class="footer__link">Kontakt os</a></li>
+            <li><a href="#privatliv" class="footer__link">Privatlivspolitik</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2025 FitAalborg. Alle rettigheder forbeholdes.</p>
+        <p class="footer__update">Data opdateret: Januar 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // State
+    let siteData = null;
+    let filteredCenters = [];
+    let displayedCount = 12;
+    const ITEMS_PER_PAGE = 12;
+    
+    // URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentCategory = urlParams.get('kategori') || '';
+    const currentArea = urlParams.get('omraade') || '';
+    const currentSearch = urlParams.get('search') || '';
+    
+    // Category metadata for SEO content
+    const categoryMeta = {
+      fitnesscentre: {
+        title: 'Fitnesscentre i Aalborg',
+        icon: '💪',
+        description: 'Find de bedste fitnesscentre i Aalborg. Sammenlign priser, faciliteter og anmeldelser for at finde det perfekte træningscenter.',
+        seoContent: `
+          <h2>Din Guide til Fitnesscentre i Aalborg</h2>
+          <p>Aalborg har et bredt udvalg af fitnesscentre der passer til alle budgetter og træningsbehov. Fra budgetvenlige 24/7 centre til premium-faciliteter med svømmehal og wellness - her er hvad du skal vide.</p>
+          
+          <h3>Typer af Fitnesscentre</h3>
+          <p>I Aalborg finder du flere typer fitnesscentre: Budget-kæder som PureGym og Fitness World tilbyder basale faciliteter til lave priser (99-199 kr./md). Premium-centre som SATS og LOOP har flere faciliteter, holdtræning og ofte svømmehal (249-399 kr./md). Derudover findes boutique-centre med fokus på specialiseret træning.</p>
+          
+          <h3>Hvad Koster Fitness i Aalborg?</h3>
+          <p>Priserne varierer betydeligt. Budget-segmentet starter fra 99 kr./måned uden binding, mens mellemklassen ligger på 149-249 kr./måned. Premium-centre med fuld adgang til alle faciliteter koster typisk 299-399 kr./måned. Husk at tjekke for oprettelsesgebyr og bindingsperiode.</p>
+          
+          <h3>Populære Faciliteter</h3>
+          <p>De mest efterspurgte faciliteter inkluderer: 24/7 adgang for maksimal fleksibilitet, holdtræning (spinning, bodypump, yoga), fri vægt-område, cardio-maskiner, sauna/wellness, og personlig træning. Nogle centre tilbyder også svømmehal og squash.</p>
+          
+          <h3>Vælg det Rigtige Center</h3>
+          <p>Overvej disse faktorer: Beliggenhed (vælg et center tæt på hjem eller arbejde), åbningstider, faciliteter du rent faktisk vil bruge, stemning og renlighed, samt pris i forhold til dit budget. Læs anmeldelser og benyt prøveperioder før du binder dig.</p>
+        `,
+        faqs: [
+          { q: 'Hvad koster et fitnesscenter i Aalborg?', a: 'Priserne spænder fra 99 kr./md for budget-centre til 399 kr./md for premium-faciliteter. De fleste tilbyder rabat ved længere binding.' },
+          { q: 'Hvilke fitnesscentre har 24/7 åbent?', a: 'PureGym, Fitness World og flere LOOP-centre tilbyder 24/7 adgang, så du kan træne når det passer dig.' },
+          { q: 'Kan jeg prøve før jeg melder mig ind?', a: 'Ja, de fleste centre tilbyder gratis prøveperiode eller prøvetræning. Kontakt centret direkte for aktuelle tilbud.' },
+          { q: 'Er der fitnesscentre med svømmehal?', a: 'Ja, LOOP Fitness og visse Fitness World-centre har adgang til svømmehal som en del af medlemskabet.' },
+          { q: 'Hvad er forskellen på budget og premium fitness?', a: 'Budget-centre tilbyder basale faciliteter uden personale. Premium inkluderer holdtræning, wellness, personlig træning og ofte bedre udstyr.' },
+          { q: 'Kan jeg fryse mit medlemskab?', a: 'De fleste centre tilbyder pause/frysning ved ferie, sygdom eller graviditet. Vilkårene varierer - tjek din kontrakt.' }
+        ]
+      },
+      fysioterapi: {
+        title: 'Fysioterapi i Aalborg',
+        icon: '🏥',
+        description: 'Find fysioterapeuter i Aalborg. Sammenlign klinikker, specialer og anmeldelser for at finde den rette behandler.',
+        seoContent: `
+          <h2>Fysioterapi i Aalborg - Find den Rette Behandler</h2>
+          <p>Med over 70 fysioterapiklinikker er Aalborg godt dækket når det kommer til behandling, genoptræning og forebyggelse. Her er hvad du skal vide for at finde den rette fysioterapeut.</p>
+          
+          <h3>Hvornår Skal Du Gå til Fysioterapeut?</h3>
+          <p>Fysioterapi hjælper ved: Ryg- og nakkesmerter, sportsskader, genoptræning efter operation, kroniske smerter, hovedpine og svimmelhed, arbejdsskader og belastningsskader, samt forebyggelse og træningsvejledning.</p>
+          
+          <h3>Specialer inden for Fysioterapi</h3>
+          <p>Mange fysioterapeuter specialiserer sig: Sportsfysioterapi (skader og performance), manuel terapi (led- og muskelteknikker), neurologisk fysioterapi (efter apopleksi, sclerose), børnefysioterapi, og arbejdsmiljø/ergonomi.</p>
+          
+          <h3>Priser og Tilskud</h3>
+          <p>En konsultation koster typisk 350-550 kr. Med lægehenvisning får du tilskud fra sygesikringen (ca. 129 kr. for første behandling, 51 kr. for efterfølgende). Mange har også aftale med sygeforsikring danmark.</p>
+          
+          <h3>Sådan Vælger Du Fysioterapeut</h3>
+          <p>Overvej: Beliggenhed og parkeringsmuligheder, speciale der matcher dit problem, anmeldelser fra andre patienter, ventetid på tid, og om de har aftale med sygesikringen.</p>
+        `,
+        faqs: [
+          { q: 'Skal jeg have henvisning til fysioterapeut?', a: 'Nej, du kan gå direkte uden henvisning. Men med lægehenvisning får du tilskud fra sygesikringen.' },
+          { q: 'Hvad koster fysioterapi i Aalborg?', a: 'Typisk 350-550 kr. per behandling. Med henvisning får du ca. 129 kr. i tilskud til første behandling.' },
+          { q: 'Hvor mange behandlinger har jeg brug for?', a: 'Det varierer. Akutte problemer løses ofte på 3-6 behandlinger, kroniske tilstande kan kræve længere forløb.' },
+          { q: 'Dækker min forsikring fysioterapi?', a: 'Sygeforsikring danmark og mange sundhedsforsikringer dækker delvist. Tjek din police for detaljer.' },
+          { q: 'Hvad er forskellen på fysioterapi og kiropraktik?', a: 'Fysioterapeuter fokuserer på øvelser og manuel behandling. Kiropraktorer arbejder primært med led-manipulationer. Begge kan hjælpe med smerter.' },
+          { q: 'Kan jeg få fysioterapi i hjemmet?', a: 'Ja, flere klinikker tilbyder hjemmebesøg ved nedsat mobilitet. Kontakt klinikken for muligheder og priser.' }
+        ]
+      },
+      yoga: {
+        title: 'Yoga i Aalborg',
+        icon: '🧘',
+        description: 'Find yogastudier i Aalborg. Sammenlign stilarter, priser og anmeldelser for at finde det perfekte sted til din praksis.',
+        seoContent: `
+          <h2>Yoga i Aalborg - Find Dit Studio</h2>
+          <p>Aalborgs yogascene er mangfoldig med studier der tilbyder alt fra dynamisk vinyasa til rolig yin yoga. Her er din guide til at finde det rigtige sted.</p>
+          
+          <h3>Populære Yoga-stilarter</h3>
+          <p>I Aalborg finder du: Hatha yoga (klassisk, roligt tempo - god for begyndere), Vinyasa/Flow (dynamisk, koordineret med åndedræt), Ashtanga (fast sekvens, fysisk krævende), Yin yoga (lange, passive stræk), Hot yoga (opvarmet rum, 38-40°C), og Meditation/mindfulness.</p>
+          
+          <h3>Priser for Yoga</h3>
+          <p>Drop-in klasser koster typisk 100-150 kr. Klippekort (10 klip) ligger på 800-1200 kr. Månedskort med ubegrænset adgang koster 400-800 kr. Mange studier tilbyder introduktionstilbud til nye elever.</p>
+          
+          <h3>For Begyndere</h3>
+          <p>Start med Hatha eller Yin yoga for et roligere tempo. Mange studier har dedikerede begynderhold. Du behøver ikke være smidig - det kommer med praksis. Medbring behageligt tøj og evt. egen måtte.</p>
+          
+          <h3>Vælg det Rigtige Studio</h3>
+          <p>Overvej: Hvilke stilarter tilbydes, tidspunkter der passer din hverdag, studiets atmosfære, underviserens erfaring, og om de tilbyder prøveklasser.</p>
+        `,
+        faqs: [
+          { q: 'Hvilken yoga-stil er bedst for begyndere?', a: 'Hatha og Yin yoga er gode startpunkter med roligt tempo. Mange studier har også dedikerede begynderhold.' },
+          { q: 'Hvad koster yoga i Aalborg?', a: 'Drop-in: 100-150 kr. Klippekort (10 gange): 800-1200 kr. Månedskort: 400-800 kr. De fleste tilbyder introduktionstilbud.' },
+          { q: 'Skal jeg være smidig for at dyrke yoga?', a: 'Nej! Smidighed kommer med praksis. Yoga handler om at møde dig selv hvor du er, ikke om at kunne lave perfekte stillinger.' },
+          { q: 'Hvad skal jeg medbringe til yoga?', a: 'Behageligt tøj du kan bevæge dig i. De fleste studier har måtter, men du kan medbringe din egen. Undgå parfume.' },
+          { q: 'Hvad er forskellen på yoga og pilates?', a: 'Yoga fokuserer på fleksibilitet, åndedræt og meditation. Pilates er mere core-fokuseret og styrketræning. Begge forbedrer kropsbevidstheden.' },
+          { q: 'Kan jeg dyrke yoga under graviditet?', a: 'Ja, men vælg gravid-yoga eller informer instruktøren. Undgå visse stillinger, især efter 1. trimester.' }
+        ]
+      },
+      kampsport: {
+        title: 'Kampsport i Aalborg',
+        icon: '🥋',
+        description: 'Find kampsportsklubber i Aalborg. Sammenlign discipliner, klubber og priser for at finde den rette træning.',
+        seoContent: `
+          <h2>Kampsport i Aalborg - Find Din Disciplin</h2>
+          <p>Aalborg har en stærk kampsportstradition med klubber der dækker et bredt spektrum af discipliner. Uanset om du søger selvforsvar, kondition eller konkurrence - her er din guide.</p>
+          
+          <h3>Populære Kampsportsgrene</h3>
+          <p>I Aalborg kan du træne: Boksning (klassisk standup), MMA (mixed martial arts), BJJ/Brazilian Jiu-Jitsu (grappling), Taekwondo (spark-fokuseret), Karate (traditionel japansk), Judo (kast og grappling), Kickboxing og Muay Thai, samt Krav Maga (selvforsvar).</p>
+          
+          <h3>For Begyndere</h3>
+          <p>De fleste klubber byder begyndere velkommen uanset alder og form. Du starter typisk med grundteknikker og opbygger gradvist. Forvent at være øm de første uger - det er normalt!</p>
+          
+          <h3>Priser og Kontingent</h3>
+          <p>Klubkontingent ligger typisk på 200-500 kr./måned. Mange tilbyder gratis prøvetræning. Budget for udstyr: Handsker fra 300 kr., gi/uniform fra 400 kr. Start med låneudstyr.</p>
+          
+          <h3>Børn og Kampsport</h3>
+          <p>Mange klubber har børnehold fra 4-6 års alderen. Kampsport lærer børn disciplin, respekt, motorik og selvtillid i et trygt miljø.</p>
+        `,
+        faqs: [
+          { q: 'Hvilken kampsport er bedst for begyndere?', a: 'Alle discipliner byder begyndere velkommen. Boksning og Taekwondo er gode startpunkter. Vælg ud fra hvad der interesserer dig mest.' },
+          { q: 'Er kampsport farligt?', a: 'Træning foregår kontrolleret med fokus på teknik. Skader sker, men ikke oftere end i andre sportsgrene. Lyt til din krop og din træner.' },
+          { q: 'Kan børn træne kampsport?', a: 'Ja! Mange klubber har børnehold fra 4-6 år. Det lærer disciplin, motorik og selvtillid i trygge rammer.' },
+          { q: 'Hvad koster kampsport i Aalborg?', a: 'Typisk 200-500 kr./måned i kontingent. Udstyr koster ekstra, men mange klubber låner ud til begyndere.' },
+          { q: 'Hvor lang tid tager det at blive god?', a: 'Det varierer, men regn med 6-12 måneder før grundteknikkerne sidder. Sort bælte tager typisk 5-10 år. Nyd rejsen!' },
+          { q: 'Kan jeg træne kampsport som voksen begynder?', a: 'Absolut! Mange starter som voksne. Du konkurrerer kun mod dig selv, og klubberne er vant til alle niveauer.' }
+        ]
+      },
+      danseskoler: {
+        title: 'Danseskoler i Aalborg',
+        icon: '💃',
+        description: 'Find danseskoler i Aalborg. Sammenlign stilarter, hold og priser for at finde den perfekte danseskole.',
+        seoContent: `
+          <h2>Danseskoler i Aalborg</h2>
+          <p>Aalborg byder på danseskoler for alle aldre og niveauer. Fra klassisk ballet til moderne hip hop - her finder du det rigtige sted at lære at danse.</p>
+          
+          <h3>Dansestilarter</h3>
+          <p>I Aalborg kan du lære: Standard og latin (vals, tango, cha-cha), Hip hop og streetdance, Ballet (klassisk og moderne), Contemporary/moderne dans, Salsa og bachata, Swing og lindy hop, samt Zumba og dance fitness.</p>
+          
+          <h3>For Voksne Begyndere</h3>
+          <p>Det er aldrig for sent at lære at danse! Mange skoler har dedikerede voksenbegynderhold i både pardans og solo. Stemningen er afslappet og fokus er på at have det sjovt.</p>
+          
+          <h3>Priser</h3>
+          <p>Et sæsonhold (efterår/forår) koster typisk 500-1200 kr. Drop-in ligger på 80-120 kr. per gang. Mange skoler tilbyder rabat ved tilmelding til flere hold.</p>
+        `,
+        faqs: [
+          { q: 'Kan voksne begynde at danse?', a: 'Ja! De fleste danseskoler har voksenbegynderhold. Det er aldrig for sent, og stemningen er inkluderende.' },
+          { q: 'Skal jeg have en partner til pardans?', a: 'Ikke nødvendigvis. Mange skoler matcher deltagere eller roterer partnere. Tjek med skolen.' },
+          { q: 'Hvad koster danseskole i Aalborg?', a: 'Sæsonhold: 500-1200 kr. Drop-in: 80-120 kr. Mange tilbyder rabat ved flere hold.' },
+          { q: 'Hvilken dans er nemmest at lære?', a: 'Salsa og swing er gode startpunkter med enkle grundtrin. Vælg det der ser sjovest ud!' },
+          { q: 'Hvad skal jeg have på til dans?', a: 'Behageligt tøj og sko du kan dreje i (undgå gummisåler). Til pardans er lædersko ideelle.' },
+          { q: 'Er der danseskole for børn?', a: 'Ja, de fleste danseskoler har børnehold i alt fra ballet til hip hop, typisk fra 3-4 års alderen.' }
+        ]
+      },
+      pilates: {
+        title: 'Pilates i Aalborg',
+        icon: '🤸',
+        description: 'Find pilatesstudier i Aalborg. Sammenlign mat og reformer, priser og anmeldelser.',
+        seoContent: `
+          <h2>Pilates i Aalborg</h2>
+          <p>Pilates styrker din core, forbedrer kropsholdning og øger fleksibiliteten. Aalborg har flere studier med både mat-pilates og reformer-maskiner.</p>
+          
+          <h3>Mat vs. Reformer Pilates</h3>
+          <p>Mat-pilates bruger kun kropsvægt og er velegnet til grupper. Reformer-pilates bruger en specialmaskine med fjedre der giver modstand og assistance. Reformer er ofte dyrere men giver flere variationer.</p>
+          
+          <h3>Priser</h3>
+          <p>Mat-pilates: 100-150 kr. drop-in, klippekort 800-1000 kr. Reformer-pilates: 150-250 kr. per session, ofte i små grupper eller 1:1.</p>
+        `,
+        faqs: [
+          { q: 'Hvad er forskellen på pilates og yoga?', a: 'Pilates fokuserer på core-styrke og kontrollerede bevægelser. Yoga inkluderer mere stræk og meditation. Begge forbedrer kropsbevidstheden.' },
+          { q: 'Er pilates godt for rygproblemer?', a: 'Ja, pilates styrker de dybe muskler der støtter rygsøjlen. Konsulter din læge ved akutte problemer.' },
+          { q: 'Hvad koster pilates?', a: 'Mat: 100-150 kr. drop-in. Reformer: 150-250 kr. per session. Klippekort giver typisk rabat.' },
+          { q: 'Kan mænd dyrke pilates?', a: 'Absolut! Pilates var oprindeligt designet af en mand til mænd. Mange atleter og sportsfolk bruger pilates.' }
+        ]
+      },
+      padel: {
+        title: 'Padel i Aalborg',
+        icon: '🎾',
+        description: 'Find padelcentre i Aalborg. Book baner, find spillere og kom i gang med Danmarks hurtigst voksende sport.',
+        seoContent: `
+          <h2>Padel i Aalborg</h2>
+          <p>Padel er Danmarks hurtigst voksende sport, og Aalborg har flere centre med indendørs og udendørs baner. Her er hvad du skal vide for at komme i gang.</p>
+          
+          <h3>Kom i Gang med Padel</h3>
+          <p>Padel er nemt at lære og sjovt fra første gang. Du spiller 2 mod 2 på en mindre bane omgivet af glas/net. Reglerne ligner tennis, men væggene er i spil. Lej ketcher og bolde i centret.</p>
+          
+          <h3>Priser</h3>
+          <p>Baneleje: 200-400 kr./time (delt af 4 spillere). Ketcherleje: 30-50 kr. Mange centre tilbyder begynderkurser og matcher der samler spillere.</p>
+        `,
+        faqs: [
+          { q: 'Hvad koster det at spille padel?', a: 'Baneleje 200-400 kr./time delt af 4 spillere = 50-100 kr. per person. Ketcherleje ca. 30-50 kr.' },
+          { q: 'Skal jeg medbringe udstyr?', a: 'Nej, alle centre udlejer ketcher og bolde. Medbring blot indendørs sko og sportstøj.' },
+          { q: 'Kan jeg spille alene?', a: 'Du skal være 4 spillere. Mange centre har "match"-funktioner hvor du kan finde medspillere.' },
+          { q: 'Er padel svært at lære?', a: 'Nej! Padel er meget begyndervenligt. De fleste kan have det sjovt fra første gang.' }
+        ]
+      },
+      diaetist: {
+        title: 'Diætist i Aalborg',
+        icon: '🥗',
+        description: 'Find diætister i Aalborg. Få professionel kostvejledning til vægttab, sygdom eller performance.',
+        seoContent: `
+          <h2>Diætist i Aalborg</h2>
+          <p>En diætist kan hjælpe dig med kostvejledning ved vægttab, sygdom, allergi eller sportsperformance. Her er hvad du skal vide.</p>
+          
+          <h3>Hvornår Bruge Diætist?</h3>
+          <p>Diætister hjælper med: Vægttab og livsstilsændringer, diabetes og hjertesygdom, mave-tarm problemer og IBS, food allergier og intolerance, spiseforstyrrelser, samt sportsernæring.</p>
+          
+          <h3>Priser og Tilskud</h3>
+          <p>Konsultation koster typisk 500-800 kr. Med lægehenvisning ved visse diagnoser (diabetes, overvægt) kan du få tilskud. Tjek også din sundhedsforsikring.</p>
+        `,
+        faqs: [
+          { q: 'Hvad koster en diætist?', a: 'Typisk 500-800 kr. per konsultation. Med lægehenvisning ved visse diagnoser kan du få tilskud.' },
+          { q: 'Skal jeg have henvisning?', a: 'Nej, du kan gå direkte. Men ved diabetes, overvægt m.fl. giver henvisning tilskud.' },
+          { q: 'Hvad er forskellen på diætist og kostvejleder?', a: 'Diætist er en beskyttet titel med sundhedsfaglig uddannelse. Kostvejleder kan alle kalde sig.' }
+        ]
+      },
+      cykelbutikker: {
+        title: 'Cykelbutikker i Aalborg',
+        icon: '🚴',
+        description: 'Find cykelbutikker i Aalborg. Køb cykler, tilbehør og få service og reparation.',
+        seoContent: `
+          <h2>Cykelbutikker i Aalborg</h2>
+          <p>Aalborg er en cykelby med mange butikker der sælger alt fra bycykler til mountainbikes og elcykler. Her finder du service, reparation og tilbehør.</p>
+          
+          <h3>Typer af Butikker</h3>
+          <p>Aalborg har: Kædebutikker (Fri BikeShop, Cykelexperten) med stort udvalg, specialbutikker med fokus på race/MTB, og mindre lokale værksteder med personlig service.</p>
+        `,
+        faqs: [
+          { q: 'Hvor kan jeg få repareret min cykel?', a: 'De fleste cykelbutikker har værksted. Priser for service starter fra ca. 300 kr.' },
+          { q: 'Hvad koster en god bycykel?', a: 'Budget: 2.500-4.000 kr. Mellemklasse: 4.000-7.000 kr. Premium: 7.000+ kr.' }
+        ]
+      },
+      sportsbutikker: {
+        title: 'Sportsbutikker i Aalborg',
+        icon: '🏆',
+        description: 'Find sportsbutikker i Aalborg. Køb udstyr til fitness, løb, bold og meget mere.',
+        seoContent: `
+          <h2>Sportsbutikker i Aalborg</h2>
+          <p>Aalborg har sportsbutikker for alle behov - fra store kæder med bredt udvalg til specialbutikker med ekspertvejledning.</p>
+        `,
+        faqs: [
+          { q: 'Hvilke sportsbutikker findes i Aalborg?', a: 'Aalborg har bl.a. Intersport, Sport24, Stadium og flere specialbutikker.' }
+        ]
+      },
+      osteopat: {
+        title: 'Osteopat i Aalborg',
+        icon: '🦴',
+        description: 'Find osteopater i Aalborg. Få holistisk behandling af smerter og bevægelsesproblemer.',
+        seoContent: `
+          <h2>Osteopat i Aalborg</h2>
+          <p>Osteopati er en holistisk behandlingsform der arbejder med hele kroppens struktur. Osteopater behandler muskel- og ledsmerter, hovedpine, fordøjelsesproblemer og meget mere.</p>
+          
+          <h3>Priser</h3>
+          <p>En konsultation koster typisk 500-700 kr. Osteopati er ikke dækket af sygesikringen, men mange sundhedsforsikringer giver tilskud.</p>
+        `,
+        faqs: [
+          { q: 'Hvad er forskellen på osteopat og kiropraktor?', a: 'Osteopater arbejder med hele kroppen og bruger blødere teknikker. Kiropraktorer fokuserer primært på rygsøjlen med manipulation.' },
+          { q: 'Dækker sygesikringen osteopati?', a: 'Nej, men mange sundhedsforsikringer giver tilskud. Tjek din police.' }
+        ]
+      }
+    };
+    
+    // Default SEO content
+    const defaultSeoContent = `
+      <h2>Find Centre i Aalborg</h2>
+      <p>FitAalborg samler alle fitness- og sundhedscentre i Aalborg på ét sted. Brug filtrene ovenfor til at finde præcis det du leder efter, og sammenlign centre baseret på anmeldelser, priser og faciliteter.</p>
+      
+      <h3>Vores Kategorier</h3>
+      <p>Vi dækker et bredt udvalg af kategorier: Fitnesscentre og træningscentre, fysioterapi og behandling, yoga og pilates, kampsport og selvforsvar, danseskoler, og meget mere.</p>
+      
+      <h3>Hvorfor Bruge FitAalborg?</h3>
+      <p>Vi samler information fra flere kilder så du kan træffe et informeret valg. Se anmeldelser, sammenlign priser, tjek faciliteter og find kontaktoplysninger - alt sammen på ét sted.</p>
+    `;
+    
+    const defaultFaqs = [
+      { q: 'Hvordan finder jeg det rigtige center?', a: 'Brug filtrene til at indsnævre søgningen baseret på kategori, område, rating og faciliteter. Læs anmeldelser og sammenlign flere steder.' },
+      { q: 'Er informationerne opdaterede?', a: 'Vi opdaterer vores database løbende. Tjek altid centerets egen hjemmeside for de nyeste priser og åbningstider.' },
+      { q: 'Kan jeg tilføje mit center?', a: 'Ja! Kontakt os via formularen nederst på siden for at få dit center tilføjet til FitAalborg.' },
+      { q: 'Hvordan beregnes ratings?', a: 'Ratings kommer fra Google-anmeldelser og afspejler ægte brugernes oplevelser.' }
+    ];
+    
+    // Load data
+    async function loadData() {
+      try {
+        const response = await fetch('data.json');
+        siteData = await response.json();
+        initializePage();
+      } catch (error) {
+        console.error('Error loading data:', error);
+      }
+    }
+    
+    // Initialize page
+    function initializePage() {
+      // Populate category filter
+      const categorySelect = document.getElementById('filterCategory');
+      siteData.categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat.slug;
+        option.textContent = `${cat.icon} ${cat.name} (${cat.count})`;
+        if (cat.slug === currentCategory) option.selected = true;
+        categorySelect.appendChild(option);
+      });
+      
+      // Set area filter from URL
+      if (currentArea) {
+        document.getElementById('filterArea').value = currentArea;
+      }
+      
+      // Set search input from URL
+      if (currentSearch) {
+        document.getElementById('searchInput').value = currentSearch;
+      }
+      
+      // Update page meta based on category
+      updatePageMeta();
+      
+      // Render content
+      applyFilters();
+      renderRelatedCategories();
+      renderSeoContent();
+      renderFaqs();
+      
+      // Highlight active nav
+      highlightActiveNav();
+    }
+    
+    // Update page meta
+    function updatePageMeta() {
+      const meta = currentCategory ? categoryMeta[currentCategory] : null;
+      const catData = siteData.categories.find(c => c.slug === currentCategory);
+      
+      let title, description, h1, subtitle;
+      
+      if (meta && catData) {
+        title = `${meta.title} | Sammenlign ${catData.count}+ Centre | FitAalborg`;
+        description = meta.description;
+        h1 = meta.title;
+        subtitle = `Find og sammenlign ${catData.count} ${catData.name.toLowerCase()} i Aalborg. Læs anmeldelser, tjek priser og vælg det rigtige sted.`;
+      } else {
+        title = 'Alle Fitness & Sundhedscentre i Aalborg | FitAalborg';
+        description = 'Find de bedste fitnesscentre, fysioterapeuter, yoga og mere i Aalborg. Sammenlign 188+ centre på ét sted.';
+        h1 = 'Alle Centre i Aalborg';
+        subtitle = 'Find og sammenlign 188+ fitness- og sundhedscentre i Aalborg. Brug filtrene til at finde det perfekte sted.';
+      }
+      
+      document.getElementById('pageTitle').textContent = title;
+      document.getElementById('pageDescription').content = description;
+      document.getElementById('ogTitle').content = title;
+      document.getElementById('ogDescription').content = description;
+      document.getElementById('heroTitle').textContent = h1;
+      document.getElementById('heroSubtitle').textContent = subtitle;
+      document.getElementById('breadcrumbCurrent').textContent = meta ? meta.title.replace(' i Aalborg', '') : 'Alle centre';
+      
+      // Update canonical
+      const canonical = currentCategory 
+        ? `https://fitaalborg.dk/kategori.html?kategori=${currentCategory}`
+        : 'https://fitaalborg.dk/kategori.html';
+      document.getElementById('pageCanonical').href = canonical;
+      document.getElementById('ogUrl').content = canonical;
+    }
+    
+    // Apply filters and render
+    function applyFilters() {
+      const category = document.getElementById('filterCategory').value;
+      const area = document.getElementById('filterArea').value;
+      const minRating = parseFloat(document.getElementById('filterRating').value) || 0;
+      const facility = document.getElementById('filterFacility').value;
+      const sort = document.getElementById('sortSelect').value;
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      
+      // Filter centers
+      filteredCenters = siteData.centers.filter(center => {
+        if (category && center.category_slug !== category) return false;
+        if (area && !center.postal_code?.startsWith(area.substring(0, 2))) return false;
+        if (minRating && (!center.rating || center.rating < minRating)) return false;
+        if (facility) {
+          const allFacilities = [...(center.facilities || []), ...(center.activities || [])].join(' ').toLowerCase();
+          if (!allFacilities.includes(facility.toLowerCase())) return false;
+        }
+        if (searchQuery) {
+          const searchable = `${center.name} ${center.address || ''} ${center.area || ''} ${center.category_primary}`.toLowerCase();
+          if (!searchable.includes(searchQuery)) return false;
+        }
+        return true;
+      });
+      
+      // Sort
+      filteredCenters.sort((a, b) => {
+        switch (sort) {
+          case 'rating':
+            return (b.rating || 0) - (a.rating || 0);
+          case 'reviews':
+            return (b.reviews_count || 0) - (a.reviews_count || 0);
+          case 'name':
+            return a.name.localeCompare(b.name, 'da');
+          default:
+            return 0;
+        }
+      });
+      
+      // Update stats
+      updateStats();
+      
+      // Update active filters chips
+      updateActiveFilters(category, area, minRating, facility);
+      
+      // Reset displayed count
+      displayedCount = ITEMS_PER_PAGE;
+      
+      // Render
+      renderCenters();
+      renderComparisonTable();
+    }
+    
+    // Update stats
+    function updateStats() {
+      document.getElementById('statCount').textContent = filteredCenters.length;
+      document.getElementById('resultsCount').textContent = filteredCenters.length;
+      
+      const withRating = filteredCenters.filter(c => c.rating);
+      if (withRating.length > 0) {
+        const avgRating = withRating.reduce((sum, c) => sum + c.rating, 0) / withRating.length;
+        document.getElementById('statAvgRating').textContent = avgRating.toFixed(1);
+      } else {
+        document.getElementById('statAvgRating').textContent = '-';
+      }
+    }
+    
+    // Update active filters display
+    function updateActiveFilters(category, area, minRating, facility) {
+      const container = document.getElementById('activeFilters');
+      const chips = [];
+      
+      if (category) {
+        const cat = siteData.categories.find(c => c.slug === category);
+        chips.push(`<span class="filters__chip">${cat?.name || category} <button class="filters__chip-remove" onclick="removeFilter('category')">×</button></span>`);
+      }
+      if (area) {
+        chips.push(`<span class="filters__chip">${area} <button class="filters__chip-remove" onclick="removeFilter('area')">×</button></span>`);
+      }
+      if (minRating) {
+        chips.push(`<span class="filters__chip">⭐ ${minRating}+ <button class="filters__chip-remove" onclick="removeFilter('rating')">×</button></span>`);
+      }
+      if (facility) {
+        chips.push(`<span class="filters__chip">${facility} <button class="filters__chip-remove" onclick="removeFilter('facility')">×</button></span>`);
+      }
+      
+      if (chips.length > 0) {
+        container.innerHTML = chips.join('');
+        container.style.display = 'flex';
+      } else {
+        container.style.display = 'none';
+      }
+    }
+    
+    // Remove individual filter
+    function removeFilter(type) {
+      switch (type) {
+        case 'category':
+          document.getElementById('filterCategory').value = '';
+          break;
+        case 'area':
+          document.getElementById('filterArea').value = '';
+          break;
+        case 'rating':
+          document.getElementById('filterRating').value = '';
+          break;
+        case 'facility':
+          document.getElementById('filterFacility').value = '';
+          break;
+      }
+      applyFilters();
+    }
+    
+    // Clear all filters
+    function clearFilters() {
+      document.getElementById('filterCategory').value = '';
+      document.getElementById('filterArea').value = '';
+      document.getElementById('filterRating').value = '';
+      document.getElementById('filterFacility').value = '';
+      document.getElementById('searchInput').value = '';
+      applyFilters();
+    }
+    
+    // Render centers grid
+    function renderCenters() {
+      const grid = document.getElementById('centersGrid');
+      const noResults = document.getElementById('noResults');
+      const loadMoreWrapper = document.getElementById('loadMoreWrapper');
+      
+      if (filteredCenters.length === 0) {
+        grid.innerHTML = '';
+        noResults.style.display = 'block';
+        loadMoreWrapper.style.display = 'none';
+        return;
+      }
+      
+      noResults.style.display = 'none';
+      
+      const centersToShow = filteredCenters.slice(0, displayedCount);
+      
+      grid.innerHTML = centersToShow.map((center, index) => {
+        const stars = center.rating ? '★'.repeat(Math.round(center.rating)) + '☆'.repeat(5 - Math.round(center.rating)) : '';
+        const attributes = [...(center.facilities || []), ...(center.activities || [])].slice(0, 4);
+        const isTop = index < 3 && center.rating >= 4.5;
+        
+        return `
+          <article class="center-card">
+            <div class="center-card__image">
+              ${center.image 
+                ? `<img src="${center.image}" alt="${center.name}" loading="lazy" width="400" height="250">`
+                : `<div class="center-card__image-placeholder">📍</div>`
+              }
+              <div class="center-card__badges">
+                ${isTop ? '<span class="center-card__badge center-card__badge--top">⭐ Top</span>' : ''}
+              </div>
+            </div>
+            <div class="center-card__body">
+              <span class="center-card__category">${center.category_primary}</span>
+              <h3 class="center-card__name">
+                <a href="ficha.html?id=${center.slug}">${center.name}</a>
+              </h3>
+              <div class="center-card__location">
+                <span class="center-card__location-icon">📍</span>
+                <span>${center.address || center.area || 'Aalborg'}</span>
+              </div>
+              ${center.rating ? `
+                <div class="center-card__rating">
+                  <span class="center-card__stars">${stars}</span>
+                  <span class="center-card__rating-value">${center.rating.toFixed(1)}</span>
+                  <span class="center-card__rating-count">(${center.reviews_count || 0} anmeldelser)</span>
+                </div>
+              ` : ''}
+              ${attributes.length > 0 ? `
+                <div class="center-card__attributes">
+                  ${attributes.map(attr => `<span class="center-card__attribute">${attr}</span>`).join('')}
+                </div>
+              ` : ''}
+              ${center.prices ? `
+                <div class="center-card__price">
+                  ${center.prices.substring(0, 60)}${center.prices.length > 60 ? '...' : ''}
+                </div>
+              ` : ''}
+              <div class="center-card__actions">
+                <a href="ficha.html?id=${center.slug}" class="btn btn--primary btn--sm">Se detaljer</a>
+                ${center.phone ? `<a href="tel:${center.phone}" class="btn btn--outline btn--sm">📞 Ring</a>` : ''}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+      
+      // Show/hide load more
+      loadMoreWrapper.style.display = displayedCount < filteredCenters.length ? 'block' : 'none';
+    }
+    
+    // Load more centers
+    function loadMore() {
+      displayedCount += ITEMS_PER_PAGE;
+      renderCenters();
+    }
+    
+    // Render comparison table
+    function renderComparisonTable() {
+      const tbody = document.getElementById('comparisonTableBody');
+      const section = document.getElementById('comparisonSection');
+      const title = document.getElementById('comparisonTitle');
+      
+      const topCenters = filteredCenters.filter(c => c.rating).slice(0, 5);
+      
+      if (topCenters.length < 2) {
+        section.style.display = 'none';
+        return;
+      }
+      
+      section.style.display = 'block';
+      
+      const catMeta = currentCategory ? categoryMeta[currentCategory] : null;
+      title.textContent = catMeta ? `Top 5 ${catMeta.title.replace(' i Aalborg', '')}` : 'Top 5 Bedst Bedømte';
+      
+      tbody.innerHTML = topCenters.map(center => `
+        <tr>
+          <td class="comparison-table__name">
+            <a href="ficha.html?id=${center.slug}">${center.name}</a>
+          </td>
+          <td>⭐ ${center.rating?.toFixed(1) || '-'}</td>
+          <td>${center.reviews_count || 0}</td>
+          <td>${center.postal_code || 'Aalborg'}</td>
+          <td>${center.prices ? center.prices.substring(0, 30) + '...' : 'Kontakt'}</td>
+          <td><a href="ficha.html?id=${center.slug}" class="btn btn--sm btn--primary">Se</a></td>
+        </tr>
+      `).join('');
+    }
+    
+    // Render related categories
+    function renderRelatedCategories() {
+      const container = document.getElementById('relatedCategories');
+      
+      const otherCategories = siteData.categories.filter(c => c.slug !== currentCategory);
+      
+      container.innerHTML = otherCategories.map(cat => `
+        <a href="kategori.html?kategori=${cat.slug}" class="category-card" style="padding: var(--space-4);">
+          <div class="category-card__icon" style="font-size: 2rem;">${cat.icon}</div>
+          <div class="category-card__name">${cat.name}</div>
+          <div class="category-card__count">${cat.count} centre</div>
+        </a>
+      `).join('');
+    }
+    
+    // Render SEO content
+    function renderSeoContent() {
+      const container = document.getElementById('seoContent');
+      const meta = currentCategory ? categoryMeta[currentCategory] : null;
+      
+      container.innerHTML = meta?.seoContent || defaultSeoContent;
+    }
+    
+    // Render FAQs
+    function renderFaqs() {
+      const container = document.getElementById('faqList');
+      const title = document.getElementById('faqTitle');
+      const meta = currentCategory ? categoryMeta[currentCategory] : null;
+      
+      const faqs = meta?.faqs || defaultFaqs;
+      
+      title.textContent = meta 
+        ? `Ofte Stillede Spørgsmål om ${meta.title.replace(' i Aalborg', '')}`
+        : 'Ofte Stillede Spørgsmål';
+      
+      container.innerHTML = faqs.map(faq => `
+        <div class="faq__item" role="listitem">
+          <button class="faq__question" aria-expanded="false" onclick="toggleFaq(this)">
+            <span>${faq.q}</span>
+            <span class="faq__icon">▼</span>
+          </button>
+          <div class="faq__answer">
+            <p>${faq.a}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Highlight active nav
+    function highlightActiveNav() {
+      document.querySelectorAll('[data-kategori]').forEach(link => {
+        if (link.dataset.kategori === currentCategory) {
+          link.classList.add('active');
+        }
+      });
+    }
+    
+    // Search handling
+    function handleSearch(event) {
+      event.preventDefault();
+      applyFilters();
+    }
+    
+    // Mobile navigation toggle
+    function toggleMobileNav() {
+      const nav = document.getElementById('mobileNav');
+      const toggle = document.querySelector('.header__mobile-toggle');
+      const isOpen = nav.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', isOpen);
+    }
+    
+    // FAQ accordion
+    function toggleFaq(button) {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const answer = button.nextElementSibling;
+      
+      document.querySelectorAll('.faq__question').forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.nextElementSibling.classList.remove('active');
+      });
+      
+      if (!isExpanded) {
+        button.setAttribute('aria-expanded', 'true');
+        answer.classList.add('active');
+      }
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', loadData);
+  </script>
+</body>
+</html>
