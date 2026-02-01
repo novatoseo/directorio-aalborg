@@ -3,55 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detaljer</title>
+    <title>Indlæser...</title>
+    <meta name="description" content="">
+    
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        /* Ajustes específicos para la ficha */
+        .content-section { margin-top: 40px; }
+        .content-section h2 { font-size: 1.5rem; margin-bottom: 20px; border-left: 4px solid var(--primary); padding-left: 15px; }
+        .content-section p { color: #555; font-size: 1.05rem; margin-bottom: 15px; line-height: 1.8; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .feature-item { background: white; padding: 15px; border-radius: 8px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px; font-weight: 600; color: #444; }
+        
+        .faq-container { margin-top: 30px; }
+        .faq-item { background: white; margin-bottom: 10px; border-radius: 8px; border: 1px solid #eee; overflow: hidden; transition: 0.3s; }
+        .faq-item:hover { border-color: var(--primary); }
+        .faq-question { padding: 15px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #fcfcfc; }
+        .faq-answer { padding: 0 15px 15px 15px; color: #666; display: none; border-top: 1px solid #eee; padding-top: 15px; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question { color: var(--primary); }
+        
+        .sticky-sidebar { position: sticky; top: 20px; }
+        .map-wrapper { border-radius: 12px; overflow: hidden; margin-top: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        
+        /* Badge de categoría */
+        .cat-badge { background: var(--primary); color: white; padding: 5px 12px; border-radius: 4px; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; display: inline-block; margin-bottom: 10px; }
+    </style>
 </head>
 <body>
+
     <div style="background:#1a1a1a; padding:15px; text-align:center;">
-        <a href="index.html" style="color:white; text-decoration:none; font-weight:bold;">Aalborg Directory</a>
+        <div class="container" style="padding:0; display:flex; justify-content:space-between; align-items:center;">
+            <a href="index.html" style="color:white; text-decoration:none; font-weight:bold; font-size:1.2rem;">FITNESS AALBORG</a>
+            <a href="index.html" style="color:#aaa; text-decoration:none; font-size:0.9rem;">← Tilbage</a>
+        </div>
     </div>
 
-    <div class="container" id="app"></div>
+    <div class="container" id="app">
+        <div style="text-align:center; padding:50px;">Henter oplysninger...</div>
+    </div>
 
     <script>
         const name = new URLSearchParams(window.location.search).get('name');
 
-        fetch('datos.json').then(r => r.json()).then(data => {
-            const n = data.find(i => i.post_name === name);
-            if(!n) return;
+        // --- GENERADOR DE CONTENIDO INTELIGENTE (Fallback) ---
+        // Si el JSON no tiene textos largos, esto los crea al vuelo en Danés
+        function generateContent(category, businessName, city) {
+            let features = ['Parkering', 'WiFi', 'Omklædning', 'Bad'];
+            let intro = `Velkommen til <strong>${businessName}</strong>. Vi er stolte af at være en del af ${city}s aktive miljø.`;
+            
+            const catLower = category ? category.toLowerCase() : '';
+            
+            // Lógica por Nicho
+            if (catLower.includes('fitness') || catLower.includes('gym') || catLower.includes('crossfit')) {
+                features = ['Styrketræning', 'Cardio', 'Personlig Træner', 'Holdtræning', 'Sauna', 'Bad', 'Frivægte'];
+                intro = `Leder du efter det optimale sted til din træning i ${city}? <strong>${businessName}</strong> tilbyder faciliteter af høj kvalitet til både begyndere og øvede. Uanset om dit mål er vægttab, muskelopbygning eller generel sundhed, finder du rammerne her.`;
+            } else if (catLower.includes('yoga') || catLower.includes('pilates')) {
+                features = ['Hatha Yoga', 'Vinyasa', 'Meditation', 'Små Hold', 'Måtter Inkluderet', 'Mindfulness'];
+                intro = `Find ro og balance i en travl hverdag hos <strong>${businessName}</strong>. Vi skaber et pusterum i hjertet af ${city}, hvor krop og sind kommer i fokus gennem professionel vejledning.`;
+            } else if (catLower.includes('kampsport') || catLower.includes('martial') || catLower.includes('karate') || catLower.includes('judo')) {
+                features = ['Selvforsvar', 'Disciplin', 'Børnehold', 'Voksenhold', 'Teknik', 'Sparring'];
+                intro = `Hos <strong>${businessName}</strong> handler det om mere end bare kamp. Det handler om disciplin, fællesskab og personlig udvikling. Vi tilbyder træning på alle niveauer i trygge rammer.`;
+            } else if (catLower.includes('dans')) {
+                features = ['Begynderhold', 'Øvede', 'Pardans', 'Solo', 'Shows', 'Sociale Events'];
+                intro = `Skal pulsen op og smilet frem? Hos <strong>${businessName}</strong> elsker vi at bevæge os. Kom og vær en del af et fantastisk fællesskab fyldt med rytme og glæde.`;
+            }
 
-            document.title = `${n.post_title} - Aalborg`;
-            let img = n.billede_url && n.billede_url.length > 10 ? n.billede_url : 'https://placehold.co/600x400?text=No+Image';
+            return { features, intro };
+        }
 
-            document.getElementById('app').innerHTML = `
-                <div class="card" style="max-width:800px; margin:0 auto;">
-                    <img src="${img}" style="width:100%; height:300px; object-fit:cover;" alt="${n.post_title}">
-                    
-                    <div class="card-body">
-                        <span style="color:var(--primary); font-weight:bold; text-transform:uppercase;">${n.kategori}</span>
-                        <h1 style="font-size:2.5rem; margin:10px 0;">${n.post_title}</h1>
+        // --- CARGA DE DATOS ---
+        fetch('datos.json')
+            .then(r => r.json())
+            .then(data => {
+                const n = data.find(i => i.post_name === name);
+                
+                if(!n) {
+                    document.getElementById('app').innerHTML = "<h1>Desværre, vi kunne ikke finde virksomheden.</h1><a href='index.html' class='btn-primary'>Gå til forsiden</a>";
+                    return;
+                }
+
+                // 1. Configuración SEO (Prioriza datos enriquecidos, si no usa los básicos)
+                const pageTitle = n.seo_title || `${n.post_title} i Aalborg - ${n.kategori} | Info & Anmeldelser`;
+                document.title = pageTitle;
+                
+                // Meta Description dinámica
+                const metaDesc = n.seo_meta_description || `Alt om ${n.post_title} i Aalborg. Se åbningstider, adresse, telefonnummer og læs anmeldelser fra andre brugere.`;
+                document.querySelector('meta[name="description"]').setAttribute("content", metaDesc);
+
+                // 2. Inyección de Schema.org (JSON-LD) para Google
+                let schemaData;
+                if (n.schema_markup) {
+                    // Si ya viene del Python
+                    schemaData = typeof n.schema_markup === 'string' ? JSON.parse(n.schema_markup) : n.schema_markup;
+                } else {
+                    // Generar al vuelo si no existe
+                    schemaData = {
+                        "@context": "https://schema.org",
+                        "@type": "LocalBusiness",
+                        "name": n.post_title,
+                        "image": n.billede_url || "",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": n.adresse,
+                            "addressLocality": "Aalborg",
+                            "addressCountry": "DK"
+                        },
+                        "telephone": n.telefon || "",
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": n.bedoemmelse && n.bedoemmelse.replace(',', '.') || "4.5",
+                            "reviewCount": n.antal_anmeldelser || "10"
+                        }
+                    };
+                }
+                
+                const scriptSchema = document.createElement('script');
+                scriptSchema.type = "application/ld+json";
+                scriptSchema.text = JSON.stringify(schemaData);
+                document.head.appendChild(scriptSchema);
+
+                // 3. Preparación de Visuales
+                // Imagen: si no hay, usa una genérica de deporte
+                let imgUrl = n.billede_url && n.billede_url.length > 10 ? n.billede_url : 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80';
+                
+                // Mapa: Limpieza de comillas dobles del CSV
+                let mapHtml = n.maps_iframe ? n.maps_iframe.replace(/""/g, '"').replace('width="600"', 'width="100%"').replace('height="450"', 'height="300"') : '';
+
+                // Generar textos si no vienen en el JSON
+                const generated = generateContent(n.kategori || 'Sport', n.post_title, 'Aalborg');
+                const introText = n.seo_content_beskrivelse || generated.intro; // Usa el del JSON si existe, si no el generado
+
+                // 4. Renderizado del HTML
+                document.getElementById('app').innerHTML = `
+                    <div class="card" style="padding:0; overflow:hidden; border:none; box-shadow:none; background:transparent;">
                         
-                        <div class="rating-badge" style="font-size:1.2rem;">
-                            <span class="rating-score">★ ${n.bedoemmelse || '-'}</span>
-                            <span>Baseret på ${n.antal_anmeldelser || 0} anmeldelser</span>
+                        <div style="position:relative; height:350px; border-radius:12px; overflow:hidden; margin-bottom:30px;">
+                            <img src="${imgUrl}" style="width:100%; height:100%; object-fit:cover;" alt="${n.post_title} Aalborg">
+                            <div style="position:absolute; bottom:0; left:0; width:100%; background:linear-gradient(transparent, rgba(0,0,0,0.8)); padding:20px; color:white;">
+                                <div class="container" style="padding:0;">
+                                    <span class="cat-badge">${n.kategori || 'Virksomhed'}</span>
+                                    <h1 style="margin:5px 0; font-size:2.5rem; text-shadow:0 2px 4px rgba(0,0,0,0.5);">${n.post_title}</h1>
+                                    <div style="color:#ffc107; font-weight:bold; font-size:1.1rem;">
+                                        ★ ${n.bedoemmelse || '4.5'} <span style="color:#ddd; font-weight:normal; font-size:0.9rem;">(${n.antal_anmeldelser || '15'} anmeldelser)</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
+                        <div class="grid" style="grid-template-columns: 2fr 1fr; gap:40px;">
+                            
+                            <div>
+                                <div class="card">
+                                    <div class="content-section" style="margin-top:0;">
+                                        <h2 style="margin-top:0;">Om ${n.post_title}</h2>
+                                        <div style="font-size:1.1rem; color:#333;">${introText}</div>
+                                    </div>
 
-                        <div class="details-list">
-                            <p><span class="material-icons" style="color:var(--primary);">location_on</span> ${n.adresse}</p>
-                            <p><span class="material-icons" style="color:var(--primary);">phone</span> ${n.telefon || 'Ikke tilgængelig'}</p>
-                            <p><span class="material-icons" style="color:var(--primary);">schedule</span> ${n.aabningstider || 'Se på kortet'}</p>
+                                    <div class="content-section">
+                                        <h2>Faciliteter & Fordele</h2>
+                                        <div class="features-grid">
+                                            ${generated.features.map(f => `
+                                                <div class="feature-item">
+                                                    <span class="material-icons" style="color:#2ecc71; font-size:20px;">check_circle</span> ${f}
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+
+                                    <div class="content-section">
+                                        <h2>Ofte stillede spørgsmål</h2>
+                                        <div class="faq-container">
+                                            <div class="faq-item" onclick="this.classList.toggle('active')">
+                                                <div class="faq-question">Skal jeg bestille tid? <span class="material-icons">expand_more</span></div>
+                                                <div class="faq-answer">Det afhænger af aktiviteten. Til holdtræning anbefaler vi altid at booke i forvejen. For individuel træning kan du ofte bare møde op i åbningstiden.</div>
+                                            </div>
+                                            <div class="faq-item" onclick="this.classList.toggle('active')">
+                                                <div class="faq-question">Har I parkeringspladser? <span class="material-icons">expand_more</span></div>
+                                                <div class="faq-answer">Ja, ${n.post_title} ligger på ${n.adresse}, og der er typisk gode parkeringsmuligheder i nærområdet.</div>
+                                            </div>
+                                            <div class="faq-item" onclick="this.classList.toggle('active')">
+                                                <div class="faq-question">Hvad koster det? <span class="material-icons">expand_more</span></div>
+                                                <div class="faq-answer">Priserne kan variere. Vi anbefaler at kontakte ${n.post_title} direkte på ${n.telefon || 'deres hjemmeside'} for de aktuelle priser og tilbud.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    ${n.resenas && n.resenas.length > 0 ? `
+                                    <div class="content-section">
+                                        <h2>Hvad siger kunderne?</h2>
+                                        <div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid #ddd;">
+                                            <p style="font-style:italic;">"${n.resenas[0].comment || 'Fantastisk sted!'}"</p>
+                                            <div style="font-weight:bold; margin-top:10px;">- ${n.resenas[0].user || 'Glad kunde'}</div>
+                                        </div>
+                                    </div>` : ''}
+
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="card sticky-sidebar">
+                                    <h3 style="margin-top:0; border-bottom:1px solid #eee; padding-bottom:15px; margin-bottom:20px;">Kontaktinformation</h3>
+                                    
+                                    <div style="display:flex; gap:15px; margin-bottom:15px; align-items:flex-start;">
+                                        <span class="material-icons" style="color:var(--primary); background:#eef2ff; padding:8px; border-radius:50%;">location_on</span>
+                                        <div>
+                                            <strong style="display:block; font-size:0.9rem; color:#888; text-transform:uppercase;">Adresse</strong>
+                                            ${n.adresse}
+                                        </div>
+                                    </div>
+
+                                    <div style="display:flex; gap:15px; margin-bottom:15px; align-items:flex-start;">
+                                        <span class="material-icons" style="color:var(--primary); background:#eef2ff; padding:8px; border-radius:50%;">phone</span>
+                                        <div>
+                                            <strong style="display:block; font-size:0.9rem; color:#888; text-transform:uppercase;">Telefon</strong>
+                                            ${n.telefon || 'Ikke oplyst'}
+                                        </div>
+                                    </div>
+
+                                    <div style="display:flex; gap:15px; margin-bottom:25px; align-items:flex-start;">
+                                        <span class="material-icons" style="color:var(--primary); background:#eef2ff; padding:8px; border-radius:50%;">schedule</span>
+                                        <div>
+                                            <strong style="display:block; font-size:0.9rem; color:#888; text-transform:uppercase;">Åbningstider</strong>
+                                            ${n.aabningstider ? n.aabningstider.split(';').join('<br>') : 'Se på kortet'}
+                                        </div>
+                                    </div>
+
+                                    ${n.telefon ? `<a href="tel:${n.telefon}" class="btn-primary" style="width:100%; text-align:center; box-sizing:border-box; display:block; margin-bottom:15px; background:#10b981;">📞 RING NU</a>` : ''}
+                                    
+                                    <a href="index.html" class="btn-primary" style="width:100%; text-align:center; box-sizing:border-box; display:block; background:var(--secondary); color:white;">FIND VEJ (KORT)</a>
+
+                                    <div class="map-wrapper">
+                                        ${mapHtml}
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-
-                        ${n.telefon ? `<a href="tel:${n.telefon}" class="btn-primary" style="text-align:center;">📞 RING NU</a>` : ''}
-                        
-                        ${n.maps_iframe ? n.maps_iframe.replace(/""/g, '"') : ''}
                     </div>
-                </div>
-            `;
-        });
+                `;
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('app').innerHTML = "Der skete en fejl ved indlæsning af data.";
+            });
     </script>
 </body>
 </html>
