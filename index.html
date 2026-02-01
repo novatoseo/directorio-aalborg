@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="da">
 <head>
-    <meta charset="UTF-8"><title>Directorio Aalborg | Mejores Servicios</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Aalborg | De bedste steder i byen</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header><h1>Directorio de Negocios en Aalborg</h1></header>
-    <div class="container">
-        <h2>Categorías principales</h2>
-        <div id="categorias" class="grid"></div>
+    <div class="header-hero">
+        <h1>Find din passion i Aalborg.</h1>
+        <p>Udforsk de bedste virksomheder, services og steder i byen.</p>
     </div>
+
+    <div class="container">
+        <h2 style="margin-bottom: 24px;">Populære kategorier</h2>
+        <div id="categorias" class="grid">
+            </div>
+    </div>
+
     <script>
-        fetch('datos.json').then(r => r.json()).then(data => {
-            const cats = [...new Set(data.map(i => i.kategori))];
-            document.getElementById('categorias').innerHTML = cats.map(c => 
-                `<a href="categoria.html?cat=${encodeURIComponent(c)}" class="card"><h3>${c}</h3><span class="badge">Explorar →</span></a>`
-            ).join('');
-        });
+        fetch('datos.json')
+            .then(response => response.json())
+            .then(data => {
+                // Filtramos categorías únicas
+                const categorias = [...new Set(data.map(item => item.kategori))].sort();
+                
+                document.getElementById('categorias').innerHTML = categorias.map(cat => `
+                    <a href="categoria.html?cat=${encodeURIComponent(cat)}" class="card" style="justify-content:center; text-align:center;">
+                        <h3>${cat}</h3>
+                        <span style="color:var(--accent); font-weight:600; font-size:0.9rem;">Udforsk &rarr;</span>
+                    </a>
+                `).join('');
+            });
     </script>
 </body>
 </html>
