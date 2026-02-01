@@ -1,133 +1,197 @@
 :root {
-    --bg: #F5F5F7;           /* Gris muy suave de fondo */
-    --card-bg: #FFFFFF;      /* Blanco puro para tarjetas */
-    --text-main: #111111;    /* Negro casi puro para textos */
-    --text-sec: #6E6E73;     /* Gris para secundarios */
-    --accent: #0071E3;       /* Azul eléctrico estilo tech/sport */
-    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --primary: #0062ff;       /* Azul vibrante estilo deporte */
+    --secondary: #1a1a1a;     /* Negro suave para textos */
+    --bg-light: #f4f5f7;      /* Fondo gris muy claro */
+    --white: #ffffff;
+    --gold: #ffc107;          /* Color estrella */
+    --radius: 8px;            /* Bordes ligeramente redondeados */
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 body {
-    background-color: var(--bg);
-    color: var(--text-main);
-    font-family: var(--font-stack);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--secondary);
     margin: 0;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
 }
 
-/* Header estilo Hero */
-.header-hero {
-    background: var(--card-bg);
-    padding: 3rem 1rem;
-    text-align: center;
-    border-bottom: 1px solid #E5E5E5;
-}
-
-.header-hero h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin: 0;
-    letter-spacing: -1px;
-}
-
-.header-hero p {
-    color: var(--text-sec);
-    font-size: 1.1rem;
-    margin-top: 10px;
-}
-
-/* Navegación */
-.nav-bar {
-    background: var(--text-main);
+/* --- HERO SECTION (La parte de arriba) --- */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
     color: white;
-    padding: 1rem;
-    font-weight: 600;
+    padding: 80px 20px;
     text-align: center;
 }
-.nav-bar a { color: white; text-decoration: none; }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Grid y Tarjetas */
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+/* Buscador estilo FitFit */
+.search-box {
+    background: white;
+    padding: 10px;
+    border-radius: 50px;
+    display: inline-flex;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.search-box input {
+    border: none;
+    flex: 1;
+    padding: 10px 20px;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 50px;
+}
+
+.search-box button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover { background: #004ecb; }
+
+/* --- CONTENEDOR Y GRID --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+    border-left: 5px solid var(--primary);
+    padding-left: 15px;
+}
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
 }
 
+/* --- TARJETAS (CARDS) ESTILO FITFIT --- */
 .card {
-    background: var(--card-bg);
-    border-radius: 16px;
-    padding: 24px;
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 1px solid transparent;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+/* Imagen de la tarjeta */
+.card-img {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+    background-color: #e0e0e0;
+}
+
+.card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Badge de "Destacado" */
+.badge-featured {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--primary);
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
 }
 
 .card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+    color: #111;
 }
 
-.category-tag {
-    display: inline-block;
-    background: #E8F2FF;
-    color: var(--accent);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 12px;
+.rating-badge {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: var(--gold);
 }
 
-/* Botones y Elementos */
+.rating-score {
+    background: var(--gold);
+    color: black;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.card-footer {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    color: #666;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Botones */
 .btn-primary {
-    display: block;
-    background: var(--text-main);
+    background: var(--primary);
     color: white;
-    text-align: center;
-    padding: 16px;
-    border-radius: 12px;
-    font-weight: 700;
     text-decoration: none;
-    margin-top: 20px;
-    font-size: 1.1rem;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
 }
 
-.rating { color: #F5A623; font-weight: 700; }
-.meta-info { color: var(--text-sec); font-size: 0.95rem; margin-bottom: 5px; }
+/* Mapas y detalles */
+iframe { width: 100%; height: 350px; border: none; border-radius: var(--radius); margin-top: 20px; }
+.details-list p { margin: 10px 0; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
 
-/* Imágenes */
-.business-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    background-color: #eee;
-}
-
-iframe {
-    width: 100%;
-    height: 300px;
-    border: 0;
-    border-radius: 12px;
-    margin-top: 24px;
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .grid { grid-template-columns: 1fr; }
 }
