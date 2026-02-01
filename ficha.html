@@ -1,50 +1,59 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="da">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css"><title>Cargando...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virksomhed</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="nav"><a href="index.html" style="text-decoration:none; color:var(--p)">← Directorio Aalborg</a></div>
-    <div class="container" id="app"></div>
+    <div class="nav-bar">
+        <a href="index.html">Aalborg Directory</a>
+    </div>
+
+    <div class="container" id="app">Cargando datos...</div>
 
     <script>
         const name = new URLSearchParams(window.location.search).get('name');
+        
         fetch('datos.json').then(r => r.json()).then(data => {
             const n = data.find(i => i.post_name === name);
-            if(!n) return document.getElementById('app').innerHTML = "Negocio no encontrado";
-
-            document.title = `${n.post_title} en ${n.by} | Opiniones y Contacto`;
             
-            // Inyectar Schema para Google
-            const schema = {
-                "@context": "https://schema.org",
-                "@type": "LocalBusiness",
-                "name": n.post_title,
-                "address": n.adresse,
-                "telephone": n.telefon,
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": n.bedoemmelse || 4,
-                    "reviewCount": n.antal_anmeldelser || 10
-                }
-            };
-            const script = document.createElement('script');
-            script.type = "application/ld+json";
-            script.text = JSON.stringify(schema);
-            document.head.appendChild(script);
+            if(!n) {
+                document.getElementById('app').innerHTML = "<h1>Virksomhed ikke fundet</h1><a href='index.html'>Gå hjem</a>";
+                return;
+            }
+
+            document.title = `${n.post_title} - Aalborg`;
+
+            // Lógica de Imagen: Si existe URL, mostramos la foto grande.
+            const imagenPrincipal = n.billede_url 
+                ? `<img src="${n.billede_url}" class="business-img" style="height: 300px; object-fit: cover;" alt="${n.post_title}">` 
+                : '';
+
+            // Limpieza del Iframe (quitamos comillas dobles extras del CSV)
+            const mapClean = n.maps_iframe ? n.maps_iframe.replace(/""/g, '"') : '';
 
             document.getElementById('app').innerHTML = `
-                <h1>${n.post_title}</h1>
-                <div class="stars">⭐ ${n.bedoemmelse} (${n.antal_anmeldelser} reseñas)</div>
-                <div class="grid">
-                    <div class="card">
-                        <p><strong>📍 Dirección:</strong><br>${n.adresse}</p>
-                        <p><strong>⏰ Horario:</strong><br>${n.aabningstider || 'Contactar para consultar'}</p>
-                        ${n.telefon ? `<a href="tel:${n.telefon}" class="btn-call">📞 LLAMAR AL NEGOCIO</a>` : ''}
-                    </div>
+                ${imagenPrincipal}
+                <span class="category-tag">${n.kategori}</span>
+                <h1 style="font-size: 2.5rem; margin: 10px 0;">${n.post_title}</h1>
+                
+                <div class="rating" style="font-size: 1.2rem; margin-bottom: 20px;">
+                    ★ ${n.bedoemmelse || ''} 
+                    <span style="color:var(--text-sec);">baseret på ${n.antal_anmeldelser || 0} anmeldelser</span>
                 </div>
-                <div class="map-container">${n.maps_iframe.replace(/""/g, '"')}</div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3 style="border-bottom:1px solid #eee; padding-bottom:10px; margin-bottom:15px;">Info & Kontakt</h3>
+                    <p><strong>📍 Adresse:</strong><br>${n.adresse}</p>
+                    <p><strong>📞 Telefon:</strong><br>${n.telefon || 'Ikke tilgængelig'}</p>
+                    <p><strong>🕒 Åbningstider:</strong><br>${n.aabningstider || 'Se på kortet'}</p>
+                    
+                    ${n.telefon ? `<a href="tel:${n.telefon}" class="btn-primary">📞 RING NU</a>` : ''}
+                </div>
+
+                ${mapClean}
             `;
         });
     </script>
