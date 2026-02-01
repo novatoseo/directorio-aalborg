@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Center i Aalborg | FitAalborg</title>
+  <meta name="description" id="pageDescription" content="Se detaljer, priser, anmeldelser og kontaktoplysninger.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" id="pageCanonical" href="https://fitaalborg.dk/ficha.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="place">
+  <meta property="og:title" id="ogTitle" content="Center i Aalborg | FitAalborg">
+  <meta property="og:description" id="ogDescription" content="Se detaljer, priser og anmeldelser.">
+  <meta property="og:url" id="ogUrl" content="https://fitaalborg.dk/ficha.html">
+  <meta property="og:site_name" content="FitAalborg">
+  <meta property="og:locale" content="da_DK">
+  <meta property="og:image" id="ogImage" content="">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Schema.org JSON-LD (will be populated by JS) -->
+  <script type="application/ld+json" id="schemaJsonLd">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Center",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Aalborg",
+      "addressCountry": "DK"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo">
+        <span class="header__logo-icon">💪</span>
+        <span>FitAalborg</span>
+      </a>
+      
+      <nav class="header__nav" aria-label="Hovednavigation">
+        <ul class="header__nav-list">
+          <li><a href="index.html" class="header__nav-link">Forside</a></li>
+          <li><a href="kategori.html?kategori=fitnesscentre" class="header__nav-link">Fitness</a></li>
+          <li><a href="kategori.html?kategori=fysioterapi" class="header__nav-link">Fysioterapi</a></li>
+          <li><a href="kategori.html?kategori=yoga" class="header__nav-link">Yoga</a></li>
+          <li><a href="kategori.html" class="header__nav-link">Alle kategorier</a></li>
+          <li><a href="#kontakt" class="header__nav-link">Kontakt</a></li>
+        </ul>
+      </nav>
+      
+      <button class="header__mobile-toggle" aria-label="Åbn menu" aria-expanded="false" onclick="toggleMobileNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+  
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigation">
+    <ul class="mobile-nav__list">
+      <li><a href="index.html" class="mobile-nav__link">Forside</a></li>
+      <li><a href="kategori.html?kategori=fitnesscentre" class="mobile-nav__link">Fitness</a></li>
+      <li><a href="kategori.html?kategori=fysioterapi" class="mobile-nav__link">Fysioterapi</a></li>
+      <li><a href="kategori.html?kategori=yoga" class="mobile-nav__link">Yoga</a></li>
+      <li><a href="kategori.html?kategori=kampsport" class="mobile-nav__link">Kampsport</a></li>
+      <li><a href="kategori.html?kategori=danseskoler" class="mobile-nav__link">Dans</a></li>
+      <li><a href="#kontakt" class="mobile-nav__link">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="index.html" class="breadcrumbs__link">Forside</a>
+          <span class="breadcrumbs__separator">›</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <a href="kategori.html" class="breadcrumbs__link" id="breadcrumbCategory">Kategori</a>
+          <span class="breadcrumbs__separator">›</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current" id="breadcrumbCurrent">Center</span>
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Ficha Header / Above the Fold -->
+    <section class="hero hero--ficha">
+      <div class="container">
+        <div class="ficha__header">
+          <div class="ficha__main-info">
+            <a href="kategori.html" class="ficha__category" id="fichaCategory">Kategori</a>
+            <h1 class="ficha__title" id="fichaTitle">Indlæser...</h1>
+            
+            <div class="ficha__meta">
+              <div class="ficha__meta-item" id="fichaAddress">
+                <span class="ficha__meta-icon">📍</span>
+                <span>Indlæser adresse...</span>
+              </div>
+              <div class="ficha__meta-item" id="fichaPhone" style="display: none;">
+                <span class="ficha__meta-icon">📞</span>
+                <a href="#" id="fichaPhoneLink">Indlæser...</a>
+              </div>
+              <div class="ficha__meta-item" id="fichaHours" style="display: none;">
+                <span class="ficha__meta-icon">🕐</span>
+                <span id="fichaHoursText">Indlæser...</span>
+              </div>
+              <div class="ficha__meta-item" id="fichaWebsite" style="display: none;">
+                <span class="ficha__meta-icon">🌐</span>
+                <a href="#" id="fichaWebsiteLink" target="_blank" rel="noopener">Besøg hjemmeside</a>
+              </div>
+            </div>
+            
+            <!-- Rating -->
+            <div class="ficha__rating" id="fichaRating" style="display: none;">
+              <div class="ficha__rating-score" id="fichaRatingScore">-</div>
+              <div>
+                <div class="ficha__rating-stars" id="fichaRatingStars">☆☆☆☆☆</div>
+                <div class="ficha__rating-count" id="fichaRatingCount">0 anmeldelser</div>
+              </div>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="ficha__ctas" id="fichaCtas">
+              <!-- Will be populated by JS -->
+            </div>
+            
+            <!-- Attribute Chips -->
+            <div class="ficha__chips" id="fichaChips">
+              <!-- Will be populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section section--white" style="padding-top: 0;">
+      <div class="container">
+        <div class="ficha__gallery">
+          <div class="ficha__gallery-main" id="fichaGallery">
+            <div class="ficha__gallery-placeholder">📷</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Summary -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="ficha__section">
+          <h2 class="ficha__section-title">
+            <span class="ficha__section-icon">📋</span>
+            Overblik
+          </h2>
+          <div class="ficha__list" id="fichaSummary">
+            <!-- Will be populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services & Prices -->
+    <section class="section section--white" id="sectionServices">
+      <div class="container">
+        <div class="ficha__section" style="border: none; padding: 0;">
+          <h2 class="ficha__section-title">
+            <span class="ficha__section-icon">💰</span>
+            Ydelser og Priser
+          </h2>
+          
+          <div id="fichaServices">
+            <!-- Will be populated by JS -->
+          </div>
+          
+          <div id="fichaPrices" style="margin-top: var(--space-6);">
+            <!-- Will be populated by JS -->
+          </div>
+          
+          <div style="margin-top: var(--space-6);" id="servicesCta">
+            <!-- CTA will be added by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Facilities -->
+    <section class="section section--gray" id="sectionFacilities">
+      <div class="container">
+        <div class="ficha__section" style="border: none; padding: 0;">
+          <h2 class="ficha__section-title">
+            <span class="ficha__section-icon">🏢</span>
+            Faciliteter og Udstyr
+          </h2>
+          <div class="ficha__list" id="fichaFacilities">
+            <!-- Will be populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activities -->
+    <section class="section section--white" id="sectionActivities">
+      <div class="container">
+        <div class="ficha__section" style="border: none; padding: 0;">
+          <h2 class="ficha__section-title">
+            <span class="ficha__section-icon">🎯</span>
+            Aktiviteter og Hold
+          </h2>
+          <div class="ficha__list" id="fichaActivities">
+            <!-- Will be populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section section--gray" id="sectionReviews">
+      <div class="container">
+        <div class="ficha__section" style="border: none; padding: 0;">
+          <h2 class="ficha__section-title">
+            <span class="ficha__section-icon">⭐</span>
+            Anmeldelser
+          </h2>
+          
+          <div class="reviews__summary" id="reviewsSummary" style="display: none;">
+            <div class="reviews__score">
+              <div class="reviews__score-value" id="reviewsScoreValue">-</div>
+              <div class="reviews__score-stars" id="reviewsScoreStars">☆☆☆☆☆</div>
+              <div class="reviews__score-count" id="reviewsScoreCount">0 anmeldelser</div>
+            </div>
+          </div>
+          
+          <div id="reviewsList">
+            <!-- Will be populated by JS -->
+          </div>
+          
+          <div id="noReviews" style="display: none;">
+            <div class="trust-block" style="background: var(--color-white);">
+              <h3 class="trust-block__title">
+                <span class="trust-block__icon">💡</span>
+                Hvad Du Bør Spørge Om
+              </h3>
+              <div class="trust-block__list">
+                <div class="trust-block__item">
+                  <span class="trust-block__item-icon">✓</span>
+                  <span>Tilbyder I prøvetræning eller introduktionstilbud?</span>
+                </div>
+                <div class="trust-block__item">
+                  <span class="trust-block__item-icon">✓</span>
+                  <span>Hvad er jeres åbningstider og travle tidspunkter?</span>
+                </div>
+                <div class="trust-block__item">
+                  <span class="trust-block__item-icon">✓</span>
+                  <span>Er der bindingsperiode på medlemskabet?</span>
+                </div>
+                <div class="trust-block__item">
+                  <span class="trust-block__item-icon">✓</span>
+                  <span>Hvilke faciliteter er inkluderet i prisen?</span>
+                </div>
+                <div class="trust-block__item">
+                  <span class="trust-block__item-icon">✓</span>
+                  <span>Har I parkeringsmuligheder?</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location / Map -->
+    <section class="section section--white">
+      <div class="container">
+        <div class="ficha__section" style="border: none; padding: 0;">
+          <h2 class="ficha__section-title">
+            <span class="ficha__section-icon">📍</span>
+            Beliggenhed
+          </h2>
+          
+          <div class="ficha__meta" style="margin-bottom: var(--space-4);">
+            <div class="ficha__meta-item">
+              <span class="ficha__meta-icon">🏠</span>
+              <span id="locationAddress">Indlæser...</span>
+            </div>
+            <div class="ficha__meta-item" id="locationArea" style="display: none;">
+              <span class="ficha__meta-icon">📌</span>
+              <span id="locationAreaText"></span>
+            </div>
+          </div>
+          
+          <div class="ficha__map" id="fichaMap">
+            <div class="ficha__gallery-placeholder" style="height: 100%; display: flex; align-items: center; justify-content: center;">
+              🗺️ Indlæser kort...
+            </div>
+          </div>
+          
+          <div style="margin-top: var(--space-4);">
+            <a href="#" id="directionsLink" class="btn btn--secondary" target="_blank" rel="noopener">
+              🧭 Få rutevejledning via Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related / Alternatives -->
+    <section class="section section--gray">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title" id="relatedTitle">Lignende Centre i Aalborg</h2>
+          <p class="section__subtitle">Andre muligheder i samme kategori</p>
+        </header>
+        
+        <div class="related-grid" id="relatedGrid">
+          <!-- Will be populated by JS -->
+        </div>
+        
+        <div class="text-center" style="margin-top: var(--space-6);">
+          <a href="kategori.html" class="btn btn--secondary" id="seeAllLink">Se alle centre →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--white">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title" id="faqTitle">Ofte Stillede Spørgsmål</h2>
+        </header>
+        
+        <div class="faq__list" id="faqList" role="list">
+          <!-- Will be populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- E-E-A-T / Update Info -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="trust-block">
+          <h2 class="trust-block__title">
+            <span class="trust-block__icon">ℹ️</span>
+            Om Disse Oplysninger
+          </h2>
+          <div class="trust-block__list">
+            <div class="trust-block__item">
+              <span class="trust-block__item-icon">📅</span>
+              <div>
+                <strong>Sidst opdateret:</strong> <span id="lastUpdated">Januar 2025</span>
+              </div>
+            </div>
+            <div class="trust-block__item">
+              <span class="trust-block__item-icon">📊</span>
+              <div>
+                <strong>Datakilde:</strong> Google Maps, officielle hjemmesider og brugeranmeldelser
+              </div>
+            </div>
+            <div class="trust-block__item">
+              <span class="trust-block__item-icon">⚠️</span>
+              <div>
+                Priser og åbningstider kan ændre sig. Kontakt stedet direkte for de nyeste oplysninger.
+              </div>
+            </div>
+          </div>
+          <p class="text-sm text-muted" style="margin-top: var(--space-4);">
+            <a href="#kontakt">🔧 Rapporter fejl i oplysningerne</a> · 
+            <a href="#kontakt">📝 Er du ejeren? Ret din profil</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="kontakt">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <span>💪</span>
+            <span>FitAalborg</span>
+          </a>
+          <p class="footer__tagline">Din guide til fitness og sundhed i Aalborg. Find, sammenlign og vælg det rigtige træningssted for dig.</p>
+        </div>
+        
+        <div>
+          <h3 class="footer__title">Kategorier</h3>
+          <ul class="footer__list">
+            <li><a href="kategori.html?kategori=fitnesscentre" class="footer__link">Fitnesscentre</a></li>
+            <li><a href="kategori.html?kategori=fysioterapi" class="footer__link">Fysioterapi</a></li>
+            <li><a href="kategori.html?kategori=yoga" class="footer__link">Yoga</a></li>
+            <li><a href="kategori.html?kategori=kampsport" class="footer__link">Kampsport</a></li>
+            <li><a href="kategori.html?kategori=danseskoler" class="footer__link">Danseskoler</a></li>
+            <li><a href="kategori.html?kategori=pilates" class="footer__link">Pilates</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer__title">Områder</h3>
+          <ul class="footer__list">
+            <li><a href="kategori.html?omraade=9000" class="footer__link">Aalborg Centrum</a></li>
+            <li><a href="kategori.html?omraade=9220" class="footer__link">Aalborg Øst</a></li>
+            <li><a href="kategori.html?omraade=9200" class="footer__link">Aalborg SV</a></li>
+            <li><a href="kategori.html?omraade=9400" class="footer__link">Nørresundby</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer__title">Information</h3>
+          <ul class="footer__list">
+            <li><a href="index.html" class="footer__link">Om FitAalborg</a></li>
+            <li><a href="#tilføj" class="footer__link">Tilføj dit center</a></li>
+            <li><a href="#kontakt" class="footer__link">Kontakt os</a></li>
+            <li><a href="#privatliv" class="footer__link">Privatlivspolitik</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2025 FitAalborg. Alle rettigheder forbeholdes.</p>
+        <p class="footer__update">Data opdateret: Januar 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // State
+    let siteData = null;
+    let currentCenter = null;
+    
+    // Get center ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const centerId = urlParams.get('id');
+    
+    // Load data
+    async function loadData() {
+      try {
+        const response = await fetch('data.json');
+        siteData = await response.json();
+        
+        // Find the center
+        currentCenter = siteData.centers.find(c => c.slug === centerId || c.id === centerId);
+        
+        if (!currentCenter) {
+          showNotFound();
+          return;
+        }
+        
+        renderFicha();
+      } catch (error) {
+        console.error('Error loading data:', error);
+        showNotFound();
+      }
+    }
+    
+    // Show not found
+    function showNotFound() {
+      document.getElementById('fichaTitle').textContent = 'Center ikke fundet';
+      document.getElementById('fichaAddress').innerHTML = '<span>Det ønskede center kunne ikke findes.</span>';
+      document.getElementById('fichaCtas').innerHTML = '<a href="index.html" class="btn btn--primary">Gå til forsiden</a>';
+    }
+    
+    // Render the ficha
+    function renderFicha() {
+      const c = currentCenter;
+      
+      // Update page meta
+      updatePageMeta();
+      
+      // Update Schema.org
+      updateSchema();
+      
+      // Breadcrumbs
+      document.getElementById('breadcrumbCategory').textContent = c.category_primary;
+      document.getElementById('breadcrumbCategory').href = `kategori.html?kategori=${c.category_slug}`;
+      document.getElementById('breadcrumbCurrent').textContent = c.name;
+      
+      // Header info
+      document.getElementById('fichaCategory').textContent = c.category_primary;
+      document.getElementById('fichaCategory').href = `kategori.html?kategori=${c.category_slug}`;
+      document.getElementById('fichaTitle').textContent = c.name;
+      
+      // Address
+      document.getElementById('fichaAddress').innerHTML = `
+        <span class="ficha__meta-icon">📍</span>
+        <span>${c.address || c.area || 'Aalborg, Danmark'}</span>
+      `;
+      
+      // Phone
+      if (c.phone) {
+        document.getElementById('fichaPhone').style.display = 'flex';
+        document.getElementById('fichaPhoneLink').textContent = c.phone;
+        document.getElementById('fichaPhoneLink').href = `tel:${c.phone.replace(/\s/g, '')}`;
+      }
+      
+      // Hours
+      if (c.opening_hours_raw) {
+        document.getElementById('fichaHours').style.display = 'flex';
+        document.getElementById('fichaHoursText').textContent = formatHours(c.opening_hours_raw);
+      }
+      
+      // Website
+      if (c.website) {
+        document.getElementById('fichaWebsite').style.display = 'flex';
+        const websiteUrl = c.website.startsWith('http') ? c.website : `https://${c.website}`;
+        document.getElementById('fichaWebsiteLink').href = websiteUrl;
+        document.getElementById('fichaWebsiteLink').textContent = c.website.replace(/^https?:\/\//, '').replace(/\/$/, '');
+      }
+      
+      // Rating
+      if (c.rating) {
+        document.getElementById('fichaRating').style.display = 'flex';
+        document.getElementById('fichaRatingScore').textContent = c.rating.toFixed(1);
+        document.getElementById('fichaRatingStars').textContent = getStars(c.rating);
+        document.getElementById('fichaRatingCount').textContent = `${c.reviews_count || 0} anmeldelser`;
+      }
+      
+      // CTAs
+      renderCtas();
+      
+      // Chips (attributes)
+      renderChips();
+      
+      // Gallery (Google Maps image)
+      renderGallery();
+      
+      // Summary
+      renderSummary();
+      
+      // Services
+      renderServices();
+      
+      // Facilities
+      renderFacilities();
+      
+      // Activities
+      renderActivities();
+      
+      // Reviews
+      renderReviews();
+      
+      // Map
+      renderMap();
+      
+      // Related centers
+      renderRelated();
+      
+      // FAQ
+      renderFaq();
+    }
+    
+    // Update page meta
+    function updatePageMeta() {
+      const c = currentCenter;
+      
+      const title = `${c.name} | ${c.category_primary} i Aalborg | FitAalborg`;
+      const description = `Se detaljer om ${c.name} i Aalborg. ${c.rating ? `Rating: ${c.rating.toFixed(1)}/5.` : ''} ${c.prices ? `Priser: ${c.prices.substring(0, 80)}...` : ''} Find adresse, åbningstider og anmeldelser.`;
+      
+      document.getElementById('pageTitle').textContent = title;
+      document.getElementById('pageDescription').content = description;
+      document.getElementById('ogTitle').content = title;
+      document.getElementById('ogDescription').content = description;
+      
+      const canonical = `https://fitaalborg.dk/ficha.html?id=${c.slug}`;
+      document.getElementById('pageCanonical').href = canonical;
+      document.getElementById('ogUrl').content = canonical;
+      
+      if (c.image) {
+        document.getElementById('ogImage').content = c.image;
+      }
+    }
+    
+    // Update Schema.org
+    function updateSchema() {
+      const c = currentCenter;
+      
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": c.name,
+        "description": `${c.category_primary} i Aalborg`,
+        "url": `https://fitaalborg.dk/ficha.html?id=${c.slug}`,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": c.address?.split(',')[0] || '',
+          "addressLocality": "Aalborg",
+          "postalCode": c.postal_code || '',
+          "addressCountry": "DK"
+        }
+      };
+      
+      if (c.phone) {
+        schema.telephone = c.phone;
+      }
+      
+      if (c.website) {
+        schema.sameAs = c.website.startsWith('http') ? c.website : `https://${c.website}`;
+      }
+      
+      if (c.image) {
+        schema.image = c.image;
+      }
+      
+      if (c.geo) {
+        schema.geo = {
+          "@type": "GeoCoordinates",
+          "latitude": c.geo.lat,
+          "longitude": c.geo.lng
+        };
+      }
+      
+      if (c.rating && c.reviews_count) {
+        schema.aggregateRating = {
+          "@type": "AggregateRating",
+          "ratingValue": c.rating,
+          "reviewCount": c.reviews_count,
+          "bestRating": 5,
+          "worstRating": 1
+        };
+      }
+      
+      if (c.opening_hours) {
+        schema.openingHoursSpecification = Object.entries(c.opening_hours).map(([day, hours]) => {
+          const [opens, closes] = hours.split('-');
+          return {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": day.charAt(0).toUpperCase() + day.slice(1),
+            "opens": opens,
+            "closes": closes
+          };
+        });
+      }
+      
+      document.getElementById('schemaJsonLd').textContent = JSON.stringify(schema, null, 2);
+    }
+    
+    // Render CTAs
+    function renderCtas() {
+      const c = currentCenter;
+      const ctas = [];
+      
+      if (c.phone) {
+        ctas.push(`<a href="tel:${c.phone.replace(/\s/g, '')}" class="btn btn--primary btn--lg">📞 Ring nu</a>`);
+      }
+      
+      if (c.website) {
+        const url = c.website.startsWith('http') ? c.website : `https://${c.website}`;
+        ctas.push(`<a href="${url}" class="btn btn--secondary btn--lg" target="_blank" rel="noopener">🌐 Besøg hjemmeside</a>`);
+      }
+      
+      if (c.geo) {
+        const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${c.geo.lat},${c.geo.lng}`;
+        ctas.push(`<a href="${mapsUrl}" class="btn btn--outline btn--lg" target="_blank" rel="noopener">🧭 Rutevejledning</a>`);
+      }
+      
+      if (ctas.length === 0) {
+        ctas.push(`<a href="kategori.html?kategori=${c.category_slug}" class="btn btn--primary btn--lg">Se lignende centre</a>`);
+      }
+      
+      document.getElementById('fichaCtas').innerHTML = ctas.join('');
+    }
+    
+    // Render chips
+    function renderChips() {
+      const c = currentCenter;
+      const chips = [];
+      
+      // Add top facilities as chips
+      const topAttrs = [...(c.facilities || [])].slice(0, 6);
+      topAttrs.forEach(attr => {
+        chips.push(`<span class="ficha__chip">${attr}</span>`);
+      });
+      
+      document.getElementById('fichaChips').innerHTML = chips.join('');
+    }
+    
+    // Render gallery
+    function renderGallery() {
+      const c = currentCenter;
+      const gallery = document.getElementById('fichaGallery');
+      
+      if (c.image) {
+        gallery.innerHTML = `<img src="${c.image}" alt="${c.name} - ${c.category_primary} i Aalborg" loading="lazy" width="800" height="450" style="width: 100%; height: 100%; object-fit: cover;">`;
+      } else {
+        gallery.innerHTML = `<div class="ficha__gallery-placeholder">📷 Intet billede tilgængeligt</div>`;
+      }
+    }
+    
+    // Render summary
+    function renderSummary() {
+      const c = currentCenter;
+      const items = [];
+      
+      items.push({ icon: '📂', text: `Kategori: ${c.category_primary}` });
+      items.push({ icon: '📍', text: `Beliggenhed: ${c.area || 'Aalborg'}` });
+      
+      if (c.rating) {
+        items.push({ icon: '⭐', text: `Rating: ${c.rating.toFixed(1)}/5 (${c.reviews_count || 0} anmeldelser)` });
+      }
+      
+      if (c.prices) {
+        items.push({ icon: '💰', text: `Priser: ${c.prices}` });
+      }
+      
+      if (c.phone) {
+        items.push({ icon: '📞', text: `Telefon: ${c.phone}` });
+      }
+      
+      if (c.opening_hours_raw) {
+        items.push({ icon: '🕐', text: `Åbningstider: ${formatHours(c.opening_hours_raw)}` });
+      }
+      
+      if (c.facilities && c.facilities.length > 0) {
+        items.push({ icon: '🏢', text: `Faciliteter: ${c.facilities.slice(0, 5).join(', ')}${c.facilities.length > 5 ? '...' : ''}` });
+      }
+      
+      if (c.activities && c.activities.length > 0) {
+        items.push({ icon: '🎯', text: `Aktiviteter: ${c.activities.slice(0, 5).join(', ')}${c.activities.length > 5 ? '...' : ''}` });
+      }
+      
+      document.getElementById('fichaSummary').innerHTML = items.map(item => `
+        <div class="ficha__list-item">
+          <span class="ficha__list-icon">${item.icon}</span>
+          <span>${item.text}</span>
+        </div>
+      `).join('');
+    }
+    
+    // Render services
+    function renderServices() {
+      const c = currentCenter;
+      const servicesContainer = document.getElementById('fichaServices');
+      const pricesContainer = document.getElementById('fichaPrices');
+      const section = document.getElementById('sectionServices');
+      
+      if ((!c.services || c.services.length === 0) && !c.prices) {
+        section.style.display = 'none';
+        return;
+      }
+      
+      // Services list
+      if (c.services && c.services.length > 0) {
+        servicesContainer.innerHTML = `
+          <div class="ficha__list">
+            ${c.services.map(service => `
+              <div class="ficha__list-item">
+                <span class="ficha__list-icon">✓</span>
+                <span>${service}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+      
+      // Prices
+      if (c.prices) {
+        pricesContainer.innerHTML = `
+          <h3>Priser</h3>
+          <div class="trust-block" style="background: var(--color-gray-50); margin-top: var(--space-3);">
+            <p style="margin: 0; white-space: pre-line;">${c.prices}</p>
+          </div>
+          <p class="text-sm text-muted" style="margin-top: var(--space-2);">* Priser kan variere. Kontakt stedet for aktuelle priser.</p>
+        `;
+      }
+      
+      // CTA
+      if (c.phone || c.website) {
+        const ctaLink = c.phone 
+          ? `tel:${c.phone.replace(/\s/g, '')}` 
+          : (c.website.startsWith('http') ? c.website : `https://${c.website}`);
+        const ctaText = c.phone ? '📞 Ring for mere info' : '🌐 Se priser på hjemmesiden';
+        const ctaTarget = c.phone ? '' : 'target="_blank" rel="noopener"';
+        
+        document.getElementById('servicesCta').innerHTML = `
+          <a href="${ctaLink}" class="btn btn--primary" ${ctaTarget}>${ctaText}</a>
+        `;
+      }
+    }
+    
+    // Render facilities
+    function renderFacilities() {
+      const c = currentCenter;
+      const container = document.getElementById('fichaFacilities');
+      const section = document.getElementById('sectionFacilities');
+      
+      if (!c.facilities || c.facilities.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+      
+      container.innerHTML = c.facilities.map(facility => `
+        <div class="ficha__list-item">
+          <span class="ficha__list-icon">✓</span>
+          <span>${facility}</span>
+        </div>
+      `).join('');
+    }
+    
+    // Render activities
+    function renderActivities() {
+      const c = currentCenter;
+      const container = document.getElementById('fichaActivities');
+      const section = document.getElementById('sectionActivities');
+      
+      if (!c.activities || c.activities.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+      
+      container.innerHTML = c.activities.map(activity => `
+        <div class="ficha__list-item">
+          <span class="ficha__list-icon">✓</span>
+          <span>${activity}</span>
+        </div>
+      `).join('');
+    }
+    
+    // Render reviews
+    function renderReviews() {
+      const c = currentCenter;
+      const summaryContainer = document.getElementById('reviewsSummary');
+      const listContainer = document.getElementById('reviewsList');
+      const noReviews = document.getElementById('noReviews');
+      
+      if (c.rating && c.reviews_count) {
+        summaryContainer.style.display = 'flex';
+        document.getElementById('reviewsScoreValue').textContent = c.rating.toFixed(1);
+        document.getElementById('reviewsScoreStars').textContent = getStars(c.rating);
+        document.getElementById('reviewsScoreCount').textContent = `Baseret på ${c.reviews_count} anmeldelser`;
+      }
+      
+      if (c.reviews && c.reviews.length > 0) {
+        noReviews.style.display = 'none';
+        listContainer.innerHTML = c.reviews.map(review => `
+          <div class="review-card">
+            <div class="review-card__header">
+              <span class="review-card__author">${review.author}</span>
+              <span class="review-card__stars">${review.rating ? getStars(review.rating) : ''}</span>
+            </div>
+            <p class="review-card__text">${review.text}</p>
+          </div>
+        `).join('');
+      } else {
+        noReviews.style.display = 'block';
+        listContainer.innerHTML = '';
+      }
+    }
+    
+    // Render map
+    function renderMap() {
+      const c = currentCenter;
+      const mapContainer = document.getElementById('fichaMap');
+      const addressEl = document.getElementById('locationAddress');
+      const areaEl = document.getElementById('locationArea');
+      const areaText = document.getElementById('locationAreaText');
+      const directionsLink = document.getElementById('directionsLink');
+      
+      addressEl.textContent = c.address || 'Aalborg, Danmark';
+      
+      if (c.area) {
+        areaEl.style.display = 'flex';
+        areaText.textContent = c.area;
+      }
+      
+      // Use iframe if available
+      if (c.maps_iframe) {
+        mapContainer.innerHTML = c.maps_iframe;
+      } else if (c.geo) {
+        // Fallback to static map link
+        mapContainer.innerHTML = `
+          <a href="https://www.google.com/maps?q=${c.geo.lat},${c.geo.lng}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; height: 100%; background: var(--color-gray-100); text-decoration: none; color: var(--color-gray-600);">
+            <div style="text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: var(--space-2);">🗺️</div>
+              <div>Klik for at åbne i Google Maps</div>
+            </div>
+          </a>
+        `;
+      }
+      
+      // Directions link
+      if (c.geo) {
+        directionsLink.href = `https://www.google.com/maps/dir/?api=1&destination=${c.geo.lat},${c.geo.lng}`;
+      } else if (c.address) {
+        directionsLink.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(c.address)}`;
+      }
+    }
+    
+    // Render related centers
+    function renderRelated() {
+      const c = currentCenter;
+      const container = document.getElementById('relatedGrid');
+      const title = document.getElementById('relatedTitle');
+      const seeAllLink = document.getElementById('seeAllLink');
+      
+      title.textContent = `Andre ${c.category_primary} i Aalborg`;
+      seeAllLink.href = `kategori.html?kategori=${c.category_slug}`;
+      
+      // Find related centers (same category, different center)
+      const related = siteData.centers
+        .filter(center => center.category_slug === c.category_slug && center.slug !== c.slug)
+        .slice(0, 6);
+      
+      if (related.length === 0) {
+        // Show other top centers if no related in same category
+        const otherCenters = siteData.centers
+          .filter(center => center.slug !== c.slug && center.rating)
+          .slice(0, 6);
+        
+        title.textContent = 'Andre Populære Centre i Aalborg';
+        seeAllLink.href = 'kategori.html';
+        
+        container.innerHTML = otherCenters.map(renderRelatedCard).join('');
+      } else {
+        container.innerHTML = related.map(renderRelatedCard).join('');
+      }
+    }
+    
+    // Render related card
+    function renderRelatedCard(center) {
+      return `
+        <a href="ficha.html?id=${center.slug}" class="related-card">
+          <div class="related-card__image">
+            ${center.image 
+              ? `<img src="${center.image}" alt="${center.name}" loading="lazy" width="80" height="80">`
+              : `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--color-gray-100); color: var(--color-gray-400);">📍</div>`
+            }
+          </div>
+          <div class="related-card__body">
+            <div class="related-card__name">${center.name}</div>
+            <div class="related-card__meta">${center.area || 'Aalborg'}</div>
+            ${center.rating ? `
+              <div class="related-card__rating">
+                <span class="related-card__rating-stars">${getStars(center.rating)}</span>
+                <span>${center.rating.toFixed(1)}</span>
+              </div>
+            ` : ''}
+          </div>
+        </a>
+      `;
+    }
+    
+    // Render FAQ
+    function renderFaq() {
+      const c = currentCenter;
+      const container = document.getElementById('faqList');
+      const title = document.getElementById('faqTitle');
+      
+      title.textContent = `Spørgsmål om ${c.name}`;
+      
+      const faqs = [
+        {
+          q: `Hvad er åbningstiderne for ${c.name}?`,
+          a: c.opening_hours_raw 
+            ? `Åbningstiderne er: ${formatHours(c.opening_hours_raw)}. Vi anbefaler at kontakte stedet direkte for at bekræfte aktuelle tider.`
+            : `Kontakt ${c.name} direkte for at få oplyst deres aktuelle åbningstider.`
+        },
+        {
+          q: `Hvad koster det at bruge ${c.name}?`,
+          a: c.prices 
+            ? `Priserne er: ${c.prices}. Bemærk at priser kan ændre sig - kontakt stedet for aktuelle priser.`
+            : `Kontakt ${c.name} direkte for at få oplyst deres aktuelle priser og eventuelle tilbud.`
+        },
+        {
+          q: `Hvor ligger ${c.name}?`,
+          a: `${c.name} ligger på ${c.address || 'Aalborg'}. Du kan bruge "Rutevejledning" knappen ovenfor for at få vist vejen i Google Maps.`
+        },
+        {
+          q: `Har ${c.name} gode anmeldelser?`,
+          a: c.rating 
+            ? `${c.name} har en rating på ${c.rating.toFixed(1)} ud af 5 baseret på ${c.reviews_count || 0} Google-anmeldelser.`
+            : `Vi har endnu ikke anmeldelser for ${c.name}. Du er velkommen til at besøge stedet og dele din oplevelse.`
+        },
+        {
+          q: `Tilbyder ${c.name} prøvetræning?`,
+          a: `Mange ${c.category_primary.toLowerCase()} tilbyder prøveperiode eller introduktionstilbud. Kontakt ${c.name} direkte for at høre om deres aktuelle tilbud til nye kunder.`
+        }
+      ];
+      
+      container.innerHTML = faqs.map(faq => `
+        <div class="faq__item" role="listitem">
+          <button class="faq__question" aria-expanded="false" onclick="toggleFaq(this)">
+            <span>${faq.q}</span>
+            <span class="faq__icon">▼</span>
+          </button>
+          <div class="faq__answer">
+            <p>${faq.a}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Helper: Get stars
+    function getStars(rating) {
+      const full = Math.round(rating);
+      return '★'.repeat(full) + '☆'.repeat(5 - full);
+    }
+    
+    // Helper: Format hours
+    function formatHours(hoursRaw) {
+      if (!hoursRaw) return 'Ikke oplyst';
+      // Clean up and shorten
+      return hoursRaw
+        .replace(/viernes/gi, 'Fre')
+        .replace(/sábado/gi, 'Lør')
+        .replace(/domingo/gi, 'Søn')
+        .replace(/lunes/gi, 'Man')
+        .replace(/martes/gi, 'Tir')
+        .replace(/miércoles/gi, 'Ons')
+        .replace(/jueves/gi, 'Tor')
+        .replace(/Cerrado/gi, 'Lukket')
+        .replace(/De /gi, '')
+        .replace(/ a /gi, '-')
+        .substring(0, 100) + (hoursRaw.length > 100 ? '...' : '');
+    }
+    
+    // Mobile navigation toggle
+    function toggleMobileNav() {
+      const nav = document.getElementById('mobileNav');
+      const toggle = document.querySelector('.header__mobile-toggle');
+      const isOpen = nav.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', isOpen);
+    }
+    
+    // FAQ accordion
+    function toggleFaq(button) {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const answer = button.nextElementSibling;
+      
+      document.querySelectorAll('.faq__question').forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.nextElementSibling.classList.remove('active');
+      });
+      
+      if (!isExpanded) {
+        button.setAttribute('aria-expanded', 'true');
+        answer.classList.add('active');
+      }
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', loadData);
+  </script>
+</body>
+</html>
