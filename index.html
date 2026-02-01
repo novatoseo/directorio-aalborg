@@ -3,35 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Aalborg | De bedste steder i byen</title>
+    <title>Find Sport & Fitness i Aalborg</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="header-hero">
-        <h1>Find din passion i Aalborg.</h1>
-        <p>Udforsk de bedste virksomheder, services og steder i byen.</p>
+
+    <div class="hero">
+        <h1>Find dit center i Aalborg</h1>
+        <p>Den største guide til fitnesscentre og sport i byen.</p>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Hvad leder du efter? (f.eks. Fitness, Yoga...)">
+            <button onclick="buscar()">SØG</button>
+        </div>
     </div>
 
     <div class="container">
-        <h2 style="margin-bottom: 24px;">Populære kategorier</h2>
-        <div id="categorias" class="grid">
-            </div>
+        <h2 class="section-title">Udforsk kategorier</h2>
+        <div id="categorias" class="grid"></div>
     </div>
 
     <script>
-        fetch('datos.json')
-            .then(response => response.json())
-            .then(data => {
-                // Filtramos categorías únicas
-                const categorias = [...new Set(data.map(item => item.kategori))].sort();
-                
-                document.getElementById('categorias').innerHTML = categorias.map(cat => `
-                    <a href="categoria.html?cat=${encodeURIComponent(cat)}" class="card" style="justify-content:center; text-align:center;">
-                        <h3>${cat}</h3>
-                        <span style="color:var(--accent); font-weight:600; font-size:0.9rem;">Udforsk &rarr;</span>
-                    </a>
-                `).join('');
-            });
+        // Función de búsqueda simple
+        function buscar() {
+            let val = document.getElementById('searchInput').value;
+            if(val) window.location.href = 'categoria.html?cat=' + encodeURIComponent(val);
+        }
+
+        fetch('datos.json').then(r => r.json()).then(data => {
+            // Extraer y ordenar categorías
+            const cats = [...new Set(data.map(i => i.kategori))].sort();
+            
+            // Usamos imágenes aleatorias de deporte para las categorías si no hay específicas
+            document.getElementById('categorias').innerHTML = cats.map(c => `
+                <a href="categoria.html?cat=${encodeURIComponent(c)}" class="card">
+                    <img src="https://source.unsplash.com/400x300/?gym,sport" class="card-img" alt="${c}">
+                    <div class="card-body" style="text-align:center;">
+                        <h3>${c}</h3>
+                        <span style="color:var(--primary); font-weight:bold;">Se alle steder →</span>
+                    </div>
+                </a>
+            `).join('');
+        });
     </script>
 </body>
 </html>
