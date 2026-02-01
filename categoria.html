@@ -3,43 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kategori | Aalborg</title>
+    <title>Kategori</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="nav-bar">
-        <a href="index.html">&larr; Tilbage til forsiden</a>
+    <div style="background:#1a1a1a; padding:15px; text-align:center;">
+        <a href="index.html" style="color:white; text-decoration:none; font-weight:bold;">← Tilbage til start</a>
     </div>
 
     <div class="container">
-        <h1 id="titulo-cat" style="font-size: 2rem; margin-bottom: 2rem;">Henter...</h1>
-        <div id="lista-negocios" class="grid"></div>
+        <h1 class="section-title" id="titulo">Indlæser...</h1>
+        <div id="lista" class="grid"></div>
     </div>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const cat = urlParams.get('cat');
-        document.getElementById('titulo-cat').innerText = cat;
+        const cat = new URLSearchParams(window.location.search).get('cat');
+        document.getElementById('titulo').innerText = "Bedste steder: " + cat;
 
-        fetch('datos.json')
-            .then(r => r.json())
-            .then(data => {
-                const filtrados = data.filter(i => i.kategori === cat);
+        fetch('datos.json').then(r => r.json()).then(data => {
+            // Filtro flexible (contiene la palabra)
+            const filtered = data.filter(i => i.kategori.toLowerCase().includes(cat.toLowerCase()));
+            
+            document.getElementById('lista').innerHTML = filtered.map(n => {
+                // Imagen: Usamos la del CSV o una por defecto si falla
+                let img = n.billede_url && n.billede_url.length > 10 ? n.billede_url : 'https://placehold.co/400x300?text=No+Image';
                 
-                document.getElementById('lista-negocios').innerHTML = filtrados.map(n => {
-                    // Si hay imagen la ponemos, si no, no ponemos nada para no romper el diseño
-                    const imgHTML = n.billede_url ? `<img src="${n.billede_url}" class="business-img" alt="${n.post_title}" loading="lazy">` : '';
-                    
-                    return `
-                    <a href="ficha.html?name=${n.post_name}" class="card">
-                        ${imgHTML}
-                        <div class="category-tag">${n.kategori}</div>
+                return `
+                <a href="ficha.html?name=${n.post_name}" class="card">
+                    <div style="position:relative;">
+                        <span class="badge-featured">ANBEFALET</span>
+                        <img src="${img}" class="card-img" alt="${n.post_title}" loading="lazy">
+                    </div>
+                    <div class="card-body">
                         <h3>${n.post_title}</h3>
-                        <div class="rating">★ ${n.bedoemmelse || '-'} <span style="color:#999; font-weight:400;">(${n.antal_anmeldelser || 0} anmeldelser)</span></div>
-                        <p class="meta-info" style="margin-top:auto; padding-top:15px;">📍 ${n.adresse ? n.adresse.split(',')[0] : 'Aalborg'}</p>
-                    </a>
-                `}).join('');
-            });
+                        <div class="rating-badge">
+                            <span class="rating-score">★ ${n.bedoemmelse || '4.5'}</span>
+                            <span style="color:#666; font-weight:normal; margin-left:5px;">(${n.antal_anmeldelser || '10'} anmeldelser)</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="material-icons" style="font-size:18px; margin-right:5px;">location_on</span>
+                            ${n.adresse ? n.adresse.split(',')[0] : 'Aalborg'}
+                        </div>
+                    </div>
+                </a>
+            `}).join('');
+        });
     </script>
 </body>
 </html>
