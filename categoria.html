@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="style.css"><title>Categoría</title></head>
+<body>
+    <div class="container">
+        <a href="index.html">← Volver</a>
+        <h1 id="titulo"></h1>
+        <div id="lista" class="grid"></div>
+    </div>
+    <script>
+        const cat = new URLSearchParams(window.location.search).get('cat');
+        document.getElementById('titulo').innerText = "Mejores " + cat;
+        fetch('datos.json').then(r => r.json()).then(data => {
+            const filtered = data.filter(i => i.kategori === cat);
+            document.getElementById('lista').innerHTML = filtered.map(n => `
+                <a href="ficha.html?name=${n.post_name}" class="card">
+                    <h3>${n.post_title}</h3>
+                    <p>⭐ ${n.bedoemmelse || 'S/N'} (${n.antal_anmeldelser || 0} reseñas)</p>
+                    <span class="badge">Ver ficha detallada</span>
+                </a>`).join('');
+        });
+    </script>
+</body>
+</html>

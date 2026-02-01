@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"><title>Directorio Aalborg | Mejores Servicios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>Directorio de Negocios en Aalborg</h1></header>
+    <div class="container">
+        <h2>Categorías principales</h2>
+        <div id="categorias" class="grid"></div>
+    </div>
+    <script>
+        fetch('datos.json').then(r => r.json()).then(data => {
+            const cats = [...new Set(data.map(i => i.kategori))];
+            document.getElementById('categorias').innerHTML = cats.map(c => 
+                `<a href="categoria.html?cat=${encodeURIComponent(c)}" class="card"><h3>${c}</h3><span class="badge">Explorar →</span></a>`
+            ).join('');
+        });
+    </script>
+</body>
+</html>
