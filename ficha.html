@@ -3,57 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virksomhed</title>
+    <title>Detaljer</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="nav-bar">
-        <a href="index.html">Aalborg Directory</a>
+    <div style="background:#1a1a1a; padding:15px; text-align:center;">
+        <a href="index.html" style="color:white; text-decoration:none; font-weight:bold;">Aalborg Directory</a>
     </div>
 
-    <div class="container" id="app">Cargando datos...</div>
+    <div class="container" id="app"></div>
 
     <script>
         const name = new URLSearchParams(window.location.search).get('name');
-        
+
         fetch('datos.json').then(r => r.json()).then(data => {
             const n = data.find(i => i.post_name === name);
-            
-            if(!n) {
-                document.getElementById('app').innerHTML = "<h1>Virksomhed ikke fundet</h1><a href='index.html'>Gå hjem</a>";
-                return;
-            }
+            if(!n) return;
 
             document.title = `${n.post_title} - Aalborg`;
-
-            // Lógica de Imagen: Si existe URL, mostramos la foto grande.
-            const imagenPrincipal = n.billede_url 
-                ? `<img src="${n.billede_url}" class="business-img" style="height: 300px; object-fit: cover;" alt="${n.post_title}">` 
-                : '';
-
-            // Limpieza del Iframe (quitamos comillas dobles extras del CSV)
-            const mapClean = n.maps_iframe ? n.maps_iframe.replace(/""/g, '"') : '';
+            let img = n.billede_url && n.billede_url.length > 10 ? n.billede_url : 'https://placehold.co/600x400?text=No+Image';
 
             document.getElementById('app').innerHTML = `
-                ${imagenPrincipal}
-                <span class="category-tag">${n.kategori}</span>
-                <h1 style="font-size: 2.5rem; margin: 10px 0;">${n.post_title}</h1>
-                
-                <div class="rating" style="font-size: 1.2rem; margin-bottom: 20px;">
-                    ★ ${n.bedoemmelse || ''} 
-                    <span style="color:var(--text-sec);">baseret på ${n.antal_anmeldelser || 0} anmeldelser</span>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <h3 style="border-bottom:1px solid #eee; padding-bottom:10px; margin-bottom:15px;">Info & Kontakt</h3>
-                    <p><strong>📍 Adresse:</strong><br>${n.adresse}</p>
-                    <p><strong>📞 Telefon:</strong><br>${n.telefon || 'Ikke tilgængelig'}</p>
-                    <p><strong>🕒 Åbningstider:</strong><br>${n.aabningstider || 'Se på kortet'}</p>
+                <div class="card" style="max-width:800px; margin:0 auto;">
+                    <img src="${img}" style="width:100%; height:300px; object-fit:cover;" alt="${n.post_title}">
                     
-                    ${n.telefon ? `<a href="tel:${n.telefon}" class="btn-primary">📞 RING NU</a>` : ''}
-                </div>
+                    <div class="card-body">
+                        <span style="color:var(--primary); font-weight:bold; text-transform:uppercase;">${n.kategori}</span>
+                        <h1 style="font-size:2.5rem; margin:10px 0;">${n.post_title}</h1>
+                        
+                        <div class="rating-badge" style="font-size:1.2rem;">
+                            <span class="rating-score">★ ${n.bedoemmelse || '-'}</span>
+                            <span>Baseret på ${n.antal_anmeldelser || 0} anmeldelser</span>
+                        </div>
 
-                ${mapClean}
+                        <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
+
+                        <div class="details-list">
+                            <p><span class="material-icons" style="color:var(--primary);">location_on</span> ${n.adresse}</p>
+                            <p><span class="material-icons" style="color:var(--primary);">phone</span> ${n.telefon || 'Ikke tilgængelig'}</p>
+                            <p><span class="material-icons" style="color:var(--primary);">schedule</span> ${n.aabningstider || 'Se på kortet'}</p>
+                        </div>
+
+                        ${n.telefon ? `<a href="tel:${n.telefon}" class="btn-primary" style="text-align:center;">📞 RING NU</a>` : ''}
+                        
+                        ${n.maps_iframe ? n.maps_iframe.replace(/""/g, '"') : ''}
+                    </div>
+                </div>
             `;
         });
     </script>
