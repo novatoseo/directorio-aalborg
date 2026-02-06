@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tilføj Dit Center | FitAalborg - Gratis Oprettelse</title>
+  <meta name="description" content="Tilføj dit fitnesscenter, yogastudie, fysioterapiklinik eller sportsklub til FitAalborg. Gratis oprettelse og øget synlighed i Aalborg.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fitaalborg.dk/tilfoej.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tilføj Dit Center | FitAalborg">
+  <meta property="og:description" content="Tilføj dit fitnesscenter, yogastudie eller klinik til FitAalborg. Gratis oprettelse.">
+  <meta property="og:url" content="https://fitaalborg.dk/tilfoej.html">
+  <meta property="og:site_name" content="FitAalborg">
+  <meta property="og:locale" content="da_DK">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    .form-section {
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-gray-200);
+      margin-bottom: var(--space-6);
+    }
+    .form-section__title {
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-gray-200);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .form-group { margin-bottom: var(--space-4); }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-label {
+      display: block;
+      font-weight: 600;
+      color: var(--color-gray-700);
+      margin-bottom: var(--space-2);
+    }
+    .form-label--required::after {
+      content: ' *';
+      color: var(--color-danger);
+    }
+    .form-hint {
+      font-size: var(--font-size-sm);
+      color: var(--color-gray-500);
+      margin-top: var(--space-1);
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: var(--space-3);
+      border: 2px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+      font-size: var(--font-size-base);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+    }
+    .form-textarea { min-height: 120px; resize: vertical; }
+    .form-checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--space-2);
+    }
+    .form-checkbox {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      cursor: pointer;
+    }
+    .form-checkbox input { width: 18px; height: 18px; cursor: pointer; }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+    @media (min-width: 768px) { .form-row { grid-template-columns: 1fr 1fr; } }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-4);
+      margin: var(--space-6) 0;
+    }
+    .benefit-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      border: 1px solid var(--color-gray-200);
+      text-align: center;
+    }
+    .benefit-card__icon { font-size: 2.5rem; margin-bottom: var(--space-3); }
+    .benefit-card__title { font-weight: 600; color: var(--color-gray-900); margin-bottom: var(--space-2); }
+    .benefit-card__text { font-size: var(--font-size-sm); color: var(--color-gray-600); }
+    .success-message {
+      display: none;
+      background: var(--color-secondary);
+      color: var(--color-white);
+      padding: var(--space-6);
+      border-radius: var(--radius-xl);
+      text-align: center;
+    }
+    .success-message.active { display: block; }
+    .success-message__icon { font-size: 4rem; margin-bottom: var(--space-4); }
+    .success-message__title { font-size: var(--font-size-2xl); margin-bottom: var(--space-2); }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo">
+        <span class="header__logo-icon">💪</span>
+        <span>FitAalborg</span>
+      </a>
+      <nav class="header__nav" aria-label="Hovednavigation">
+        <ul class="header__nav-list">
+          <li><a href="index.html" class="header__nav-link">Forside</a></li>
+          <li><a href="kategori.html?kategori=fitnesscentre" class="header__nav-link">Fitness</a></li>
+          <li><a href="kategori.html?kategori=fysioterapi" class="header__nav-link">Fysioterapi</a></li>
+          <li><a href="kategori.html?kategori=yoga" class="header__nav-link">Yoga</a></li>
+          <li><a href="kategori.html" class="header__nav-link">Alle kategorier</a></li>
+          <li><a href="kontakt.html" class="header__nav-link">Kontakt</a></li>
+        </ul>
+      </nav>
+      <button class="header__mobile-toggle" aria-label="Åbn menu" aria-expanded="false" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigation">
+    <ul class="mobile-nav__list">
+      <li><a href="index.html" class="mobile-nav__link">Forside</a></li>
+      <li><a href="kategori.html?kategori=fitnesscentre" class="mobile-nav__link">Fitness</a></li>
+      <li><a href="kategori.html?kategori=fysioterapi" class="mobile-nav__link">Fysioterapi</a></li>
+      <li><a href="kategori.html?kategori=yoga" class="mobile-nav__link">Yoga</a></li>
+      <li><a href="kategori.html" class="mobile-nav__link">Alle kategorier</a></li>
+      <li><a href="kontakt.html" class="mobile-nav__link">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="index.html" class="breadcrumbs__link">Forside</a>
+          <span class="breadcrumbs__separator">›</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Tilføj dit center</span>
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero hero--category">
+      <div class="container">
+        <h1 class="hero__title">Tilføj Dit Center til FitAalborg</h1>
+        <p class="hero__subtitle">Få gratis synlighed og nå ud til tusindvis af potentielle kunder i Aalborg. Det tager kun 5 minutter at oprette din profil.</p>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="section section--gray">
+      <div class="container">
+        <header class="section__header text-center">
+          <h2 class="section__title">Hvorfor Tilføje Dit Center?</h2>
+          <p class="section__subtitle">Bliv synlig for folk der aktivt søger efter dit tilbud</p>
+        </header>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-card__icon">🆓</div>
+            <div class="benefit-card__title">100% Gratis</div>
+            <div class="benefit-card__text">Det koster ikke noget at blive oprettet. Ingen skjulte gebyrer eller bindinger.</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-card__icon">👀</div>
+            <div class="benefit-card__title">Øget Synlighed</div>
+            <div class="benefit-card__text">Bliv fundet af folk der aktivt søger efter fitness og sundhed i Aalborg.</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-card__icon">📞</div>
+            <div class="benefit-card__title">Direkte Kontakt</div>
+            <div class="benefit-card__text">Potentielle kunder kan ringe, besøge din hjemmeside eller finde vej direkte.</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-card__icon">⭐</div>
+            <div class="benefit-card__title">Vis Dine Anmeldelser</div>
+            <div class="benefit-card__text">Dine Google-anmeldelser vises automatisk og bygger tillid hos nye kunder.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <section class="section section--white">
+      <div class="container" style="max-width: 800px;">
+        
+        <div class="success-message" id="successMessage">
+          <div class="success-message__icon">✅</div>
+          <h2 class="success-message__title">Tak for din indsendelse!</h2>
+          <p>Vi har modtaget dine oplysninger og vil gennemgå dem inden for 2-3 hverdage. Du vil modtage en bekræftelse på email, når dit center er live.</p>
+          <a href="index.html" class="btn btn--secondary" style="margin-top: var(--space-4);">Tilbage til forsiden</a>
+        </div>
+        
+        <form id="addCenterForm" onsubmit="handleSubmit(event)">
+          
+          <div class="form-section">
+            <h2 class="form-section__title"><span>📋</span> Grundlæggende Oplysninger</h2>
+            <div class="form-group">
+              <label class="form-label form-label--required" for="centerName">Centerets navn</label>
+              <input type="text" class="form-input" id="centerName" name="centerName" required placeholder="F.eks. Fitness World Aalborg">
+            </div>
+            <div class="form-group">
+              <label class="form-label form-label--required" for="category">Kategori</label>
+              <select class="form-select" id="category" name="category" required>
+                <option value="">Vælg kategori...</option>
+                <option value="fitnesscentre">💪 Fitnesscenter</option>
+                <option value="fysioterapi">🏥 Fysioterapi</option>
+                <option value="yoga">🧘 Yoga</option>
+                <option value="kampsport">🥋 Kampsport</option>
+                <option value="danseskoler">💃 Danseskole</option>
+                <option value="pilates">🤸 Pilates</option>
+                <option value="padel">🎾 Padel</option>
+                <option value="cykelbutikker">🚴 Cykelbutik</option>
+                <option value="sportsbutikker">🏆 Sportsbutik</option>
+                <option value="diaetist">🥗 Diætist</option>
+                <option value="osteopat">🦴 Osteopat</option>
+                <option value="andet">📍 Andet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="description">Kort beskrivelse</label>
+              <textarea class="form-textarea" id="description" name="description" placeholder="Fortæl kort om jeres center, services og hvad der gør jer unikke..."></textarea>
+              <p class="form-hint">Max 500 tegn. Denne tekst kan vises i søgeresultater.</p>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h2 class="form-section__title"><span>📍</span> Kontaktoplysninger</h2>
+            <div class="form-group">
+              <label class="form-label form-label--required" for="address">Adresse</label>
+              <input type="text" class="form-input" id="address" name="address" required placeholder="F.eks. Vesterbro 10, 9000 Aalborg">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="phone">Telefonnummer</label>
+                <input type="tel" class="form-input" id="phone" name="phone" placeholder="+45 12 34 56 78">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" class="form-input" id="email" name="email" placeholder="kontakt@ditcenter.dk">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="website">Hjemmeside</label>
+              <input type="url" class="form-input" id="website" name="website" placeholder="https://www.ditcenter.dk">
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h2 class="form-section__title"><span>🕐</span> Åbningstider</h2>
+            <div class="form-group">
+              <label class="form-label" for="hours">Åbningstider</label>
+              <textarea class="form-textarea" id="hours" name="hours" placeholder="F.eks.:&#10;Mandag-fredag: 06:00-22:00&#10;Lørdag-søndag: 08:00-20:00&#10;&#10;Eller skriv '24/7' hvis I har døgnåbent"></textarea>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h2 class="form-section__title"><span>💰</span> Services og Priser</h2>
+            <div class="form-group">
+              <label class="form-label" for="services">Ydelser/Services</label>
+              <textarea class="form-textarea" id="services" name="services" placeholder="F.eks.:&#10;- Styrketræning&#10;- Cardio&#10;- Holdtræning&#10;- Personlig træning"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="prices">Priser</label>
+              <textarea class="form-textarea" id="prices" name="prices" placeholder="F.eks.:&#10;Månedligt medlemskab: 199 kr.&#10;Årligt medlemskab: 1.999 kr.&#10;Drop-in: 79 kr."></textarea>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h2 class="form-section__title"><span>🏢</span> Faciliteter</h2>
+            <div class="form-group">
+              <label class="form-label">Vælg de faciliteter I tilbyder</label>
+              <div class="form-checkbox-group">
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="24/7 åbent"><span>🕐 24/7 åbent</span></label>
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="Parkering"><span>🅿️ Parkering</span></label>
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="Omklædning"><span>🚿 Omklædning</span></label>
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="Sauna"><span>🧖 Sauna</span></label>
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="Svømmehal"><span>🏊 Svømmehal</span></label>
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="Holdtræning"><span>👥 Holdtræning</span></label>
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="Personlig træner"><span>💪 Personlig træner</span></label>
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="Café"><span>☕ Café/lounge</span></label>
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="Wifi"><span>📶 Gratis wifi</span></label>
+                <label class="form-checkbox"><input type="checkbox" name="facilities" value="Handicapadgang"><span>♿ Handicapadgang</span></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="otherFacilities">Andre faciliteter</label>
+              <input type="text" class="form-input" id="otherFacilities" name="otherFacilities" placeholder="Evt. andre faciliteter adskilt med komma">
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h2 class="form-section__title"><span>👤</span> Kontaktperson (vises ikke offentligt)</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label form-label--required" for="contactName">Dit navn</label>
+                <input type="text" class="form-input" id="contactName" name="contactName" required placeholder="Fornavn Efternavn">
+              </div>
+              <div class="form-group">
+                <label class="form-label form-label--required" for="contactEmail">Din email</label>
+                <input type="email" class="form-input" id="contactEmail" name="contactEmail" required placeholder="din@email.dk">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contactRole">Din rolle</label>
+              <select class="form-select" id="contactRole" name="contactRole">
+                <option value="">Vælg...</option>
+                <option value="ejer">Ejer</option>
+                <option value="manager">Manager/Leder</option>
+                <option value="marketing">Marketing</option>
+                <option value="medarbejder">Medarbejder</option>
+                <option value="andet">Andet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-checkbox">
+                <input type="checkbox" name="consent" required>
+                <span>Jeg bekræfter at jeg har tilladelse til at oprette dette center, og at oplysningerne er korrekte.</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="text-center" style="margin-top: var(--space-6);">
+            <button type="submit" class="btn btn--primary btn--lg" style="min-width: 250px;">➕ Indsend til godkendelse</button>
+            <p class="text-sm text-muted" style="margin-top: var(--space-3);">Vi gennemgår alle indsendelser manuelt. Dit center vil typisk være live inden for 2-3 hverdage.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--gray">
+      <div class="container" style="max-width: 800px;">
+        <header class="section__header">
+          <h2 class="section__title">Ofte Stillede Spørgsmål</h2>
+        </header>
+        <div class="faq__list" role="list">
+          <div class="faq__item" role="listitem">
+            <button class="faq__question" aria-expanded="false" onclick="toggleFaq(this)">
+              <span>Koster det noget at blive oprettet?</span>
+              <span class="faq__icon">▼</span>
+            </button>
+            <div class="faq__answer"><p>Nej, det er 100% gratis at oprette dit center på FitAalborg. Vi har ingen skjulte gebyrer eller bindinger.</p></div>
+          </div>
+          <div class="faq__item" role="listitem">
+            <button class="faq__question" aria-expanded="false" onclick="toggleFaq(this)">
+              <span>Hvor lang tid tager det at blive godkendt?</span>
+              <span class="faq__icon">▼</span>
+            </button>
+            <div class="faq__answer"><p>Vi gennemgår alle indsendelser manuelt for at sikre kvaliteten. Dit center vil typisk være live inden for 2-3 hverdage. Du modtager en email når det er godkendt.</p></div>
+          </div>
+          <div class="faq__item" role="listitem">
+            <button class="faq__question" aria-expanded="false" onclick="toggleFaq(this)">
+              <span>Kan jeg redigere mine oplysninger senere?</span>
+              <span class="faq__icon">▼</span>
+            </button>
+            <div class="faq__answer"><p>Ja, du kan altid kontakte os for at opdatere dine oplysninger. Send rettelser via vores <a href="kontakt.html">kontaktformular</a>.</p></div>
+          </div>
+          <div class="faq__item" role="listitem">
+            <button class="faq__question" aria-expanded="false" onclick="toggleFaq(this)">
+              <span>Mit center ligger allerede på FitAalborg - hvordan retter jeg det?</span>
+              <span class="faq__icon">▼</span>
+            </button>
+            <div class="faq__answer"><p>Hvis dit center allerede er oprettet og du vil rette oplysningerne, kan du udfylde formularen ovenfor eller <a href="kontakt.html">kontakte os direkte</a>.</p></div>
+          </div>
+          <div class="faq__item" role="listitem">
+            <button class="faq__question" aria-expanded="false" onclick="toggleFaq(this)">
+              <span>Kan jeg få mit center fjernet?</span>
+              <span class="faq__icon">▼</span>
+            </button>
+            <div class="faq__answer"><p>Ja, hvis du ønsker at få dit center fjernet fra FitAalborg, kan du <a href="kontakt.html">kontakte os</a>. Vi behandler alle anmodninger inden for 2-3 hverdage.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo"><span>💪</span><span>FitAalborg</span></a>
+          <p class="footer__tagline">Din guide til fitness og sundhed i Aalborg.</p>
+        </div>
+        <div>
+          <h3 class="footer__title">Kategorier</h3>
+          <ul class="footer__list">
+            <li><a href="kategori.html?kategori=fitnesscentre" class="footer__link">Fitnesscentre</a></li>
+            <li><a href="kategori.html?kategori=fysioterapi" class="footer__link">Fysioterapi</a></li>
+            <li><a href="kategori.html?kategori=yoga" class="footer__link">Yoga</a></li>
+            <li><a href="kategori.html?kategori=kampsport" class="footer__link">Kampsport</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__title">Områder</h3>
+          <ul class="footer__list">
+            <li><a href="kategori.html?omraade=9000" class="footer__link">Aalborg Centrum</a></li>
+            <li><a href="kategori.html?omraade=9220" class="footer__link">Aalborg Øst</a></li>
+            <li><a href="kategori.html?omraade=9200" class="footer__link">Aalborg SV</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__title">Information</h3>
+          <ul class="footer__list">
+            <li><a href="om.html" class="footer__link">Om FitAalborg</a></li>
+            <li><a href="tilfoej.html" class="footer__link">Tilføj dit center</a></li>
+            <li><a href="kontakt.html" class="footer__link">Kontakt os</a></li>
+            <li><a href="privatlivspolitik.html" class="footer__link">Privatlivspolitik</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2025 FitAalborg. Alle rettigheder forbeholdes.</p>
+        <p class="footer__update">Data opdateret: Januar 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileNav() {
+      const nav = document.getElementById('mobileNav');
+      const toggle = document.querySelector('.header__mobile-toggle');
+      const isOpen = nav.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', isOpen);
+    }
+    function toggleFaq(button) {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const answer = button.nextElementSibling;
+      document.querySelectorAll('.faq__question').forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.nextElementSibling.classList.remove('active');
+      });
+      if (!isExpanded) {
+        button.setAttribute('aria-expanded', 'true');
+        answer.classList.add('active');
+      }
+    }
+    function handleSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const facilities = [];
+      form.querySelectorAll('input[name="facilities"]:checked').forEach(cb => facilities.push(cb.value));
+      console.log('Form submitted:', Object.fromEntries(formData), { facilities });
+      form.style.display = 'none';
+      document.getElementById('successMessage').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
