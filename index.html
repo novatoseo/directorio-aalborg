@@ -63,56 +63,14 @@
       background:
         linear-gradient(
           180deg,
-          rgba(8, 10, 16, 0.88) 0%,
-          rgba(8, 10, 16, 0.72) 30%,
-          rgba(8, 10, 16, 0.70) 60%,
-          rgba(8, 10, 16, 0.92) 100%
+          rgba(10, 14, 20, 0.72) 0%,
+          rgba(10, 14, 20, 0.55) 35%,
+          rgba(10, 14, 20, 0.60) 65%,
+          rgba(10, 14, 20, 0.88) 100%
         );
       pointer-events: none;
-      backdrop-filter: saturate(0.2) brightness(0.7);
-      -webkit-backdrop-filter: saturate(0.2) brightness(0.7);
-    }
-
-    /* Radial spotlight that follows the cursor — reveals the map underneath */
-    .hero__cursor-light {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      /* The radial-gradient position is updated via JS */
-      background: radial-gradient(
-        circle 280px at 50% 50%,
-        transparent 0%,
-        transparent 35%,
-        rgba(8, 10, 16, 0.70) 100%
-      );
-      /* This layer REPLACES the base overlay in the spotlight area */
-      mix-blend-mode: normal;
-    }
-
-    .hero:hover .hero__cursor-light {
-      opacity: 1;
-    }
-
-    /* When cursor-light is active, lighten the base overlay in the spotlight zone */
-    .hero__map-container.cursor-active::after {
-      background:
-        radial-gradient(
-          circle 260px at var(--cx, 50%) var(--cy, 50%),
-          rgba(8, 10, 16, 0.35) 0%,
-          rgba(8, 10, 16, 0.55) 40%,
-          transparent 100%
-        ),
-        linear-gradient(
-          180deg,
-          rgba(8, 10, 16, 0.88) 0%,
-          rgba(8, 10, 16, 0.72) 30%,
-          rgba(8, 10, 16, 0.70) 60%,
-          rgba(8, 10, 16, 0.92) 100%
-        );
-      transition: none;
+      backdrop-filter: saturate(0.3) brightness(0.85);
+      -webkit-backdrop-filter: saturate(0.3) brightness(0.85);
     }
 
     /* Hide Leaflet controls & attribution in hero context */
@@ -126,14 +84,17 @@
       cursor: default;
     }
 
-    /* Hero content floats above map — styled in refinements section below */
+    /* Hero content floats above map */
+    .hero > .container {
+      position: relative;
+      z-index: 2;
+    }
 
     /* ===== ANIMATED MAP MARKERS ===== */
     .map-marker {
       position: relative;
       width: 18px;
       height: 18px;
-      transition: transform 0.3s ease;
     }
 
     .map-marker__dot {
@@ -146,7 +107,6 @@
       border-radius: 50%;
       background: #22d3ee;
       box-shadow: 0 0 6px 2px rgba(34, 211, 238, 0.5);
-      transition: width 0.3s, height 0.3s, box-shadow 0.3s;
     }
 
     .map-marker__pulse {
@@ -159,40 +119,6 @@
       border-radius: 50%;
       border: 2px solid rgba(34, 211, 238, 0.6);
       animation: markerPulse 2.8s ease-out infinite;
-    }
-
-    /* Markers react when cursor is nearby (class toggled by JS) */
-    .map-marker.is-near .map-marker__dot {
-      width: 12px;
-      height: 12px;
-      box-shadow: 0 0 14px 4px rgba(34, 211, 238, 0.7);
-    }
-    .map-marker.is-near .map-marker__pulse {
-      animation-duration: 1.2s;
-    }
-    /* Type-specific is-near overrides are in each type block above */
-
-    /* Tooltip that appears on nearby markers */
-    .map-marker__label {
-      position: absolute;
-      bottom: calc(100% + 6px);
-      left: 50%;
-      transform: translateX(-50%) translateY(4px);
-      white-space: nowrap;
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: #fff;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(6px);
-      padding: 3px 8px;
-      border-radius: 6px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s, transform 0.25s;
-    }
-    .map-marker.is-near .map-marker__label {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
     }
 
     /* Stagger the pulse for each marker via inline delay */
@@ -215,9 +141,6 @@
     .map-marker--fitness .map-marker__pulse {
       border-color: rgba(249, 115, 22, 0.6);
     }
-    .map-marker--fitness.is-near .map-marker__dot {
-      box-shadow: 0 0 14px 4px rgba(249, 115, 22, 0.7);
-    }
 
     /* Yoga markers */
     .map-marker--yoga .map-marker__dot {
@@ -226,9 +149,6 @@
     }
     .map-marker--yoga .map-marker__pulse {
       border-color: rgba(167, 139, 250, 0.6);
-    }
-    .map-marker--yoga.is-near .map-marker__dot {
-      box-shadow: 0 0 14px 4px rgba(167, 139, 250, 0.7);
     }
 
     /* Physio markers */
@@ -239,35 +159,20 @@
     .map-marker--physio .map-marker__pulse {
       border-color: rgba(52, 211, 153, 0.6);
     }
-    .map-marker--physio.is-near .map-marker__dot {
-      box-shadow: 0 0 14px 4px rgba(52, 211, 153, 0.7);
-    }
 
     /* ===== HERO CONTENT REFINEMENTS (over map) ===== */
-    .hero > .container {
-      position: relative;
-      z-index: 2;
-      background: radial-gradient(
-        ellipse 90% 80% at 50% 45%,
-        rgba(8, 10, 16, 0.45) 0%,
-        transparent 70%
-      );
-      padding: 40px 20px;
-      border-radius: 24px;
-    }
-
     .hero__title {
       color: #fff;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
     }
 
     .hero__subtitle {
-      color: rgba(255, 255, 255, 0.92);
-      text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+      color: rgba(255, 255, 255, 0.88);
+      text-shadow: 0 1px 10px rgba(0,0,0,0.3);
     }
 
     .hero__stats {
-      color: rgba(255, 255, 255, 0.95);
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .hero__stat strong {
@@ -358,464 +263,6 @@
         gap: 10px;
         font-size: 0.68rem;
       }
-    /* ===== SMOOTH SCROLL ===== */
-    html { scroll-behavior: smooth; }
-
-    /* ===== CUSTOM CURSOR ===== */
-    @media (pointer: fine) {
-      * { cursor: none !important; }
-      .cursor-dot {
-        position: fixed;
-        top: 0; left: 0;
-        width: 8px; height: 8px;
-        background: #fff;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 99999;
-        mix-blend-mode: difference;
-        transition: width 0.2s, height 0.2s, margin 0.2s;
-      }
-      .cursor-ring {
-        position: fixed;
-        top: 0; left: 0;
-        width: 44px; height: 44px;
-        border: 2px solid rgba(34,211,238,0.5);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 99998;
-        transition: width 0.35s cubic-bezier(0.16,1,0.3,1),
-                    height 0.35s cubic-bezier(0.16,1,0.3,1),
-                    margin 0.35s cubic-bezier(0.16,1,0.3,1),
-                    border-color 0.3s,
-                    background 0.3s;
-      }
-      .cursor-glow {
-        position: fixed;
-        top: 0; left: 0;
-        width: 200px; height: 200px;
-        background: radial-gradient(circle, rgba(34,211,238,0.06) 0%, transparent 70%);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 99997;
-      }
-      /* Hover states */
-      .cursor-hover .cursor-ring {
-        width: 64px; height: 64px;
-        margin: -10px 0 0 -10px;
-        border-color: rgba(249,115,22,0.6);
-        background: rgba(249,115,22,0.06);
-      }
-      .cursor-hover .cursor-dot {
-        width: 4px; height: 4px;
-        margin: 2px 0 0 2px;
-      }
-
-      /* Cursor trail (canvas) */
-      #cursorCanvas {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 99996;
-      }
-    }
-
-    /* ===== AURORA BOREALIS CANVAS ===== */
-    #auroraCanvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    /* ===== SCROLL PROGRESS ===== */
-    .scroll-progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #f97316, #22d3ee, #a78bfa, #34d399, #f97316);
-      background-size: 400% 100%;
-      animation: progressShift 4s linear infinite;
-      z-index: 100000;
-      width: 0%;
-      box-shadow: 0 0 14px rgba(34,211,238,0.6), 0 0 40px rgba(34,211,238,0.2);
-    }
-    @keyframes progressShift {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 400% 50%; }
-    }
-
-    /* ===== HEADER ===== */
-    .header {
-      transition: all 0.5s cubic-bezier(0.16,1,0.3,1) !important;
-    }
-    .header.is-scrolled {
-      background: rgba(6,6,14,0.88) !important;
-      backdrop-filter: blur(24px) saturate(1.6);
-      -webkit-backdrop-filter: blur(24px) saturate(1.6);
-      box-shadow: 0 4px 40px rgba(0,0,0,0.4), 0 1px 0 rgba(34,211,238,0.08);
-    }
-
-    /* ===== HERO TEXT DECODE (set by JS) ===== */
-    .hero__title {
-      font-family: inherit;
-    }
-    .hero__title .char {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(20px) rotateX(90deg);
-      animation: charReveal 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    @keyframes charReveal {
-      to { opacity: 1; transform: translateY(0) rotateX(0deg); }
-    }
-    .decode-char {
-      color: #22d3ee;
-      transition: color 0.15s;
-    }
-
-    /* ===== HERO ENTRANCE ===== */
-    .hero__subtitle,
-    .hero__stats,
-    .search-box,
-    .hero__map-legend {
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeSlideUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    .hero__subtitle   { animation-delay: 1.0s; }
-    .hero__stats      { animation-delay: 1.3s; }
-    .search-box       { animation-delay: 1.5s; }
-    .hero__map-legend { animation-delay: 1.8s; }
-
-    @keyframes fadeSlideUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ===== SCROLL REVEAL ===== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(60px);
-      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
-                  transform 0.8s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-    .reveal-scale {
-      opacity: 0;
-      transform: scale(0.8) translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal-scale.is-visible { opacity: 1; transform: scale(1) translateY(0); }
-
-    /* Stagger children */
-    .stagger-children > * {
-      opacity: 0;
-      transform: translateY(50px) scale(0.95);
-      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
-                  transform 0.6s cubic-bezier(0.16,1,0.3,1);
-    }
-    .stagger-children.is-visible > *:nth-child(1)  { transition-delay: 0.05s; }
-    .stagger-children.is-visible > *:nth-child(2)  { transition-delay: 0.1s; }
-    .stagger-children.is-visible > *:nth-child(3)  { transition-delay: 0.15s; }
-    .stagger-children.is-visible > *:nth-child(4)  { transition-delay: 0.2s; }
-    .stagger-children.is-visible > *:nth-child(5)  { transition-delay: 0.25s; }
-    .stagger-children.is-visible > *:nth-child(6)  { transition-delay: 0.3s; }
-    .stagger-children.is-visible > *:nth-child(7)  { transition-delay: 0.35s; }
-    .stagger-children.is-visible > *:nth-child(8)  { transition-delay: 0.4s; }
-    .stagger-children.is-visible > *:nth-child(9)  { transition-delay: 0.45s; }
-    .stagger-children.is-visible > *:nth-child(10) { transition-delay: 0.5s; }
-    .stagger-children.is-visible > *:nth-child(11) { transition-delay: 0.55s; }
-    .stagger-children.is-visible > *:nth-child(12) { transition-delay: 0.6s; }
-    .stagger-children.is-visible > * { opacity: 1; transform: translateY(0) scale(1); }
-
-    /* ===== CATEGORY CARDS — HOLOGRAPHIC PRISMATIC ===== */
-    .category-card {
-      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s !important;
-      transform-style: preserve-3d;
-      position: relative;
-      overflow: hidden;
-    }
-    .category-card::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      background: conic-gradient(
-        from var(--card-angle, 0deg),
-        #f97316, #22d3ee, #a78bfa, #34d399, #f97316
-      );
-      border-radius: inherit;
-      opacity: 0;
-      transition: opacity 0.5s;
-      z-index: -1;
-      filter: blur(8px);
-    }
-    .category-card:hover::before {
-      opacity: 0.6;
-      animation: holoSpin 3s linear infinite;
-    }
-    @keyframes holoSpin {
-      to { --card-angle: 360deg; }
-    }
-    @property --card-angle {
-      syntax: '<angle>';
-      initial-value: 0deg;
-      inherits: false;
-    }
-    .category-card::after {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: linear-gradient(
-        135deg,
-        transparent 30%,
-        rgba(255,255,255,0.03) 40%,
-        rgba(255,255,255,0.12) 50%,
-        rgba(255,255,255,0.03) 60%,
-        transparent 70%
-      );
-      transform: translateX(var(--shine-x, -100%));
-      transition: transform 0.6s ease;
-      pointer-events: none;
-      z-index: 1;
-    }
-    .category-card:hover::after {
-      transform: translateX(100%);
-    }
-    .category-card:hover {
-      transform: translateY(-10px) scale(1.04) !important;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2), 0 0 30px rgba(34,211,238,0.1) !important;
-    }
-    .category-card__icon {
-      transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1) !important;
-    }
-    .category-card:hover .category-card__icon {
-      transform: scale(1.35) rotate(-8deg) !important;
-    }
-
-    /* ===== CENTER CARDS — DEPTH HOVER ===== */
-    .center-card {
-      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s !important;
-      transform-style: preserve-3d;
-      overflow: hidden;
-    }
-    .center-card:hover {
-      transform: translateY(-14px) !important;
-      box-shadow: 0 30px 70px rgba(0,0,0,0.2), 0 0 0 1px rgba(249,115,22,0.1) !important;
-    }
-    .center-card__image { overflow: hidden; }
-    .center-card__image img,
-    .center-card__image-placeholder {
-      transition: transform 0.8s cubic-bezier(0.16,1,0.3,1), filter 0.8s !important;
-    }
-    .center-card:hover .center-card__image img {
-      transform: scale(1.12) !important;
-      filter: brightness(1.1) saturate(1.2);
-    }
-
-    /* ===== INTENT LINKS — ELASTIC BOUNCE ===== */
-    .intent-link {
-      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s !important;
-      position: relative;
-      overflow: hidden;
-    }
-    .intent-link:hover {
-      transform: translateY(-5px) scale(1.07) !important;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
-    }
-    .intent-link:active {
-      transform: scale(0.95) !important;
-    }
-
-    /* ===== TRUST BLOCK ===== */
-    .trust-block__item {
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1) !important;
-      border-radius: 12px;
-      padding: 14px !important;
-      position: relative;
-    }
-    .trust-block__item::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: linear-gradient(180deg, #22d3ee, #a78bfa);
-      border-radius: 3px;
-      transform: scaleY(0);
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    .trust-block__item:hover::before {
-      transform: scaleY(1);
-    }
-    .trust-block__item:hover {
-      transform: translateX(12px) !important;
-      background: rgba(34,211,238,0.04);
-    }
-
-    /* ===== FAQ SMOOTH ===== */
-    .faq__answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.4s;
-      opacity: 0;
-    }
-    .faq__answer.active { max-height: 300px; opacity: 1; }
-    .faq__icon {
-      transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1) !important;
-    }
-    .faq__question[aria-expanded="true"] .faq__icon {
-      transform: rotate(180deg) !important;
-    }
-
-    /* ===== BUTTONS — RIPPLE + GLOW ===== */
-    .btn {
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s !important;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-    .btn:active { transform: scale(0.96); }
-    .btn .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      transform: scale(0);
-      animation: btnRipple 0.6s ease-out;
-      pointer-events: none;
-    }
-    @keyframes btnRipple {
-      to { transform: scale(4); opacity: 0; }
-    }
-
-    /* ===== SECTION WAVE DIVIDERS ===== */
-    .wave-divider {
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
-      z-index: 1;
-    }
-    .wave-divider svg {
-      display: block;
-      width: calc(100% + 2px);
-      height: 50px;
-    }
-    .wave-divider--top {
-      top: -1px;
-      bottom: auto;
-      transform: rotate(180deg);
-    }
-
-    /* ===== ANIMATED COUNTERS — SLOT MACHINE ===== */
-    .slot-counter {
-      display: inline-flex;
-      overflow: hidden;
-      height: 1.2em;
-      vertical-align: bottom;
-    }
-    .slot-counter__digit {
-      display: inline-block;
-      animation: slotSpin 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
-      line-height: 1.2em;
-    }
-    @keyframes slotSpin {
-      0% { transform: translateY(-200%); opacity: 0; filter: blur(4px); }
-      60% { filter: blur(0); }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-
-    /* ===== CLICK SHOCKWAVE ===== */
-    .shockwave {
-      position: fixed;
-      border-radius: 50%;
-      border: 2px solid rgba(34,211,238,0.5);
-      pointer-events: none;
-      z-index: 99990;
-      animation: shockwaveExpand 0.6s ease-out forwards;
-    }
-    @keyframes shockwaveExpand {
-      0% { width: 0; height: 0; opacity: 1; }
-      100% { width: 200px; height: 200px; opacity: 0; margin: -100px 0 0 -100px; }
-    }
-
-    /* ===== SECTION TITLE GLOW UNDERLINE ===== */
-    .section__title {
-      position: relative;
-      display: inline-block;
-    }
-    .section__title::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #f97316, #22d3ee, #a78bfa);
-      border-radius: 3px;
-      transition: width 1s cubic-bezier(0.16,1,0.3,1);
-      box-shadow: 0 0 12px rgba(34,211,238,0.4);
-    }
-    .is-visible .section__title::after,
-    .reveal.is-visible .section__title::after {
-      width: 100%;
-    }
-
-    /* ===== BACK TO TOP ===== */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px; right: 30px;
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f97316, #22d3ee);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      opacity: 0;
-      transform: translateY(20px) scale(0.6) rotate(-180deg);
-      transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
-      box-shadow: 0 6px 24px rgba(249,115,22,0.35);
-      pointer-events: none;
-    }
-    .back-to-top.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1) rotate(0deg);
-      pointer-events: all;
-    }
-    .back-to-top:hover {
-      transform: translateY(-6px) scale(1.15);
-      box-shadow: 0 12px 40px rgba(249,115,22,0.5);
-    }
-
-    /* ===== FOOTER ===== */
-    .footer {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
-    }
-    .footer.is-visible { opacity: 1; transform: translateY(0); }
-
-    /* ===== PREFERS REDUCED MOTION ===== */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      * { cursor: auto !important; }
-      .cursor-dot, .cursor-ring, .cursor-glow, #cursorCanvas, #auroraCanvas { display: none !important; }
-      .scroll-progress { display: none; }
-      .reveal, .reveal-scale, .stagger-children > *, .footer { opacity: 1; transform: none; }
     }
   </style>
 
@@ -839,22 +286,7 @@
   }
   </script>
 </head>
-<body class="page-home">
-  <!-- Scroll Progress Bar -->
-  <div class="scroll-progress" id="scrollProgress"></div>
-  
-  <!-- Aurora Borealis Background -->
-  <canvas id="auroraCanvas"></canvas>
-
-  <!-- Custom Cursor -->
-  <div class="cursor-glow" id="cursorGlow"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-  <div class="cursor-dot" id="cursorDot"></div>
-  <canvas id="cursorCanvas"></canvas>
-  
-  <!-- Back to Top -->
-  <button class="back-to-top" id="backToTop" aria-label="Tilbage til toppen" onclick="window.scrollTo({top:0})">↑</button>
-
+<body>
   <!-- Header -->
   <header class="header">
     <div class="container header__inner">
@@ -899,9 +331,8 @@
     <!-- Hero Section with Interactive Map -->
     <section class="hero">
       <!-- Leaflet Map Background -->
-      <div class="hero__map-container" id="heroMapContainer">
+      <div class="hero__map-container">
         <div id="heroMap"></div>
-        <div class="hero__cursor-light" id="cursorLight"></div>
       </div>
 
       <!-- Hero Content (unchanged structure) -->
@@ -1281,106 +712,61 @@
       }).addTo(map);
 
       // ── Fitness center locations across Aalborg ──
+      // Representative coordinates for real areas
       const markers = [
         // Fitness (orange)
-        { lat: 57.0488, lng: 9.9217, type: 'fitness', label: 'PureGym Aalborg' },
-        { lat: 57.0445, lng: 9.9310, type: 'fitness', label: 'Fitness World' },
-        { lat: 57.0380, lng: 9.9120, type: 'fitness', label: 'SATS Sønderbro' },
-        { lat: 57.0520, lng: 9.9400, type: 'fitness', label: 'CrossFit Aalborg' },
-        { lat: 57.0350, lng: 9.8850, type: 'fitness', label: 'LOOP Fitness' },
-        { lat: 57.0260, lng: 9.9580, type: 'fitness', label: 'Fitness X Øst' },
-        { lat: 57.0220, lng: 9.9750, type: 'fitness', label: 'Repeat Aalborg' },
-        { lat: 57.0590, lng: 9.9100, type: 'fitness', label: 'Nørresundby Gym' },
-        { lat: 57.0620, lng: 9.9350, type: 'fitness', label: 'FW Nørresundby' },
-        { lat: 57.0410, lng: 9.8700, type: 'fitness', label: 'Hasseris Fitness' },
-        { lat: 57.0310, lng: 9.9020, type: 'fitness', label: 'Skalborg Motion' },
-        { lat: 57.0550, lng: 9.8950, type: 'fitness', label: 'Lindholm Gym' },
+        { lat: 57.0488, lng: 9.9217, type: 'fitness' },   // Centrum
+        { lat: 57.0445, lng: 9.9310, type: 'fitness' },   // Boulevarden area
+        { lat: 57.0380, lng: 9.9120, type: 'fitness' },   // Sønderbro
+        { lat: 57.0520, lng: 9.9400, type: 'fitness' },   // Østerbro
+        { lat: 57.0350, lng: 9.8850, type: 'fitness' },   // Vestbyen
+        { lat: 57.0260, lng: 9.9580, type: 'fitness' },   // Aalborg Øst
+        { lat: 57.0220, lng: 9.9750, type: 'fitness' },   // Aalborg ØST 2
+        { lat: 57.0590, lng: 9.9100, type: 'fitness' },   // Nørresundby
+        { lat: 57.0620, lng: 9.9350, type: 'fitness' },   // Nørresundby øst
+        { lat: 57.0410, lng: 9.8700, type: 'fitness' },   // Hasseris
+        { lat: 57.0310, lng: 9.9020, type: 'fitness' },   // Skalborg
+        { lat: 57.0550, lng: 9.8950, type: 'fitness' },   // Lindholm
 
         // Yoga (purple)
-        { lat: 57.0470, lng: 9.9180, type: 'yoga', label: 'Yoga i Aalborg' },
-        { lat: 57.0510, lng: 9.9260, type: 'yoga', label: 'Hot Yoga Studio' },
-        { lat: 57.0430, lng: 9.9050, type: 'yoga', label: 'Zen Yoga Vest' },
-        { lat: 57.0390, lng: 9.9350, type: 'yoga', label: 'Flow Studio' },
+        { lat: 57.0470, lng: 9.9180, type: 'yoga' },      // Centrum
+        { lat: 57.0510, lng: 9.9260, type: 'yoga' },      // Nær havnefront
+        { lat: 57.0430, lng: 9.9050, type: 'yoga' },      // Vestbyen
+        { lat: 57.0390, lng: 9.9350, type: 'yoga' },      // Syd
 
         // Fysioterapi (green)
-        { lat: 57.0500, lng: 9.9150, type: 'physio', label: 'Fysio Centrum' },
-        { lat: 57.0460, lng: 9.9390, type: 'physio', label: 'SportsFysio Øst' },
-        { lat: 57.0530, lng: 9.9050, type: 'physio', label: 'Klinik Vestbyen' },
-        { lat: 57.0280, lng: 9.9450, type: 'physio', label: 'Aalborg Øst Fysio' },
-        { lat: 57.0570, lng: 9.9280, type: 'physio', label: 'Sundby Fysioterapi' },
-        { lat: 57.0420, lng: 9.8800, type: 'physio', label: 'Hasseris Klinik' },
+        { lat: 57.0500, lng: 9.9150, type: 'physio' },    // Centrum
+        { lat: 57.0460, lng: 9.9390, type: 'physio' },    // Øst
+        { lat: 57.0530, lng: 9.9050, type: 'physio' },    // Vest
+        { lat: 57.0280, lng: 9.9450, type: 'physio' },    // Aalborg Øst
+        { lat: 57.0570, lng: 9.9280, type: 'physio' },    // Nørresundby
+        { lat: 57.0420, lng: 9.8800, type: 'physio' },    // Hasseris
 
-        // Other (cyan)
-        { lat: 57.0440, lng: 9.9100, type: 'other', label: 'MMA Aalborg' },
-        { lat: 57.0370, lng: 9.9250, type: 'other', label: 'Danseskolen' },
-        { lat: 57.0290, lng: 9.9650, type: 'other', label: 'Padel Aalborg' },
-        { lat: 57.0560, lng: 9.9180, type: 'other', label: 'Nørresundby Boks' },
-        { lat: 57.0480, lng: 9.8900, type: 'other', label: 'Cykel & Sport' },
+        // Other (cyan) — kampsport, dans, padel, etc.
+        { lat: 57.0440, lng: 9.9100, type: 'other' },     // Kampsport centrum
+        { lat: 57.0370, lng: 9.9250, type: 'other' },     // Dans
+        { lat: 57.0290, lng: 9.9650, type: 'other' },     // Padel Øst
+        { lat: 57.0560, lng: 9.9180, type: 'other' },     // Nørresundby
+        { lat: 57.0480, lng: 9.8900, type: 'other' },     // Vestbyen
       ];
-
-      const leafletMarkers = []; // store references for proximity detection
 
       markers.forEach((m, i) => {
         const typeClass = `map-marker--${m.type}`;
-        const delay = (i * 0.35) % 2.8;
+        const delay = (i * 0.35) % 2.8; // stagger pulse animations
 
         const icon = L.divIcon({
           className: '',
           html: `
-            <div class="map-marker ${typeClass}" data-marker-index="${i}">
+            <div class="map-marker ${typeClass}">
               <div class="map-marker__pulse" style="animation-delay: ${delay.toFixed(2)}s"></div>
               <div class="map-marker__dot"></div>
-              <div class="map-marker__label">${m.label}</div>
             </div>
           `,
           iconSize: [18, 18],
           iconAnchor: [9, 9]
         });
 
-        const lm = L.marker([m.lat, m.lng], { icon, interactive: false }).addTo(map);
-        leafletMarkers.push(lm);
-      });
-
-      // ── Cursor interaction: spotlight + marker proximity ──
-      const heroEl = document.querySelector('.hero');
-      const mapContainer = document.getElementById('heroMapContainer');
-      const PROXIMITY_PX = 120; // pixels
-
-      function handleCursorMove(e) {
-        const rect = heroEl.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const xPct = ((x / rect.width) * 100).toFixed(1) + '%';
-        const yPct = ((y / rect.height) * 100).toFixed(1) + '%';
-
-        // Update overlay spotlight position via CSS vars
-        mapContainer.style.setProperty('--cx', xPct);
-        mapContainer.style.setProperty('--cy', yPct);
-        mapContainer.classList.add('cursor-active');
-
-        // Check marker proximity
-        leafletMarkers.forEach((lm, i) => {
-          const markerPoint = map.latLngToContainerPoint(lm.getLatLng());
-          // Adjust for hero offset within the page
-          const mx = markerPoint.x;
-          const my = markerPoint.y;
-          const dist = Math.hypot(x - mx, y - my);
-
-          const markerEl = heroEl.querySelector(`[data-marker-index="${i}"]`);
-          if (markerEl) {
-            if (dist < PROXIMITY_PX) {
-              markerEl.classList.add('is-near');
-            } else {
-              markerEl.classList.remove('is-near');
-            }
-          }
-        });
-      }
-
-      heroEl.addEventListener('mousemove', handleCursorMove);
-      heroEl.addEventListener('mouseleave', () => {
-        mapContainer.classList.remove('cursor-active');
-        heroEl.querySelectorAll('.map-marker.is-near').forEach(el => el.classList.remove('is-near'));
+        L.marker([m.lat, m.lng], { icon, interactive: false }).addTo(map);
       });
 
       // Gentle auto-pan for a living feel
@@ -1517,344 +903,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       initHeroMap();
       loadData();
-      initAurora();
-      initCustomCursor();
-      initCursorTrail();
-      initScrollProgress();
-      initHeaderScroll();
-      initScrollReveal();
-      initHeroTextDecode();
-      initSlotCounters();
-      initBackToTop();
-      initCardTilt3D();
-      initButtonRipple();
-      initClickShockwave();
-      initParallaxHero();
-      initSmoothParallaxElements();
     });
-
-    // ===== AURORA BOREALIS (Northern Lights for Aalborg!) =====
-    function initAurora() {
-      const canvas = document.getElementById('auroraCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let w, h;
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      const bands = [
-        { y: 0.18, amp: 60, freq: 0.003, speed: 0.0004, color: [34,211,238] },
-        { y: 0.25, amp: 80, freq: 0.002, speed: 0.0003, color: [52,211,153] },
-        { y: 0.15, amp: 50, freq: 0.004, speed: 0.0005, color: [167,139,250] },
-        { y: 0.30, amp: 40, freq: 0.0025, speed: 0.00035, color: [249,115,22] },
-      ];
-
-      let time = 0;
-      function drawAurora() {
-        ctx.clearRect(0, 0, w, h);
-        bands.forEach(band => {
-          const baseY = h * band.y;
-          ctx.beginPath();
-          ctx.moveTo(0, h);
-          for (let x = 0; x <= w; x += 3) {
-            const y = baseY + Math.sin(x * band.freq + time * band.speed * 1000) * band.amp
-                     + Math.sin(x * band.freq * 0.5 + time * band.speed * 600) * band.amp * 0.5;
-            ctx.lineTo(x, y);
-          }
-          ctx.lineTo(w, h);
-          ctx.closePath();
-          const [r, g, b] = band.color;
-          const grad = ctx.createLinearGradient(0, baseY - band.amp, 0, baseY + band.amp * 3);
-          grad.addColorStop(0, `rgba(${r},${g},${b},0.01)`);
-          grad.addColorStop(0.3, `rgba(${r},${g},${b},0.04)`);
-          grad.addColorStop(0.5, `rgba(${r},${g},${b},0.06)`);
-          grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
-          ctx.fillStyle = grad;
-          ctx.fill();
-        });
-        time = performance.now();
-        requestAnimationFrame(drawAurora);
-      }
-      drawAurora();
-    }
-
-    // ===== CUSTOM CURSOR =====
-    function initCustomCursor() {
-      if (!matchMedia('(pointer: fine)').matches) return;
-      const dot = document.getElementById('cursorDot');
-      const ring = document.getElementById('cursorRing');
-      const glow = document.getElementById('cursorGlow');
-      if (!dot || !ring || !glow) return;
-
-      let mx = -100, my = -100, rx = -100, ry = -100, gx = -100, gy = -100;
-
-      document.addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-      });
-
-      function tick() {
-        // Dot follows instantly
-        dot.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
-        // Ring follows with lag
-        rx += (mx - rx) * 0.15;
-        ry += (my - ry) * 0.15;
-        ring.style.transform = `translate(${rx - 22}px, ${ry - 22}px)`;
-        // Glow follows with more lag
-        gx += (mx - gx) * 0.08;
-        gy += (my - gy) * 0.08;
-        glow.style.transform = `translate(${gx - 100}px, ${gy - 100}px)`;
-        requestAnimationFrame(tick);
-      }
-      tick();
-
-      // Hover detection for interactive elements
-      const hoverTargets = 'a, button, .btn, .category-card, .center-card, .intent-link, .faq__question, input, select';
-      document.addEventListener('mouseover', e => {
-        if (e.target.closest(hoverTargets)) document.body.classList.add('cursor-hover');
-      });
-      document.addEventListener('mouseout', e => {
-        if (e.target.closest(hoverTargets)) document.body.classList.remove('cursor-hover');
-      });
-    }
-
-    // ===== CURSOR TRAIL (Canvas) =====
-    function initCursorTrail() {
-      if (!matchMedia('(pointer: fine)').matches) return;
-      const canvas = document.getElementById('cursorCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      const trail = [];
-      const MAX = 30;
-
-      document.addEventListener('mousemove', e => {
-        trail.push({ x: e.clientX, y: e.clientY, life: 1 });
-        if (trail.length > MAX) trail.shift();
-      });
-
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < trail.length; i++) {
-          const p = trail[i];
-          p.life -= 0.025;
-          if (p.life <= 0) { trail.splice(i, 1); i--; continue; }
-          const size = p.life * 4;
-          const alpha = p.life * 0.4;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(34, 211, 238, ${alpha})`;
-          ctx.fill();
-          // secondary glow
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, size * 3, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(34, 211, 238, ${alpha * 0.15})`;
-          ctx.fill();
-        }
-        requestAnimationFrame(draw);
-      }
-      draw();
-    }
-
-    // ===== SCROLL PROGRESS =====
-    function initScrollProgress() {
-      const bar = document.getElementById('scrollProgress');
-      if (!bar) return;
-      window.addEventListener('scroll', () => {
-        const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-        bar.style.width = pct + '%';
-      }, { passive: true });
-    }
-
-    // ===== HEADER SCROLL =====
-    function initHeaderScroll() {
-      const header = document.querySelector('.header');
-      if (!header) return;
-      window.addEventListener('scroll', () => {
-        header.classList.toggle('is-scrolled', window.scrollY > 60);
-      }, { passive: true });
-    }
-
-    // ===== SCROLL REVEAL =====
-    function initScrollReveal() {
-      document.querySelectorAll('.section__header').forEach(el => el.classList.add('reveal'));
-      document.querySelectorAll('.categories-grid').forEach(el => el.classList.add('stagger-children'));
-      document.querySelectorAll('.centers-grid').forEach(el => el.classList.add('stagger-children'));
-      document.querySelectorAll('.intent-links').forEach(el => el.classList.add('stagger-children'));
-      document.querySelectorAll('.trust-block').forEach(el => el.classList.add('reveal-scale'));
-      document.querySelectorAll('.content-section').forEach(el => el.classList.add('reveal'));
-      document.querySelectorAll('.faq__list').forEach(el => el.classList.add('stagger-children'));
-      document.querySelectorAll('.section').forEach(el => {
-        if (!el.classList.contains('hero')) el.classList.add('reveal');
-      });
-      document.querySelectorAll('.footer').forEach(el => el.classList.add('reveal'));
-
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
-      }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
-
-      document.querySelectorAll('.reveal, .reveal-scale, .stagger-children, .footer').forEach(el => obs.observe(el));
-    }
-
-    // ===== HERO TEXT DECODE (Matrix-style character reveal) =====
-    function initHeroTextDecode() {
-      const title = document.querySelector('.hero__title');
-      if (!title) return;
-      const original = title.textContent;
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
-      
-      // Wrap each character in a span
-      title.innerHTML = '';
-      const spans = [];
-      for (let i = 0; i < original.length; i++) {
-        const span = document.createElement('span');
-        span.className = 'char';
-        span.style.animationDelay = (0.3 + i * 0.03) + 's';
-        span.textContent = original[i] === ' ' ? '\u00A0' : original[i];
-        title.appendChild(span);
-        spans.push({ el: span, target: original[i], resolved: false });
-      }
-
-      // Scramble effect
-      let frame = 0;
-      const scrambleInterval = setInterval(() => {
-        frame++;
-        spans.forEach((s, i) => {
-          if (s.resolved) return;
-          const resolveAt = 12 + i * 2;
-          if (frame >= resolveAt) {
-            s.el.textContent = s.target === ' ' ? '\u00A0' : s.target;
-            s.el.classList.remove('decode-char');
-            s.resolved = true;
-          } else if (frame >= 4 + i * 0.5) {
-            s.el.textContent = chars[Math.floor(Math.random() * chars.length)];
-            s.el.classList.add('decode-char');
-          }
-        });
-        if (spans.every(s => s.resolved)) clearInterval(scrambleInterval);
-      }, 40);
-    }
-
-    // ===== SLOT MACHINE COUNTERS =====
-    function initSlotCounters() {
-      const statStrongs = document.querySelectorAll('.hero__stat strong');
-      statStrongs.forEach(el => {
-        const text = el.textContent.trim();
-        // Only animate pure numbers
-        if (!/^\d+$/.test(text)) return;
-        const target = parseInt(text);
-        el.textContent = '';
-        el.classList.add('slot-counter');
-        
-        const digits = String(target).split('');
-        setTimeout(() => {
-          digits.forEach((d, i) => {
-            const span = document.createElement('span');
-            span.className = 'slot-counter__digit';
-            span.style.animationDelay = (i * 0.12) + 's';
-            span.textContent = d;
-            el.appendChild(span);
-          });
-        }, 1200);
-      });
-    }
-
-    // ===== BACK TO TOP =====
-    function initBackToTop() {
-      const btn = document.getElementById('backToTop');
-      if (!btn) return;
-      window.addEventListener('scroll', () => {
-        btn.classList.toggle('visible', window.scrollY > 600);
-      }, { passive: true });
-    }
-
-    // ===== 3D CARD TILT (perspective follow) =====
-    function initCardTilt3D() {
-      setTimeout(() => {
-        document.querySelectorAll('.center-card, .category-card').forEach(card => {
-          card.addEventListener('mousemove', e => {
-            const r = card.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width - 0.5;
-            const y = (e.clientY - r.top) / r.height - 0.5;
-            card.style.transform = `perspective(600px) rotateY(${x * 10}deg) rotateX(${y * -10}deg) translateY(-8px) scale(1.02)`;
-          });
-          card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-            card.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1)';
-            setTimeout(() => { card.style.transition = ''; }, 600);
-          });
-        });
-      }, 2500);
-    }
-
-    // ===== BUTTON RIPPLE =====
-    function initButtonRipple() {
-      document.addEventListener('click', e => {
-        const btn = e.target.closest('.btn');
-        if (!btn) return;
-        const rect = btn.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
-        const size = Math.max(rect.width, rect.height) * 2;
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-        btn.appendChild(ripple);
-        ripple.addEventListener('animationend', () => ripple.remove());
-      });
-    }
-
-    // ===== CLICK SHOCKWAVE =====
-    function initClickShockwave() {
-      document.addEventListener('click', e => {
-        const wave = document.createElement('div');
-        wave.className = 'shockwave';
-        wave.style.left = e.clientX + 'px';
-        wave.style.top = e.clientY + 'px';
-        document.body.appendChild(wave);
-        wave.addEventListener('animationend', () => wave.remove());
-      });
-    }
-
-    // ===== PARALLAX HERO MAP =====
-    function initParallaxHero() {
-      const mapC = document.getElementById('heroMapContainer');
-      if (!mapC) return;
-      window.addEventListener('scroll', () => {
-        const s = window.scrollY;
-        const hh = document.querySelector('.hero')?.offsetHeight || 800;
-        if (s < hh) {
-          mapC.style.transform = `translateY(${s * 0.35}px) scale(${1 + s * 0.00025})`;
-        }
-      }, { passive: true });
-    }
-
-    // ===== SMOOTH PARALLAX ON SECTIONS (depth layers) =====
-    function initSmoothParallaxElements() {
-      const sections = document.querySelectorAll('.section');
-      window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        sections.forEach(sec => {
-          const rect = sec.getBoundingClientRect();
-          const centerOffset = rect.top + rect.height / 2 - window.innerHeight / 2;
-          // Subtle shift on section headers
-          const header = sec.querySelector('.section__header');
-          if (header) {
-            header.style.transform = `translateY(${centerOffset * -0.04}px)`;
-          }
-        });
-      }, { passive: true });
-    }
   </script>
 </body>
 </html>
