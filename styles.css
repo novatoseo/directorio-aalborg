@@ -1540,10 +1540,6 @@ p:last-child { margin-bottom: 0; }
   background: var(--color-gray-50);
 }
 
-.price-table__service {
-  color: var(--color-gray-700);
-}
-
 .price-table__price {
   font-weight: 600;
   color: var(--color-gray-900);
@@ -1756,4 +1752,121 @@ p:last-child { margin-bottom: 0; }
   html {
     scroll-behavior: auto;
   }
+}
+
+
+/* ============================================
+   HOMEPAGE-ONLY OVERRIDES (.page-home)
+   These styles only apply to index.html via
+   body.page-home — no other page is affected.
+   ============================================ */
+
+/* --- Header: transparent on dark hero --- */
+.page-home .header {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
+.page-home .header__logo {
+  color: #fff;
+}
+
+.page-home .header__logo:hover {
+  color: #22d3ee;
+}
+
+.page-home .header__nav-link {
+  color: rgba(255,255,255,0.8);
+}
+
+.page-home .header__nav-link:hover,
+.page-home .header__nav-link.active {
+  color: #fff;
+}
+
+.page-home .header__nav-link::after {
+  background: #22d3ee;
+}
+
+.page-home .header__mobile-toggle span {
+  background: #fff;
+}
+
+/* --- Hero: remove blue gradient, let map show through --- */
+.page-home .hero {
+  background: none;
+  background-color: #080a10;
+  padding: 0;
+}
+
+/* --- Search box: remove white box-shadow for glass effect --- */
+.page-home .search-box {
+  background: none;
+  box-shadow: none;
+  margin-top: var(--space-6);
+}
+
+/* --- Search inputs: dark-friendly, remove gray borders --- */
+.page-home .search-box__input,
+.page-home .search-box__select {
+  border-color: transparent;
+}
+
+.page-home .search-box__input:focus,
+.page-home .search-box__select:focus {
+  border-color: rgba(34,211,238,0.5);
+  box-shadow: 0 0 0 3px rgba(34,211,238,0.15);
+}
+
+/* --- Hero subtitle: full width allowed --- */
+.page-home .hero__subtitle {
+  max-width: none;
+}
+
+/* --- FAQ: use max-height animation instead of display toggle --- */
+.page-home .faq__answer {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 var(--space-4);
+  opacity: 0;
+  transition: max-height 0.6s cubic-bezier(0.16,1,0.3,1),
+              padding 0.4s ease,
+              opacity 0.4s ease;
+}
+
+.page-home .faq__answer.active {
+  display: block;
+  max-height: 300px;
+  padding: 0 var(--space-4) var(--space-4);
+  opacity: 1;
+}
+
+/* --- Mobile nav: dark theme on homepage --- */
+.page-home .mobile-nav {
+  background: rgba(10,10,20,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.page-home .mobile-nav__link {
+  color: rgba(255,255,255,0.8);
+}
+
+.page-home .mobile-nav__link:hover,
+.page-home .mobile-nav__link.active {
+  background: rgba(255,255,255,0.08);
+  color: #22d3ee;
+}
+
+/* --- Ensure z-index layering works for effects --- */
+.page-home .section {
+  position: relative;
+  z-index: 1;
+}
+
+.page-home .footer {
+  position: relative;
+  z-index: 1;
 }
