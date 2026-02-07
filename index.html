@@ -63,14 +63,56 @@
       background:
         linear-gradient(
           180deg,
-          rgba(10, 14, 20, 0.72) 0%,
-          rgba(10, 14, 20, 0.55) 35%,
-          rgba(10, 14, 20, 0.60) 65%,
-          rgba(10, 14, 20, 0.88) 100%
+          rgba(8, 10, 16, 0.88) 0%,
+          rgba(8, 10, 16, 0.72) 30%,
+          rgba(8, 10, 16, 0.70) 60%,
+          rgba(8, 10, 16, 0.92) 100%
         );
       pointer-events: none;
-      backdrop-filter: saturate(0.3) brightness(0.85);
-      -webkit-backdrop-filter: saturate(0.3) brightness(0.85);
+      backdrop-filter: saturate(0.2) brightness(0.7);
+      -webkit-backdrop-filter: saturate(0.2) brightness(0.7);
+    }
+
+    /* Radial spotlight that follows the cursor — reveals the map underneath */
+    .hero__cursor-light {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      /* The radial-gradient position is updated via JS */
+      background: radial-gradient(
+        circle 280px at 50% 50%,
+        transparent 0%,
+        transparent 35%,
+        rgba(8, 10, 16, 0.70) 100%
+      );
+      /* This layer REPLACES the base overlay in the spotlight area */
+      mix-blend-mode: normal;
+    }
+
+    .hero:hover .hero__cursor-light {
+      opacity: 1;
+    }
+
+    /* When cursor-light is active, lighten the base overlay in the spotlight zone */
+    .hero__map-container.cursor-active::after {
+      background:
+        radial-gradient(
+          circle 260px at var(--cx, 50%) var(--cy, 50%),
+          rgba(8, 10, 16, 0.35) 0%,
+          rgba(8, 10, 16, 0.55) 40%,
+          transparent 100%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(8, 10, 16, 0.88) 0%,
+          rgba(8, 10, 16, 0.72) 30%,
+          rgba(8, 10, 16, 0.70) 60%,
+          rgba(8, 10, 16, 0.92) 100%
+        );
+      transition: none;
     }
 
     /* Hide Leaflet controls & attribution in hero context */
@@ -84,17 +126,14 @@
       cursor: default;
     }
 
-    /* Hero content floats above map */
-    .hero > .container {
-      position: relative;
-      z-index: 2;
-    }
+    /* Hero content floats above map — styled in refinements section below */
 
     /* ===== ANIMATED MAP MARKERS ===== */
     .map-marker {
       position: relative;
       width: 18px;
       height: 18px;
+      transition: transform 0.3s ease;
     }
 
     .map-marker__dot {
@@ -107,6 +146,7 @@
       border-radius: 50%;
       background: #22d3ee;
       box-shadow: 0 0 6px 2px rgba(34, 211, 238, 0.5);
+      transition: width 0.3s, height 0.3s, box-shadow 0.3s;
     }
 
     .map-marker__pulse {
@@ -119,6 +159,40 @@
       border-radius: 50%;
       border: 2px solid rgba(34, 211, 238, 0.6);
       animation: markerPulse 2.8s ease-out infinite;
+    }
+
+    /* Markers react when cursor is nearby (class toggled by JS) */
+    .map-marker.is-near .map-marker__dot {
+      width: 12px;
+      height: 12px;
+      box-shadow: 0 0 14px 4px rgba(34, 211, 238, 0.7);
+    }
+    .map-marker.is-near .map-marker__pulse {
+      animation-duration: 1.2s;
+    }
+    /* Type-specific is-near overrides are in each type block above */
+
+    /* Tooltip that appears on nearby markers */
+    .map-marker__label {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      white-space: nowrap;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      padding: 3px 8px;
+      border-radius: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .map-marker.is-near .map-marker__label {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     /* Stagger the pulse for each marker via inline delay */
@@ -141,6 +215,9 @@
     .map-marker--fitness .map-marker__pulse {
       border-color: rgba(249, 115, 22, 0.6);
     }
+    .map-marker--fitness.is-near .map-marker__dot {
+      box-shadow: 0 0 14px 4px rgba(249, 115, 22, 0.7);
+    }
 
     /* Yoga markers */
     .map-marker--yoga .map-marker__dot {
@@ -149,6 +226,9 @@
     }
     .map-marker--yoga .map-marker__pulse {
       border-color: rgba(167, 139, 250, 0.6);
+    }
+    .map-marker--yoga.is-near .map-marker__dot {
+      box-shadow: 0 0 14px 4px rgba(167, 139, 250, 0.7);
     }
 
     /* Physio markers */
@@ -159,20 +239,35 @@
     .map-marker--physio .map-marker__pulse {
       border-color: rgba(52, 211, 153, 0.6);
     }
+    .map-marker--physio.is-near .map-marker__dot {
+      box-shadow: 0 0 14px 4px rgba(52, 211, 153, 0.7);
+    }
 
     /* ===== HERO CONTENT REFINEMENTS (over map) ===== */
+    .hero > .container {
+      position: relative;
+      z-index: 2;
+      background: radial-gradient(
+        ellipse 90% 80% at 50% 45%,
+        rgba(8, 10, 16, 0.45) 0%,
+        transparent 70%
+      );
+      padding: 40px 20px;
+      border-radius: 24px;
+    }
+
     .hero__title {
       color: #fff;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.3);
     }
 
     .hero__subtitle {
-      color: rgba(255, 255, 255, 0.88);
-      text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+      color: rgba(255, 255, 255, 0.92);
+      text-shadow: 0 1px 12px rgba(0,0,0,0.5);
     }
 
     .hero__stats {
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.95);
     }
 
     .hero__stat strong {
@@ -331,8 +426,9 @@
     <!-- Hero Section with Interactive Map -->
     <section class="hero">
       <!-- Leaflet Map Background -->
-      <div class="hero__map-container">
+      <div class="hero__map-container" id="heroMapContainer">
         <div id="heroMap"></div>
+        <div class="hero__cursor-light" id="cursorLight"></div>
       </div>
 
       <!-- Hero Content (unchanged structure) -->
@@ -712,61 +808,106 @@
       }).addTo(map);
 
       // ── Fitness center locations across Aalborg ──
-      // Representative coordinates for real areas
       const markers = [
         // Fitness (orange)
-        { lat: 57.0488, lng: 9.9217, type: 'fitness' },   // Centrum
-        { lat: 57.0445, lng: 9.9310, type: 'fitness' },   // Boulevarden area
-        { lat: 57.0380, lng: 9.9120, type: 'fitness' },   // Sønderbro
-        { lat: 57.0520, lng: 9.9400, type: 'fitness' },   // Østerbro
-        { lat: 57.0350, lng: 9.8850, type: 'fitness' },   // Vestbyen
-        { lat: 57.0260, lng: 9.9580, type: 'fitness' },   // Aalborg Øst
-        { lat: 57.0220, lng: 9.9750, type: 'fitness' },   // Aalborg ØST 2
-        { lat: 57.0590, lng: 9.9100, type: 'fitness' },   // Nørresundby
-        { lat: 57.0620, lng: 9.9350, type: 'fitness' },   // Nørresundby øst
-        { lat: 57.0410, lng: 9.8700, type: 'fitness' },   // Hasseris
-        { lat: 57.0310, lng: 9.9020, type: 'fitness' },   // Skalborg
-        { lat: 57.0550, lng: 9.8950, type: 'fitness' },   // Lindholm
+        { lat: 57.0488, lng: 9.9217, type: 'fitness', label: 'PureGym Aalborg' },
+        { lat: 57.0445, lng: 9.9310, type: 'fitness', label: 'Fitness World' },
+        { lat: 57.0380, lng: 9.9120, type: 'fitness', label: 'SATS Sønderbro' },
+        { lat: 57.0520, lng: 9.9400, type: 'fitness', label: 'CrossFit Aalborg' },
+        { lat: 57.0350, lng: 9.8850, type: 'fitness', label: 'LOOP Fitness' },
+        { lat: 57.0260, lng: 9.9580, type: 'fitness', label: 'Fitness X Øst' },
+        { lat: 57.0220, lng: 9.9750, type: 'fitness', label: 'Repeat Aalborg' },
+        { lat: 57.0590, lng: 9.9100, type: 'fitness', label: 'Nørresundby Gym' },
+        { lat: 57.0620, lng: 9.9350, type: 'fitness', label: 'FW Nørresundby' },
+        { lat: 57.0410, lng: 9.8700, type: 'fitness', label: 'Hasseris Fitness' },
+        { lat: 57.0310, lng: 9.9020, type: 'fitness', label: 'Skalborg Motion' },
+        { lat: 57.0550, lng: 9.8950, type: 'fitness', label: 'Lindholm Gym' },
 
         // Yoga (purple)
-        { lat: 57.0470, lng: 9.9180, type: 'yoga' },      // Centrum
-        { lat: 57.0510, lng: 9.9260, type: 'yoga' },      // Nær havnefront
-        { lat: 57.0430, lng: 9.9050, type: 'yoga' },      // Vestbyen
-        { lat: 57.0390, lng: 9.9350, type: 'yoga' },      // Syd
+        { lat: 57.0470, lng: 9.9180, type: 'yoga', label: 'Yoga i Aalborg' },
+        { lat: 57.0510, lng: 9.9260, type: 'yoga', label: 'Hot Yoga Studio' },
+        { lat: 57.0430, lng: 9.9050, type: 'yoga', label: 'Zen Yoga Vest' },
+        { lat: 57.0390, lng: 9.9350, type: 'yoga', label: 'Flow Studio' },
 
         // Fysioterapi (green)
-        { lat: 57.0500, lng: 9.9150, type: 'physio' },    // Centrum
-        { lat: 57.0460, lng: 9.9390, type: 'physio' },    // Øst
-        { lat: 57.0530, lng: 9.9050, type: 'physio' },    // Vest
-        { lat: 57.0280, lng: 9.9450, type: 'physio' },    // Aalborg Øst
-        { lat: 57.0570, lng: 9.9280, type: 'physio' },    // Nørresundby
-        { lat: 57.0420, lng: 9.8800, type: 'physio' },    // Hasseris
+        { lat: 57.0500, lng: 9.9150, type: 'physio', label: 'Fysio Centrum' },
+        { lat: 57.0460, lng: 9.9390, type: 'physio', label: 'SportsFysio Øst' },
+        { lat: 57.0530, lng: 9.9050, type: 'physio', label: 'Klinik Vestbyen' },
+        { lat: 57.0280, lng: 9.9450, type: 'physio', label: 'Aalborg Øst Fysio' },
+        { lat: 57.0570, lng: 9.9280, type: 'physio', label: 'Sundby Fysioterapi' },
+        { lat: 57.0420, lng: 9.8800, type: 'physio', label: 'Hasseris Klinik' },
 
-        // Other (cyan) — kampsport, dans, padel, etc.
-        { lat: 57.0440, lng: 9.9100, type: 'other' },     // Kampsport centrum
-        { lat: 57.0370, lng: 9.9250, type: 'other' },     // Dans
-        { lat: 57.0290, lng: 9.9650, type: 'other' },     // Padel Øst
-        { lat: 57.0560, lng: 9.9180, type: 'other' },     // Nørresundby
-        { lat: 57.0480, lng: 9.8900, type: 'other' },     // Vestbyen
+        // Other (cyan)
+        { lat: 57.0440, lng: 9.9100, type: 'other', label: 'MMA Aalborg' },
+        { lat: 57.0370, lng: 9.9250, type: 'other', label: 'Danseskolen' },
+        { lat: 57.0290, lng: 9.9650, type: 'other', label: 'Padel Aalborg' },
+        { lat: 57.0560, lng: 9.9180, type: 'other', label: 'Nørresundby Boks' },
+        { lat: 57.0480, lng: 9.8900, type: 'other', label: 'Cykel & Sport' },
       ];
+
+      const leafletMarkers = []; // store references for proximity detection
 
       markers.forEach((m, i) => {
         const typeClass = `map-marker--${m.type}`;
-        const delay = (i * 0.35) % 2.8; // stagger pulse animations
+        const delay = (i * 0.35) % 2.8;
 
         const icon = L.divIcon({
           className: '',
           html: `
-            <div class="map-marker ${typeClass}">
+            <div class="map-marker ${typeClass}" data-marker-index="${i}">
               <div class="map-marker__pulse" style="animation-delay: ${delay.toFixed(2)}s"></div>
               <div class="map-marker__dot"></div>
+              <div class="map-marker__label">${m.label}</div>
             </div>
           `,
           iconSize: [18, 18],
           iconAnchor: [9, 9]
         });
 
-        L.marker([m.lat, m.lng], { icon, interactive: false }).addTo(map);
+        const lm = L.marker([m.lat, m.lng], { icon, interactive: false }).addTo(map);
+        leafletMarkers.push(lm);
+      });
+
+      // ── Cursor interaction: spotlight + marker proximity ──
+      const heroEl = document.querySelector('.hero');
+      const mapContainer = document.getElementById('heroMapContainer');
+      const PROXIMITY_PX = 120; // pixels
+
+      function handleCursorMove(e) {
+        const rect = heroEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const xPct = ((x / rect.width) * 100).toFixed(1) + '%';
+        const yPct = ((y / rect.height) * 100).toFixed(1) + '%';
+
+        // Update overlay spotlight position via CSS vars
+        mapContainer.style.setProperty('--cx', xPct);
+        mapContainer.style.setProperty('--cy', yPct);
+        mapContainer.classList.add('cursor-active');
+
+        // Check marker proximity
+        leafletMarkers.forEach((lm, i) => {
+          const markerPoint = map.latLngToContainerPoint(lm.getLatLng());
+          // Adjust for hero offset within the page
+          const mx = markerPoint.x;
+          const my = markerPoint.y;
+          const dist = Math.hypot(x - mx, y - my);
+
+          const markerEl = heroEl.querySelector(`[data-marker-index="${i}"]`);
+          if (markerEl) {
+            if (dist < PROXIMITY_PX) {
+              markerEl.classList.add('is-near');
+            } else {
+              markerEl.classList.remove('is-near');
+            }
+          }
+        });
+      }
+
+      heroEl.addEventListener('mousemove', handleCursorMove);
+      heroEl.addEventListener('mouseleave', () => {
+        mapContainer.classList.remove('cursor-active');
+        heroEl.querySelectorAll('.map-marker.is-near').forEach(el => el.classList.remove('is-near'));
       });
 
       // Gentle auto-pan for a living feel
