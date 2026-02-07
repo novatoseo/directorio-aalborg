@@ -24,9 +24,248 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
   
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
   
+  <!-- Hero Map Styles -->
+  <style>
+    /* ===== HERO MAP BACKGROUND ===== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 60px;
+    }
+
+    .hero__map-container {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    #heroMap {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Dark + desaturated overlay on the map tiles */
+    .hero__map-container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(10, 14, 20, 0.72) 0%,
+          rgba(10, 14, 20, 0.55) 35%,
+          rgba(10, 14, 20, 0.60) 65%,
+          rgba(10, 14, 20, 0.88) 100%
+        );
+      pointer-events: none;
+      backdrop-filter: saturate(0.3) brightness(0.85);
+      -webkit-backdrop-filter: saturate(0.3) brightness(0.85);
+    }
+
+    /* Hide Leaflet controls & attribution in hero context */
+    #heroMap .leaflet-control-zoom,
+    #heroMap .leaflet-control-attribution {
+      display: none !important;
+    }
+
+    /* Prevent map interaction from stealing scroll on mobile */
+    #heroMap.leaflet-container {
+      cursor: default;
+    }
+
+    /* Hero content floats above map */
+    .hero > .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== ANIMATED MAP MARKERS ===== */
+    .map-marker {
+      position: relative;
+      width: 18px;
+      height: 18px;
+    }
+
+    .map-marker__dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22d3ee;
+      box-shadow: 0 0 6px 2px rgba(34, 211, 238, 0.5);
+    }
+
+    .map-marker__pulse {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(34, 211, 238, 0.6);
+      animation: markerPulse 2.8s ease-out infinite;
+    }
+
+    /* Stagger the pulse for each marker via inline delay */
+    @keyframes markerPulse {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(2.6);
+        opacity: 0;
+      }
+    }
+
+    /* Fitness-type markers get a warm accent */
+    .map-marker--fitness .map-marker__dot {
+      background: #f97316;
+      box-shadow: 0 0 6px 2px rgba(249, 115, 22, 0.5);
+    }
+    .map-marker--fitness .map-marker__pulse {
+      border-color: rgba(249, 115, 22, 0.6);
+    }
+
+    /* Yoga markers */
+    .map-marker--yoga .map-marker__dot {
+      background: #a78bfa;
+      box-shadow: 0 0 6px 2px rgba(167, 139, 250, 0.5);
+    }
+    .map-marker--yoga .map-marker__pulse {
+      border-color: rgba(167, 139, 250, 0.6);
+    }
+
+    /* Physio markers */
+    .map-marker--physio .map-marker__dot {
+      background: #34d399;
+      box-shadow: 0 0 6px 2px rgba(52, 211, 153, 0.5);
+    }
+    .map-marker--physio .map-marker__pulse {
+      border-color: rgba(52, 211, 153, 0.6);
+    }
+
+    /* ===== HERO CONTENT REFINEMENTS (over map) ===== */
+    .hero__title {
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+
+    .hero__subtitle {
+      color: rgba(255, 255, 255, 0.88);
+      text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    }
+
+    .hero__stats {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero__stat strong {
+      color: #fff;
+    }
+
+    /* Glass search box for dark hero */
+    .search-box {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .search-box__input {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .search-box__input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .search-box__select {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .search-box__select option {
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    .search-box__icon {
+      filter: brightness(2);
+    }
+
+    /* ===== MAP LEGEND (bottom-left of hero) ===== */
+    .hero__map-legend {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      z-index: 2;
+      display: flex;
+      gap: 16px;
+      padding: 10px 16px;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .hero__map-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero__map-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .hero__map-legend-dot--fitness { background: #f97316; }
+    .hero__map-legend-dot--yoga { background: #a78bfa; }
+    .hero__map-legend-dot--physio { background: #34d399; }
+    .hero__map-legend-dot--other { background: #22d3ee; }
+
+    @media (max-width: 640px) {
+      .hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        padding-top: 80px;
+      }
+      .hero__map-legend {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 0.68rem;
+      }
+    }
+  </style>
+
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
   {
@@ -89,8 +328,14 @@
   </nav>
 
   <main>
-    <!-- Hero Section -->
+    <!-- Hero Section with Interactive Map -->
     <section class="hero">
+      <!-- Leaflet Map Background -->
+      <div class="hero__map-container">
+        <div id="heroMap"></div>
+      </div>
+
+      <!-- Hero Content (unchanged structure) -->
       <div class="container">
         <h1 class="hero__title">Find det Bedste Fitnesscenter i Aalborg</h1>
         <p class="hero__subtitle">Sammenlign 188+ fitnesscentre, fysioterapeuter, yogastudier og sportsklubber i Aalborg. Læs anmeldelser, tjek priser og find det perfekte sted til din træning.</p>
@@ -144,6 +389,26 @@
               Find centre
             </button>
           </form>
+        </div>
+      </div>
+
+      <!-- Map Legend -->
+      <div class="hero__map-legend">
+        <div class="hero__map-legend-item">
+          <span class="hero__map-legend-dot hero__map-legend-dot--fitness"></span>
+          <span>Fitness</span>
+        </div>
+        <div class="hero__map-legend-item">
+          <span class="hero__map-legend-dot hero__map-legend-dot--yoga"></span>
+          <span>Yoga</span>
+        </div>
+        <div class="hero__map-legend-item">
+          <span class="hero__map-legend-dot hero__map-legend-dot--physio"></span>
+          <span>Fysio</span>
+        </div>
+        <div class="hero__map-legend-item">
+          <span class="hero__map-legend-dot hero__map-legend-dot--other"></span>
+          <span>Øvrige</span>
         </div>
       </div>
     </section>
@@ -377,55 +642,145 @@
     </section>
   </main>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <a href="index.html" class="footer__logo"><span>💪</span><span>FitAalborg</span></a>
-        <p class="footer__tagline">Din guide til fitness og sundhed i Aalborg.</p>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo"><span>💪</span><span>FitAalborg</span></a>
+          <p class="footer__tagline">Din guide til fitness og sundhed i Aalborg.</p>
+        </div>
+        <div>
+          <h3 class="footer__title">Kategorier</h3>
+          <ul class="footer__list">
+            <li><a href="kategori.html?kategori=fitnesscentre" class="footer__link">Fitnesscentre</a></li>
+            <li><a href="kategori.html?kategori=fysioterapi" class="footer__link">Fysioterapi</a></li>
+            <li><a href="kategori.html?kategori=yoga" class="footer__link">Yoga</a></li>
+            <li><a href="kategori.html?kategori=kampsport" class="footer__link">Kampsport</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__title">Områder</h3>
+          <ul class="footer__list">
+            <li><a href="kategori.html?omraade=9000" class="footer__link">Aalborg Centrum</a></li>
+            <li><a href="kategori.html?omraade=9220" class="footer__link">Aalborg Øst</a></li>
+            <li><a href="kategori.html?omraade=9200" class="footer__link">Aalborg SV</a></li>
+            <li><a href="kategori.html?omraade=9400" class="footer__link">Nørresundby</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__title">Information</h3>
+          <ul class="footer__list">
+            <li><a href="om.html" class="footer__link">Om FitAalborg</a></li>
+            <li><a href="tilfoej.html" class="footer__link">Tilføj dit center</a></li>
+            <li><a href="kontakt.html" class="footer__link">Kontakt os</a></li>
+            <li><a href="privatlivspolitik.html" class="footer__link">Privatlivspolitik</a></li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <h3 class="footer__title">Kategorier</h3>
-        <ul class="footer__list">
-          <li><a href="kategori.html?kategori=fitnesscentre" class="footer__link">Fitnesscentre</a></li>
-          <li><a href="kategori.html?kategori=fysioterapi" class="footer__link">Fysioterapi</a></li>
-          <li><a href="kategori.html?kategori=yoga" class="footer__link">Yoga</a></li>
-          <li><a href="kategori.html?kategori=kampsport" class="footer__link">Kampsport</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="footer__title">Områder</h3>
-        <ul class="footer__list">
-          <li><a href="kategori.html?omraade=9000" class="footer__link">Aalborg Centrum</a></li>
-          <li><a href="kategori.html?omraade=9220" class="footer__link">Aalborg Øst</a></li>
-          <li><a href="kategori.html?omraade=9200" class="footer__link">Aalborg SV</a></li>
-          <li><a href="kategori.html?omraade=9400" class="footer__link">Nørresundby</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="footer__title">Information</h3>
-        <ul class="footer__list">
-          <li><a href="om.html" class="footer__link">Om FitAalborg</a></li>
-          <li><a href="tilfoej.html" class="footer__link">Tilføj dit center</a></li>
-          <li><a href="kontakt.html" class="footer__link">Kontakt os</a></li>
-          <li><a href="privatlivspolitik.html" class="footer__link">Privatlivspolitik</a></li>
-        </ul>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2025 FitAalborg. Alle rettigheder forbeholdes.</p>
+        <p class="footer__update">Data opdateret: Januar 2025</p>
       </div>
     </div>
-    <div class="footer__bottom">
-      <p class="footer__copy">© 2025 FitAalborg. Alle rettigheder forbeholdes.</p>
-      <p class="footer__update">Data opdateret: Januar 2025</p>
-    </div>
-  </div>
-</footer>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <!-- JavaScript -->
   <script>
-    // Data loaded from JSON
+    // ===== HERO MAP INITIALIZATION =====
+    function initHeroMap() {
+      const map = L.map('heroMap', {
+        center: [57.048, 9.921],       // Aalborg center
+        zoom: 13,
+        zoomControl: false,
+        attributionControl: false,
+        dragging: false,               // Prevent accidental drag on mobile
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        touchZoom: false,
+        keyboard: false,
+        boxZoom: false
+      });
+
+      // Dark-themed map tiles (CartoDB Dark Matter)
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd'
+      }).addTo(map);
+
+      // ── Fitness center locations across Aalborg ──
+      // Representative coordinates for real areas
+      const markers = [
+        // Fitness (orange)
+        { lat: 57.0488, lng: 9.9217, type: 'fitness' },   // Centrum
+        { lat: 57.0445, lng: 9.9310, type: 'fitness' },   // Boulevarden area
+        { lat: 57.0380, lng: 9.9120, type: 'fitness' },   // Sønderbro
+        { lat: 57.0520, lng: 9.9400, type: 'fitness' },   // Østerbro
+        { lat: 57.0350, lng: 9.8850, type: 'fitness' },   // Vestbyen
+        { lat: 57.0260, lng: 9.9580, type: 'fitness' },   // Aalborg Øst
+        { lat: 57.0220, lng: 9.9750, type: 'fitness' },   // Aalborg ØST 2
+        { lat: 57.0590, lng: 9.9100, type: 'fitness' },   // Nørresundby
+        { lat: 57.0620, lng: 9.9350, type: 'fitness' },   // Nørresundby øst
+        { lat: 57.0410, lng: 9.8700, type: 'fitness' },   // Hasseris
+        { lat: 57.0310, lng: 9.9020, type: 'fitness' },   // Skalborg
+        { lat: 57.0550, lng: 9.8950, type: 'fitness' },   // Lindholm
+
+        // Yoga (purple)
+        { lat: 57.0470, lng: 9.9180, type: 'yoga' },      // Centrum
+        { lat: 57.0510, lng: 9.9260, type: 'yoga' },      // Nær havnefront
+        { lat: 57.0430, lng: 9.9050, type: 'yoga' },      // Vestbyen
+        { lat: 57.0390, lng: 9.9350, type: 'yoga' },      // Syd
+
+        // Fysioterapi (green)
+        { lat: 57.0500, lng: 9.9150, type: 'physio' },    // Centrum
+        { lat: 57.0460, lng: 9.9390, type: 'physio' },    // Øst
+        { lat: 57.0530, lng: 9.9050, type: 'physio' },    // Vest
+        { lat: 57.0280, lng: 9.9450, type: 'physio' },    // Aalborg Øst
+        { lat: 57.0570, lng: 9.9280, type: 'physio' },    // Nørresundby
+        { lat: 57.0420, lng: 9.8800, type: 'physio' },    // Hasseris
+
+        // Other (cyan) — kampsport, dans, padel, etc.
+        { lat: 57.0440, lng: 9.9100, type: 'other' },     // Kampsport centrum
+        { lat: 57.0370, lng: 9.9250, type: 'other' },     // Dans
+        { lat: 57.0290, lng: 9.9650, type: 'other' },     // Padel Øst
+        { lat: 57.0560, lng: 9.9180, type: 'other' },     // Nørresundby
+        { lat: 57.0480, lng: 9.8900, type: 'other' },     // Vestbyen
+      ];
+
+      markers.forEach((m, i) => {
+        const typeClass = `map-marker--${m.type}`;
+        const delay = (i * 0.35) % 2.8; // stagger pulse animations
+
+        const icon = L.divIcon({
+          className: '',
+          html: `
+            <div class="map-marker ${typeClass}">
+              <div class="map-marker__pulse" style="animation-delay: ${delay.toFixed(2)}s"></div>
+              <div class="map-marker__dot"></div>
+            </div>
+          `,
+          iconSize: [18, 18],
+          iconAnchor: [9, 9]
+        });
+
+        L.marker([m.lat, m.lng], { icon, interactive: false }).addTo(map);
+      });
+
+      // Gentle auto-pan for a living feel
+      let panDir = 1;
+      setInterval(() => {
+        const center = map.getCenter();
+        map.panBy([panDir * 0.4, 0], { animate: true, duration: 4, easeLinearity: 1 });
+        panDir *= -1;
+      }, 6000);
+    }
+
+    // ===== EXISTING SITE DATA =====
     let siteData = null;
     
-    // Load data
     async function loadData() {
       try {
         const response = await fetch('data.json');
@@ -437,7 +792,6 @@
       }
     }
     
-    // Render categories grid
     function renderCategories() {
       const grid = document.getElementById('categoriesGrid');
       if (!grid || !siteData) return;
@@ -451,12 +805,10 @@
       `).join('');
     }
     
-    // Render top centers
     function renderTopCenters() {
       const grid = document.getElementById('topCentersGrid');
       if (!grid || !siteData) return;
       
-      // Get top 9 centers with ratings
       const topCenters = siteData.centers
         .filter(c => c.rating && c.reviews_count)
         .slice(0, 9);
@@ -513,7 +865,6 @@
       }).join('');
     }
     
-    // Search handling
     function handleSearch(event) {
       event.preventDefault();
       const query = document.getElementById('searchQuery').value;
@@ -526,7 +877,6 @@
       window.location.href = url;
     }
     
-    // Mobile navigation toggle
     function toggleMobileNav() {
       const nav = document.getElementById('mobileNav');
       const toggle = document.querySelector('.header__mobile-toggle');
@@ -534,26 +884,26 @@
       toggle.setAttribute('aria-expanded', isOpen);
     }
     
-    // FAQ accordion
     function toggleFaq(button) {
       const isExpanded = button.getAttribute('aria-expanded') === 'true';
       const answer = button.nextElementSibling;
       
-      // Close all other FAQs
       document.querySelectorAll('.faq__question').forEach(btn => {
         btn.setAttribute('aria-expanded', 'false');
         btn.nextElementSibling.classList.remove('active');
       });
       
-      // Toggle current FAQ
       if (!isExpanded) {
         button.setAttribute('aria-expanded', 'true');
         answer.classList.add('active');
       }
     }
     
-    // Initialize
-    document.addEventListener('DOMContentLoaded', loadData);
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', () => {
+      initHeroMap();
+      loadData();
+    });
   </script>
 </body>
 </html>
